@@ -24,7 +24,7 @@
                     <tr v-for="position in positions.data" :key="position.id">
                       <td >{{position.id}}</td>
                       <td>{{position.name}}</td>
-                      <td>{{position.code}}</td>
+                      <td>{{position.position_code}}</td>
                       <td >
                           <a href="#" @click = "editModal(position)">
                               <i class="fa fa-edit blue"></i>

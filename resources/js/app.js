@@ -46,8 +46,8 @@ const toast = Swal.mixin({
 window.toast = toast;
 
 //gates
-import Gate from './Gate';
-Vue.prototype.$gate = new Gate(window.user);
+// import Gate from './Gate';
+// Vue.prototype.$gate = new Gate(window.user);
 
 import moment from 'moment';
 import axios from 'axios';
@@ -68,7 +68,7 @@ Vue.filter('formatDate', function(date) {
 });
 
 //find loggedin user id
-Vue.prototype.$userId = document.querySelector("meta[name='currentuser_id']").getAttribute('content');
+// Vue.prototype.$userId = document.querySelector("meta[name='currentuser_id']").getAttribute('content');
 
 /**
  * The following block of code may be used to automatically register your
@@ -83,6 +83,7 @@ Vue.prototype.$userId = document.querySelector("meta[name='currentuser_id']").ge
 
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('vote-component', require('./components/Vote.vue').default);
+Vue.component('pagination', require('laravel-vue-pagination'));
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

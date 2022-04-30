@@ -48,7 +48,7 @@
             </ul>
           </li>
 
-          <li class="nav-item">
+          <!-- <li class="nav-item">
             <router-link to="/user" class="nav-link">
             <i class="nav-icon fas fa-users yellow"></i>
               <p>Users</p>
@@ -60,7 +60,7 @@
             <i class="nav-icon fas fa-user green"></i>
               <p>Profile</p>
             </router-link>
-          </li>
+          </li> -->
         
           <li class="nav-item">
           <a class="nav-link" href="{{ route('logout') }}"

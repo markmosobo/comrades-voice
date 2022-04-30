@@ -1,94 +1,85 @@
 <template>
-    <div class="container">
-<section class="contact-section">
+    <section class="contact-section">
     <div class="container" id="vote">
         <div class="row no-gutters align-items-center">
-        <div class="col-md-6 col-lg-5">
-            <form class="contact-form" action="" method="post">
-                    {{csrf_field()}}
-                    <h3>Get out your vote</h3>
-                    <p>Please fill your university registration number below</p>
-                    <input type="text" class="form-control" placeholder="Your Reg No" name="name">
 
-                    <button class="btn btn-solid" type="submit">Submit</button>
-                </form>
-            </div>
-            <div class="col-md-6 col-lg-7">
-                <div class="contact-info" hidden>
+            <div class="col-md-6 col-lg-7" id="candForm">
+                <div class="contact-info">
                     <!-- <h3>A simple and transparent voting process</h3> -->
                     <p>Please choose your preferred candidate in the following categories:</p>
                     <form>
                     <h3>Student Leader</h3>
                     <div class="radio">
-                    <label><input type="radio" name="optradio">Option 1</label>
+                        <tr  v-for="cand in pres_candidates.data" :key="cand.id">
+                            <td>
+                                <label>
+                                <input type="radio" v-model="form.president_candidate_id" name="president_candidate_id">{{cand.student.first_name}} {{cand.student.last_name}}
+                                </label>
+                            </td>
+                        </tr>
                     </div>
-                    <div class="radio">
-                    <label><input type="radio" name="optradio">Option 2</label>
-                    </div>
-                    <div class="radio">
-                    <label><input type="radio" name="optradio">Option 3</label>
-                    </div>
+
                     <h3>Secretary General</h3>
                     <div class="radio">
-                    <label><input type="radio" name="optradio">Option 1</label>
-                    </div>
-                    <div class="radio">
-                    <label><input type="radio" name="optradio">Option 2</label>
-                    </div>
-                    <div class="radio">
-                    <label><input type="radio" name="optradio">Option 3</label>
+                        <tr  v-for="cand in sec_gen_candidates.data" :key="cand.id">
+                            <td>
+                                <label>
+                                <input type="radio" v-model="form.sec_gen_candidate_id" name="sec_gen_candidate_id">{{cand.student.first_name}} {{cand.student.last_name}}
+                                </label>
+                            </td>
+                        </tr>
                     </div>
                     <h3>Finance</h3>
                     <div class="radio">
-                    <label><input type="radio" name="optradio">Option 1</label>
-                    </div>
-                    <div class="radio">
-                    <label><input type="radio" name="optradio">Option 2</label>
-                    </div>
-                    <div class="radio">
-                    <label><input type="radio" name="optradio">Option 3</label>
+                        <tr  v-for="cand in fin_candidates.data" :key="cand.id">
+                            <td>
+                                <label>
+                                <input type="radio" v-model="form.fin_candidate_id" name="fin_candidate_id">{{cand.student.first_name}} {{cand.student.last_name}}
+                                </label>
+                            </td>
+                        </tr>
                     </div>
                     <h3>School Rep</h3>
                     <h5>Male</h5>
                     <div class="radio">
-                    <label><input type="radio" name="optradio">Option 1</label>
-                    </div>
-                    <div class="radio">
-                    <label><input type="radio" name="optradio">Option 2</label>
-                    </div>
-                    <div class="radio">
-                    <label><input type="radio" name="optradio">Option 3</label>
+                        <tr  v-for="cand in male_sch_candidates.data" :key="cand.id">
+                            <td>
+                                <label>
+                                <input type="radio" v-model="form.male_sch_candidate_id" name="male_sch_candidate_id">{{cand.student.first_name}} {{cand.student.last_name}}
+                                </label>
+                            </td>
+                        </tr>
                     </div>
                     <h5>Female</h5>
                     <div class="radio">
-                    <label><input type="radio" name="optrad">Option 1</label>
-                    </div>
-                    <div class="radio">
-                    <label><input type="radio" name="optradi">Option 2</label>
-                    </div>
-                    <div class="radio">
-                    <label><input type="radio" name="optradia">Option 3</label>
+                        <tr  v-for="cand in female_sch_candidates.data" :key="cand.id">
+                            <td>
+                                <label>
+                                <input type="radio" v-model="form.female_sch_candidate_id" name="female_sch_candidate_id">{{cand.student.first_name}} {{cand.student.last_name}}
+                                </label>
+                            </td>
+                        </tr>
                     </div>
                     <h3>Co-curricular</h3>
                     <h5>Male</h5>
                     <div class="radio">
-                    <label><input type="radio" name="optradio">Option 1</label>
-                    </div>
-                    <div class="radio">
-                    <label><input type="radio" name="optradio">Option 2</label>
-                    </div>
-                    <div class="radio">
-                    <label><input type="radio" name="optradio">Option 3</label>
+                        <tr  v-for="cand in male_sport_candidates.data" :key="cand.id">
+                            <td>
+                                <label>
+                                <input type="radio" v-model="form.male_sport_candidate_id" name="male_sport_candidate_id">{{cand.student.first_name}} {{cand.student.last_name}}
+                                </label>
+                            </td>
+                        </tr>
                     </div>
                     <h5>Female</h5>
                     <div class="radio">
-                    <label><input type="radio" name="optradio">Option 1</label>
-                    </div>
-                    <div class="radio">
-                    <label><input type="radio" name="optradio">Option 2</label>
-                    </div>
-                    <div class="radio">
-                    <label><input type="radio" name="optradio">Option 3</label>
+                        <tr  v-for="cand in female_sport_candidates.data" :key="cand.id">
+                            <td>
+                                <label>
+                                <input type="radio" v-model="form.female_sport_candidate_id" name="female_sch_candidate_id">{{cand.student.first_name}} {{cand.student.last_name}}
+                                </label>
+                            </td>
+                        </tr>
                     </div>
 
                     <button class="btn btn-solid" type="submit">Vote</button>
@@ -97,15 +88,73 @@
                 </div>
             </div>
 
+
         </div>
     </div>
-  </section>
-    </div>
+    </section>
 </template>
 
 <script>
     export default {
+        data(){
+            return{
+                editmode: false,
+                pres_candidates: {},
+                sec_gen_candidates: {},
+                fin_candidates: {},
+                male_sch_candidates: {},
+                female_sch_candidates: {},
+                male_sport_candidates: {},
+                female_sport_candidates: {},
+                form: new Form({
+                    id: '',
+                    pres_candidate_id: '',
+                    sec_gen_candidate_id: '',
+                    fin_candidate_id: '',
+                    male_sch_candidate_id: '',
+                    female_sch_candidate_id: '',
+                    male_sport_candidate_id: '',
+                    female_sport_candidate_id: '',
+                    image: '',
+                    slug: ''
+                })
+            }
+        },
+        methods: {
+            //check if reg no exists or if voted
+            confirmRegNo(){
+                axios.get('api/confirmreg').then(({data}) => (this.confirmregno = data));
+            },
+            loadPresCandidates(){
+                axios.get('api/pres_candidate').then(({data}) => (this.pres_candidates = data));
+            },
+            loadSecGenCandidates(){
+                axios.get('api/sec_gen_candidate').then(({data}) => (this.sec_gen_candidates = data));
+            },
+            loadFinCandidates(){
+                axios.get('api/fin_candidate').then(({data}) => (this.fin_candidates = data));
+            },
+            loadMaleSchoolCandidates(){
+                axios.get('api/male_sch_candidate').then(({data}) => (this.male_sch_candidates = data));
+            },
+            loadFemaleSchoolCandidates(){
+                axios.get('api/female_sch_candidate').then(({data}) => (this.female_sch_candidates = data));
+            },
+            loadMaleSportCandidates(){
+                axios.get('api/male_sport_candidate').then(({data}) => (this.male_sport_candidates = data));
+            },
+            loadFemaleSportCandidates(){
+                axios.get('api/female_sport_candidate').then(({data}) => (this.female_sport_candidates = data));
+            },
+        },
         mounted() {
+            this.loadPresCandidates();
+            this.loadSecGenCandidates();
+            this.loadFinCandidates();
+            this.loadMaleSchoolCandidates();
+            this.loadFemaleSchoolCandidates();
+            this.loadMaleSportCandidates();
+            this.loadFemaleSportCandidates();
             console.log('Component mounted.')
         }
     }

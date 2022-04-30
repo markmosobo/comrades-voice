@@ -23,6 +23,7 @@ class CreateStudentsTable extends Migration
             ->references('id')->on('schools')
             ->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
+            $table->integer('vote_status')->default(0);
         });
     }
 

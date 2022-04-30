@@ -16,21 +16,21 @@
                   <table class="table m-0">
                     <thead>
                     <tr>
-                      <th>Candidate ID</th>
                       <th>Name</th>
-                      <th>Position</th>
                       <th>School</th>
                       <th>Gender</th>
+                      <th>Position</th>
+                      <th>Year</th>
                       <th>Action</th>                     
                     </tr>
                     </thead>
                     <tbody>
                     <tr v-for="cand in candidates.data" :key="cand.id">
-                      <td><a href="#">{{cand.id}}</a></td>
-                      <td>{{cand.student.name}}</td>
-                      <td>{{cand.position.name}}</td>
-                      <td>{{cand.school.name}}</td>
+                      <td>{{cand.student.first_name}} {{cand.student.last_name}}</td>
+                      <td>{{cand.school.school_code}}</td>
                       <td>{{cand.gender | capitalize}} </td>
+                      <td>{{cand.position.name}}</td>
+                      <td>{{cand.acad_year | capitalize}} </td>
                       <td >
                           <a href="#" @click = "editModal(cand)">
                               <i class="fa fa-edit blue"></i>
@@ -46,7 +46,7 @@
                 </div>
               </div>
               <div class="card-footer clearfix" style="display: block;">
-                <pagination :data="candidate" @pagination-change-page="getResults">
+                <pagination :data="candidates" @pagination-change-page="getResults">
                   	<span slot="prev-nav">&lt; Previous</span>
 	                  <span slot="next-nav">Next &gt;</span>
                 </pagination>                
@@ -146,7 +146,7 @@
         data(){
             return{
                 editmode: false,
-                inpatients: {},
+                candidates: {},
                 form: new Form({
                         id: '',
                         candidate_id: '',
@@ -162,7 +162,7 @@
         methods: {
             getResults(page = 1) {
               this.$Progress.start();  
-              axios.get('api/candidate?page=' + page).then(({ data }) => (this.candidate = data));
+              axios.get('api/candidate?page=' + page).then(({ data }) => (this.candidates = data));
               this.$Progress.finish();
             },              
               newModal(){
@@ -265,7 +265,7 @@
         mounted() {
             this.listPositions();
             this.listSchools();
-            this.listCandidates();
+            this.listStudents();
             this.loadCandidates();
             Fire.$on('Refresh',() => {this.loadCandidates();})
         }

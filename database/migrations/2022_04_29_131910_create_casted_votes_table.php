@@ -15,7 +15,6 @@ class CreateCastedVotesTable extends Migration
     {
         Schema::create('casted_votes', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('reg_no')->nullable();
             $table->integer('school_male_rep_id')->unsigned();
             $table->foreign('school_male_rep_id')
             ->references('id')->on('candidates');
@@ -24,6 +23,9 @@ class CreateCastedVotesTable extends Migration
             ->references('id')->on('candidates');
             $table->integer('president_candidate_id')->unsigned();
             $table->foreign('president_candidate_id')
+            ->references('id')->on('candidates');
+            $table->integer('sec_gen_candidate_id')->unsigned();
+            $table->foreign('sec_gen_candidate_id')
             ->references('id')->on('candidates');
             $table->integer('finance_candidate_id')->unsigned();
             $table->foreign('finance_candidate_id')

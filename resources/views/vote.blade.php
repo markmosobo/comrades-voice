@@ -73,57 +73,9 @@
     <div class="body-overlay"></div>
   </header>
   <!-- header end -->
-  <div class="container">
-  <section class="contact-section">
-    <div class="container">
-        <div class="row no-gutters align-items-center">
-            <div class="col-md-6 col-lg-7">
-                <div class="contact-info">
-                    <h3>Democracy in practice</h3>
-                    <p>The most convenient way to make your voice as a comrade count, just from 
-                        the comfort of anywhere you are at the touch of a button.
-                    </p>
-                    <ul class="contact-list">
-                        <li><i class="fas fa-envelope"></i> <a href="mailto:abc@example.com.com">mmosobo@gmail.com</a> </li>
-                        <li><i class="fas fa-phone fa-flip-horizontal"></i><a href="tel:1234567890">0791514737</a>
-                        </li>
-                        <li><i class="fas fa-map-marker-alt"></i>MMSUT</li>
-                    </ul>
-                    <div class="circular-icons social-links">
-                        <ul>
-                            <li><a href="https://demo.codevibrant.com/html/kavya/contact.html#"><i class="fab fa-facebook-f"></i></a></li>
-                            <li><a href="https://demo.codevibrant.com/html/kavya/contact.html#"><i class="fab fa-twitter"></i></a></li>
-                            <li><a href="https://demo.codevibrant.com/html/kavya/contact.html#"><i class="fab fa-pinterest-p"></i></a></li>
-                            <li><a href="https://demo.codevibrant.com/html/kavya/contact.html#"><i class="fab fa-instagram"></i></a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-5">
-                @if (session('status'))
-                    <div class="alert alert-success" role="alert">
-                        <button type="button" class="close" data-dismiss="alert">×</button>
-                        {{ session('status') }}
-                    </div>
-                @elseif(session('failed'))
-                    <div class="alert alert-danger" role="alert">
-                        <button type="button" class="close" data-dismiss="alert">×</button>
-                        {{ session('failed') }}
-                    </div>
-                @endif
-                <form class="contact-form" action="{{route('form.search')}}" method="get" role="search">
-                    {{csrf_field()}}
-                    <h3>Get your vote out</h3>
-                    <p>Please fill in your registration number</p>
-                    <input type="text" class="form-control" placeholder="Your Registration Number" name="search">
+  <div class="container" id="vote">
 
-                    <button class="btn btn-solid" type="submit">Submit</button>
-                </form>
-            </div>
-        </div>
-    </div>
-</section>
-
+  <vote-component></vote-component>
   </div>
 
     <!-- Footer section -->

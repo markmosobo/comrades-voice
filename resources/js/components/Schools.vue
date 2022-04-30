@@ -14,18 +14,18 @@
                 <table class="table table-hover text-nowrap">
                   <thead>
                     <tr>
-                      <th >ID</th>
+                      <th>ID</th>
                       <th>Name</th>
                       <th>Code</th>
-                      <th >Modify</th>
+                      <th>Modify</th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr v-for="school in schools.data" :key="school.id">
-                      <td >{{school.id}}</td>
+                      <td>{{school.id}}</td>
                       <td>{{school.name}}</td>
-                      <td>{{school.code}}</td>
-                      <td >
+                      <td>{{school.school_code}}</td>
+                      <td>
                           <a href="#" @click = "editModal(school)">
                               <i class="fa fa-edit blue"></i>
                           </a>
@@ -40,12 +40,11 @@
                 </table>
               </div>
               <!-- /.card-body -->
-              <div class="card-footer clearfix" style="display: block;">
-                <pagination :data="schools" @pagination-change-page="getResults">
-                  	<span slot="prev-nav">&lt; Previous</span>
-	                  <span slot="next-nav">Next &gt;</span>
-                </pagination> 
-              </div>               
+                        <div class="card-footer">
+                        <ul class="pagination pagination-sm m-0 float-right">
+                        <pagination :data="schools" @pagination-change-page="getResults"></pagination>
+                        </ul>
+                        </div>              
             </div>
             <!-- /.card -->
           </div>
@@ -199,7 +198,7 @@
                 })
               },
               loadSchools(){
-                  axios.get('api/school').then(({data}) => (this.school = data));
+                  axios.get('api/school').then(({data}) => (this.schools = data));
               }              
         },
         mounted() {

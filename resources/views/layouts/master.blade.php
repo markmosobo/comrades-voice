@@ -12,10 +12,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="csrf-token" content="{{ csrf_token() }}">
 
-  <title>{{config('app.name')}} - Laravel-Vue Application </title>
+  <title>{{config('app.name')}} - University Voting System </title>
 
    <!-- Theme style -->
-  <link rel="stylesheet" href="{{asset('css/app.css')}}">
+  <link rel="stylesheet" href="{{mix('css/app.css')}}">
 </head>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper" id="vote">
@@ -94,7 +94,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <footer class="main-footer">
     <!-- To the right -->
     <div class="float-right d-none d-sm-inline">
-      University voting management system
+      University Voting Management System
     </div>
     <!-- Default to the left -->
     <strong>Copyright &copy; 2022.</strong> All rights reserved.
@@ -108,9 +108,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
 </script>    
 @endauth
 <!-- REQUIRED SCRIPTS -->
-@if (Auth::check()) 
+<!-- @if (Auth::check()) 
          <meta name="currentuser_id" content="{{ Auth::user()->id }}" />
- @endif 
+ @endif  -->
 <!-- jQuery -->
 
 <script src="{{mix('js/app.js')}}"></script>

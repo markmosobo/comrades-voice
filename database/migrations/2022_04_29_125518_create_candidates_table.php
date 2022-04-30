@@ -23,7 +23,11 @@ class CreateCandidatesTable extends Migration
             $table->foreign('student_id')  
             ->references('id')
             ->on('students');
+            $table->integer('school_id')->unsigned();
+            $table->foreign('school_id')
+            ->references('id')->on('schools');
             $table->string('gender')->nullable();
+            $table->string('acad_year')->nullable();
             $table->timestamps();
         });
     }
