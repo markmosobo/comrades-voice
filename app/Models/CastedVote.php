@@ -10,19 +10,18 @@ class CastedVote extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'reg_no',
-        'president_candidate_id',
+        'pres_candidate_id',
         'sec_gen_candidate_id',
-        'finance_candidate_id',
-        'school_male_rep_id',
-        'school_female_rep_id',
-        'sports_male_candidate_id',
-        'sports_female_candidate_id'
+        'fin_candidate_id',
+        'male_sch_candidate_id',
+        'female_sch_candidate_id',
+        'male_sport_candidate_id',
+        'female_sport_candidate_id'
     ];
 
     public function president()
     {
-        return $this->belongsTo(Candidate::class,'president_candidate_id');
+        return $this->belongsTo(Candidate::class,'pres_candidate_id');
     }
 
     public function secgen()
@@ -32,26 +31,26 @@ class CastedVote extends Model
 
     public function finance()
     {
-        return $this->belongsTo(Candidate::class,'finance_candidate_id');
+        return $this->belongsTo(Candidate::class,'fin_candidate_id');
     }
 
     public function school_male()
     {
-        return $this->belongsTo(Candidate::class,'school_male_candidate_id');
+        return $this->belongsTo(Candidate::class,'male_sch_candidate_id');
     }
 
     public function school_female()
     {
-        return $this->belongsTo(Candidate::class,'school_female_candidate_id');
+        return $this->belongsTo(Candidate::class,'female_sch_candidate_id');
     }
 
     public function sports_male()
     {
-        return $this->belongsTo(Candidate::class,'sports_male_candidate_id');
+        return $this->belongsTo(Candidate::class,'male_sport_candidate_id');
     }
 
     public function sports_female()
     {
-        return $this->belongsTo(Candidate::class,'sports_female_candidate_id');
+        return $this->belongsTo(Candidate::class,'female_sport_candidate_id');
     }
 }

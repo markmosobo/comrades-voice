@@ -19,7 +19,8 @@ Route::group(['prefix' => 'v1', 'middleware' => 'auth:api'], function(){
 Route::apiResources([
     'school' => API\SchoolController::class,
     'position' => API\PositionController::class,
-    'candidate' => API\CandidateController::class
+    'candidate' => API\CandidateController::class,
+    'vote' => API\CastedVoteController::class,
 ]);
 
 Route::get('listschools',[API\SchoolController::class,'list']);

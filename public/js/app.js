@@ -2843,8 +2843,87 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  data: function data() {
+    return {
+      positions: {},
+      schools: {},
+      form: new Form({
+        gender: '',
+        acad_year: ''
+      })
+    };
+  },
+  methods: {
+    listPositions: function listPositions() {
+      var _this = this;
+
+      axios.get('api/listpositions').then(function (response) {
+        _this.positions = response.data.data;
+      });
+    },
+    listSchools: function listSchools() {
+      var _this2 = this;
+
+      axios.get('api/listschools').then(function (response) {
+        _this2.schools = response.data.data;
+      });
+    }
+  },
   mounted: function mounted() {
+    this.listPositions();
+    this.listSchools();
     console.log('Component mounted.');
   }
 });
@@ -3190,6 +3269,27 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -3216,68 +3316,80 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
-    //check if reg no exists or if voted
-    confirmRegNo: function confirmRegNo() {
+    vote: function vote() {
       var _this = this;
 
-      axios.get('api/confirmreg').then(function (_ref) {
-        var data = _ref.data;
-        return _this.confirmregno = data;
+      this.$Progress.start();
+      this.form.post('api/vote').then(function () {
+        _this.$Progress.finish();
+
+        Swal.fire({
+          icon: 'success',
+          title: 'Thank you for voting!'
+        });
+        window.location.href = "/";
+      })["catch"](function () {
+        _this.$Progress.fail();
+
+        toast.fire({
+          icon: 'fail',
+          title: 'Please ensure to fill all required categories!'
+        });
       });
     },
     loadPresCandidates: function loadPresCandidates() {
       var _this2 = this;
 
-      axios.get('api/pres_candidate').then(function (_ref2) {
-        var data = _ref2.data;
+      axios.get('api/pres_candidate').then(function (_ref) {
+        var data = _ref.data;
         return _this2.pres_candidates = data;
       });
     },
     loadSecGenCandidates: function loadSecGenCandidates() {
       var _this3 = this;
 
-      axios.get('api/sec_gen_candidate').then(function (_ref3) {
-        var data = _ref3.data;
+      axios.get('api/sec_gen_candidate').then(function (_ref2) {
+        var data = _ref2.data;
         return _this3.sec_gen_candidates = data;
       });
     },
     loadFinCandidates: function loadFinCandidates() {
       var _this4 = this;
 
-      axios.get('api/fin_candidate').then(function (_ref4) {
-        var data = _ref4.data;
+      axios.get('api/fin_candidate').then(function (_ref3) {
+        var data = _ref3.data;
         return _this4.fin_candidates = data;
       });
     },
     loadMaleSchoolCandidates: function loadMaleSchoolCandidates() {
       var _this5 = this;
 
-      axios.get('api/male_sch_candidate').then(function (_ref5) {
-        var data = _ref5.data;
+      axios.get('api/male_sch_candidate').then(function (_ref4) {
+        var data = _ref4.data;
         return _this5.male_sch_candidates = data;
       });
     },
     loadFemaleSchoolCandidates: function loadFemaleSchoolCandidates() {
       var _this6 = this;
 
-      axios.get('api/female_sch_candidate').then(function (_ref6) {
-        var data = _ref6.data;
+      axios.get('api/female_sch_candidate').then(function (_ref5) {
+        var data = _ref5.data;
         return _this6.female_sch_candidates = data;
       });
     },
     loadMaleSportCandidates: function loadMaleSportCandidates() {
       var _this7 = this;
 
-      axios.get('api/male_sport_candidate').then(function (_ref7) {
-        var data = _ref7.data;
+      axios.get('api/male_sport_candidate').then(function (_ref6) {
+        var data = _ref6.data;
         return _this7.male_sport_candidates = data;
       });
     },
     loadFemaleSportCandidates: function loadFemaleSportCandidates() {
       var _this8 = this;
 
-      axios.get('api/female_sport_candidate').then(function (_ref8) {
-        var data = _ref8.data;
+      axios.get('api/female_sport_candidate').then(function (_ref7) {
+        var data = _ref7.data;
         return _this8.female_sport_candidates = data;
       });
     }
@@ -66154,649 +66266,516 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", { staticClass: "container mt-3" }, [
+    _c("div", { staticClass: "card card-default" }, [
+      _vm._m(0),
+      _vm._v(" "),
+      _c("div", { staticClass: "card-body" }, [
+        _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "col-md-6" }, [
+            _c("div", { staticClass: "form-group" }, [
+              _c("label", [_vm._v("Position")]),
+              _vm._v(" "),
+              _c(
+                "select",
+                {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.form.candidate_position_id,
+                      expression: "form.candidate_position_id",
+                    },
+                  ],
+                  staticClass: "form-control",
+                  staticStyle: { width: "100%" },
+                  attrs: {
+                    "data-select2-id": "1",
+                    tabindex: "-1",
+                    "aria-hidden": "true",
+                    id: "candidate_position_id",
+                  },
+                  on: {
+                    change: function ($event) {
+                      var $$selectedVal = Array.prototype.filter
+                        .call($event.target.options, function (o) {
+                          return o.selected
+                        })
+                        .map(function (o) {
+                          var val = "_value" in o ? o._value : o.value
+                          return val
+                        })
+                      _vm.$set(
+                        _vm.form,
+                        "candidate_position_id",
+                        $event.target.multiple
+                          ? $$selectedVal
+                          : $$selectedVal[0]
+                      )
+                    },
+                  },
+                },
+                [
+                  _c("option", { attrs: { value: "" } }, [
+                    _vm._v("Select Position"),
+                  ]),
+                  _vm._v(" "),
+                  _vm._l(_vm.positions, function (item) {
+                    return _c(
+                      "option",
+                      {
+                        key: item.id,
+                        domProps: {
+                          value: item.id,
+                          selected: item.id == _vm.form.candidate_position_id,
+                        },
+                      },
+                      [_vm._v(_vm._s(item.name))]
+                    )
+                  }),
+                ],
+                2
+              ),
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-group" }, [
+              _c("label", [_vm._v("School")]),
+              _vm._v(" "),
+              _c(
+                "select",
+                {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.form.candidate_school_id,
+                      expression: "form.candidate_school_id",
+                    },
+                  ],
+                  staticClass: "form-control",
+                  staticStyle: { width: "100%" },
+                  attrs: {
+                    "data-select2-id": "1",
+                    tabindex: "-1",
+                    "aria-hidden": "true",
+                    id: "candidate_school_id",
+                  },
+                  on: {
+                    change: function ($event) {
+                      var $$selectedVal = Array.prototype.filter
+                        .call($event.target.options, function (o) {
+                          return o.selected
+                        })
+                        .map(function (o) {
+                          var val = "_value" in o ? o._value : o.value
+                          return val
+                        })
+                      _vm.$set(
+                        _vm.form,
+                        "candidate_school_id",
+                        $event.target.multiple
+                          ? $$selectedVal
+                          : $$selectedVal[0]
+                      )
+                    },
+                  },
+                },
+                [
+                  _c("option", { attrs: { value: "" } }, [
+                    _vm._v("Select School"),
+                  ]),
+                  _vm._v(" "),
+                  _vm._l(_vm.schools, function (item) {
+                    return _c(
+                      "option",
+                      {
+                        key: item.id,
+                        domProps: {
+                          value: item.id,
+                          selected: item.id == _vm.form.candidate_school_id,
+                        },
+                      },
+                      [_vm._v(_vm._s(item.name))]
+                    )
+                  }),
+                ],
+                2
+              ),
+            ]),
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-md-6" }, [
+            _c("div", { staticClass: "form-group" }, [
+              _c("label", [_vm._v("Gender")]),
+              _vm._v(" "),
+              _c(
+                "select",
+                {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.form.gender,
+                      expression: "form.gender",
+                    },
+                  ],
+                  staticClass: "form-control",
+                  attrs: { id: "gender", name: "gender" },
+                  on: {
+                    change: function ($event) {
+                      var $$selectedVal = Array.prototype.filter
+                        .call($event.target.options, function (o) {
+                          return o.selected
+                        })
+                        .map(function (o) {
+                          var val = "_value" in o ? o._value : o.value
+                          return val
+                        })
+                      _vm.$set(
+                        _vm.form,
+                        "gender",
+                        $event.target.multiple
+                          ? $$selectedVal
+                          : $$selectedVal[0]
+                      )
+                    },
+                  },
+                },
+                [
+                  _c("option", { attrs: { value: "" } }, [
+                    _vm._v("Select Gender"),
+                  ]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "male" } }, [_vm._v("Male")]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "female" } }, [
+                    _vm._v("Female"),
+                  ]),
+                ]
+              ),
+              _vm._v(" "),
+              _vm.form.errors.has("gender")
+                ? _c("div", {
+                    domProps: {
+                      innerHTML: _vm._s(_vm.form.errors.get("gender")),
+                    },
+                  })
+                : _vm._e(),
+            ]),
+          ]),
+        ]),
+        _vm._v(" "),
+        _vm._m(1),
+      ]),
+      _vm._v(" "),
+      _vm._m(2),
+    ]),
+    _vm._v(" "),
+    _vm._m(3),
+  ])
 }
 var staticRenderFns = [
   function () {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "container" }, [
-      _c("div", { staticClass: "card card-default" }, [
-        _c("div", { staticClass: "card-header" }, [
-          _c("h3", { staticClass: "card-title" }, [
-            _vm._v("Select2 (Default Theme)"),
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "card-tools" }, [
-            _c(
-              "button",
-              {
-                staticClass: "btn btn-tool",
-                attrs: { type: "button", "data-card-widget": "collapse" },
-              },
-              [_c("i", { staticClass: "fas fa-minus" })]
-            ),
-            _vm._v(" "),
-            _c(
-              "button",
-              {
-                staticClass: "btn btn-tool",
-                attrs: { type: "button", "data-card-widget": "remove" },
-              },
-              [_c("i", { staticClass: "fas fa-times" })]
-            ),
-          ]),
-        ]),
+    return _c("div", { staticClass: "card-header" }, [
+      _c("h3", { staticClass: "card-title" }, [
+        _vm._v("Election Results (Real-time)"),
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "card-tools" }, [
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-tool",
+            attrs: { type: "button", "data-card-widget": "collapse" },
+          },
+          [_c("i", { staticClass: "fas fa-minus" })]
+        ),
+      ]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "button",
+      { staticClass: "btn btn-primary", attrs: { type: "button" } },
+      [_vm._v("Find "), _c("i", { staticClass: "fas fa-search" })]
+    )
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "card-footer" }, [
+      _vm._v("\n        Visit "),
+      _c("a", { attrs: { href: "https://select2.github.io/" } }, [
+        _vm._v("Results documentation"),
+      ]),
+      _vm._v(
+        " for more insight and information about\n        the completed elections.\n      "
+      ),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "card" }, [
+      _c("div", { staticClass: "card-header border-transparent" }, [
+        _c("h3", { staticClass: "card-title" }, [_vm._v("Latest Orders")]),
         _vm._v(" "),
-        _c("div", { staticClass: "card-body" }, [
-          _c("div", { staticClass: "row" }, [
-            _c("div", { staticClass: "col-md-6" }, [
-              _c("div", { staticClass: "form-group" }, [
-                _c("label", [_vm._v("Minimal")]),
+        _c("div", { staticClass: "card-tools" }, [
+          _c(
+            "button",
+            {
+              staticClass: "btn btn-tool",
+              attrs: { type: "button", "data-card-widget": "collapse" },
+            },
+            [_c("i", { staticClass: "fas fa-minus" })]
+          ),
+          _vm._v(" "),
+          _c(
+            "button",
+            {
+              staticClass: "btn btn-tool",
+              attrs: { type: "button", "data-card-widget": "remove" },
+            },
+            [_c("i", { staticClass: "fas fa-times" })]
+          ),
+        ]),
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "card-body p-0" }, [
+        _c("div", { staticClass: "table-responsive" }, [
+          _c("table", { staticClass: "table m-0" }, [
+            _c("thead", [
+              _c("tr", [
+                _c("th", [_vm._v("Order ID")]),
                 _vm._v(" "),
-                _c(
-                  "select",
-                  {
-                    staticClass:
-                      "form-control select2 select2-hidden-accessible",
-                    staticStyle: { width: "100%" },
-                    attrs: {
-                      "data-select2-id": "1",
-                      tabindex: "-1",
-                      "aria-hidden": "true",
-                    },
-                  },
-                  [
-                    _c(
-                      "option",
-                      {
-                        attrs: { selected: "selected", "data-select2-id": "3" },
-                      },
-                      [_vm._v("Alabama")]
-                    ),
-                    _vm._v(" "),
-                    _c("option", [_vm._v("Alaska")]),
-                    _vm._v(" "),
-                    _c("option", [_vm._v("California")]),
-                    _vm._v(" "),
-                    _c("option", [_vm._v("Delaware")]),
-                    _vm._v(" "),
-                    _c("option", [_vm._v("Tennessee")]),
-                    _vm._v(" "),
-                    _c("option", [_vm._v("Texas")]),
-                    _vm._v(" "),
-                    _c("option", [_vm._v("Washington")]),
-                  ]
-                ),
-                _c(
-                  "span",
-                  {
-                    staticClass:
-                      "select2 select2-container select2-container--default",
-                    staticStyle: { width: "100%" },
-                    attrs: { dir: "ltr", "data-select2-id": "2" },
-                  },
-                  [
-                    _c("span", { staticClass: "selection" }, [
-                      _c(
-                        "span",
-                        {
-                          staticClass:
-                            "select2-selection select2-selection--single",
-                          attrs: {
-                            role: "combobox",
-                            "aria-haspopup": "true",
-                            "aria-expanded": "false",
-                            tabindex: "0",
-                            "aria-disabled": "false",
-                            "aria-labelledby": "select2-k4jg-container",
-                          },
-                        },
-                        [
-                          _c(
-                            "span",
-                            {
-                              staticClass: "select2-selection__rendered",
-                              attrs: {
-                                id: "select2-k4jg-container",
-                                role: "textbox",
-                                "aria-readonly": "true",
-                                title: "Alabama",
-                              },
-                            },
-                            [_vm._v("Alabama")]
-                          ),
-                          _c(
-                            "span",
-                            {
-                              staticClass: "select2-selection__arrow",
-                              attrs: { role: "presentation" },
-                            },
-                            [_c("b", { attrs: { role: "presentation" } })]
-                          ),
-                        ]
-                      ),
-                    ]),
-                    _c("span", {
-                      staticClass: "dropdown-wrapper",
-                      attrs: { "aria-hidden": "true" },
-                    }),
-                  ]
-                ),
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "form-group" }, [
-                _c("label", [_vm._v("Disabled")]),
+                _c("th", [_vm._v("Item")]),
                 _vm._v(" "),
-                _c(
-                  "select",
-                  {
-                    staticClass:
-                      "form-control select2 select2-hidden-accessible",
-                    staticStyle: { width: "100%" },
-                    attrs: {
-                      disabled: "",
-                      "data-select2-id": "4",
-                      tabindex: "-1",
-                      "aria-hidden": "true",
-                    },
-                  },
-                  [
-                    _c(
-                      "option",
-                      {
-                        attrs: { selected: "selected", "data-select2-id": "6" },
-                      },
-                      [_vm._v("Alabama")]
-                    ),
-                    _vm._v(" "),
-                    _c("option", [_vm._v("Alaska")]),
-                    _vm._v(" "),
-                    _c("option", [_vm._v("California")]),
-                    _vm._v(" "),
-                    _c("option", [_vm._v("Delaware")]),
-                    _vm._v(" "),
-                    _c("option", [_vm._v("Tennessee")]),
-                    _vm._v(" "),
-                    _c("option", [_vm._v("Texas")]),
-                    _vm._v(" "),
-                    _c("option", [_vm._v("Washington")]),
-                  ]
-                ),
-                _c(
-                  "span",
-                  {
-                    staticClass:
-                      "select2 select2-container select2-container--default select2-container--disabled",
-                    staticStyle: { width: "100%" },
-                    attrs: { dir: "ltr", "data-select2-id": "5" },
-                  },
-                  [
-                    _c("span", { staticClass: "selection" }, [
-                      _c(
-                        "span",
-                        {
-                          staticClass:
-                            "select2-selection select2-selection--single",
-                          attrs: {
-                            role: "combobox",
-                            "aria-haspopup": "true",
-                            "aria-expanded": "false",
-                            tabindex: "-1",
-                            "aria-disabled": "true",
-                            "aria-labelledby": "select2-m3dq-container",
-                          },
-                        },
-                        [
-                          _c(
-                            "span",
-                            {
-                              staticClass: "select2-selection__rendered",
-                              attrs: {
-                                id: "select2-m3dq-container",
-                                role: "textbox",
-                                "aria-readonly": "true",
-                                title: "Alabama",
-                              },
-                            },
-                            [_vm._v("Alabama")]
-                          ),
-                          _c(
-                            "span",
-                            {
-                              staticClass: "select2-selection__arrow",
-                              attrs: { role: "presentation" },
-                            },
-                            [_c("b", { attrs: { role: "presentation" } })]
-                          ),
-                        ]
-                      ),
-                    ]),
-                    _c("span", {
-                      staticClass: "dropdown-wrapper",
-                      attrs: { "aria-hidden": "true" },
-                    }),
-                  ]
-                ),
+                _c("th", [_vm._v("Status")]),
+                _vm._v(" "),
+                _c("th", [_vm._v("Popularity")]),
               ]),
             ]),
             _vm._v(" "),
-            _c("div", { staticClass: "col-md-6" }, [
-              _c("div", { staticClass: "form-group" }, [
-                _c("label", [_vm._v("Multiple")]),
+            _c("tbody", [
+              _c("tr", [
+                _c("td", [
+                  _c("a", { attrs: { href: "pages/examples/invoice.html" } }, [
+                    _vm._v("OR9842"),
+                  ]),
+                ]),
                 _vm._v(" "),
-                _c(
-                  "select",
-                  {
-                    staticClass: "select2 select2-hidden-accessible",
-                    staticStyle: { width: "100%" },
-                    attrs: {
-                      multiple: "",
-                      "data-placeholder": "Select a State",
-                      "data-select2-id": "7",
-                      tabindex: "-1",
-                      "aria-hidden": "true",
-                    },
-                  },
-                  [
-                    _c("option", [_vm._v("Alabama")]),
-                    _vm._v(" "),
-                    _c("option", [_vm._v("Alaska")]),
-                    _vm._v(" "),
-                    _c("option", [_vm._v("California")]),
-                    _vm._v(" "),
-                    _c("option", [_vm._v("Delaware")]),
-                    _vm._v(" "),
-                    _c("option", [_vm._v("Tennessee")]),
-                    _vm._v(" "),
-                    _c("option", [_vm._v("Texas")]),
-                    _vm._v(" "),
-                    _c("option", [_vm._v("Washington")]),
-                  ]
-                ),
-                _c(
-                  "span",
-                  {
-                    staticClass:
-                      "select2 select2-container select2-container--default",
-                    staticStyle: { width: "100%" },
-                    attrs: { dir: "ltr", "data-select2-id": "8" },
-                  },
-                  [
-                    _c("span", { staticClass: "selection" }, [
-                      _c(
-                        "span",
-                        {
-                          staticClass:
-                            "select2-selection select2-selection--multiple",
-                          attrs: {
-                            role: "combobox",
-                            "aria-haspopup": "true",
-                            "aria-expanded": "false",
-                            tabindex: "-1",
-                            "aria-disabled": "false",
-                          },
-                        },
-                        [
-                          _c(
-                            "ul",
-                            { staticClass: "select2-selection__rendered" },
-                            [
-                              _c(
-                                "li",
-                                {
-                                  staticClass:
-                                    "select2-search select2-search--inline",
-                                },
-                                [
-                                  _c("input", {
-                                    staticClass: "select2-search__field",
-                                    staticStyle: { width: "453px" },
-                                    attrs: {
-                                      type: "search",
-                                      tabindex: "0",
-                                      autocomplete: "off",
-                                      autocorrect: "off",
-                                      autocapitalize: "none",
-                                      spellcheck: "false",
-                                      role: "searchbox",
-                                      "aria-autocomplete": "list",
-                                      placeholder: "Select a State",
-                                    },
-                                  }),
-                                ]
-                              ),
-                            ]
-                          ),
-                        ]
-                      ),
-                    ]),
-                    _c("span", {
-                      staticClass: "dropdown-wrapper",
-                      attrs: { "aria-hidden": "true" },
-                    }),
-                  ]
-                ),
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "form-group" }, [
-                _c("label", [_vm._v("Disabled Result")]),
+                _c("td", [_vm._v("Call of Duty IV")]),
                 _vm._v(" "),
-                _c(
-                  "select",
-                  {
-                    staticClass:
-                      "form-control select2 select2-hidden-accessible",
-                    staticStyle: { width: "100%" },
-                    attrs: {
-                      "data-select2-id": "9",
-                      tabindex: "-1",
-                      "aria-hidden": "true",
-                    },
-                  },
-                  [
-                    _c(
-                      "option",
-                      {
-                        attrs: {
-                          selected: "selected",
-                          "data-select2-id": "11",
-                        },
-                      },
-                      [_vm._v("Alabama")]
-                    ),
-                    _vm._v(" "),
-                    _c("option", [_vm._v("Alaska")]),
-                    _vm._v(" "),
-                    _c("option", { attrs: { disabled: "disabled" } }, [
-                      _vm._v("California (disabled)"),
-                    ]),
-                    _vm._v(" "),
-                    _c("option", [_vm._v("Delaware")]),
-                    _vm._v(" "),
-                    _c("option", [_vm._v("Tennessee")]),
-                    _vm._v(" "),
-                    _c("option", [_vm._v("Texas")]),
-                    _vm._v(" "),
-                    _c("option", [_vm._v("Washington")]),
-                  ]
-                ),
-                _c(
-                  "span",
-                  {
-                    staticClass:
-                      "select2 select2-container select2-container--default",
-                    staticStyle: { width: "100%" },
-                    attrs: { dir: "ltr", "data-select2-id": "10" },
-                  },
-                  [
-                    _c("span", { staticClass: "selection" }, [
-                      _c(
-                        "span",
-                        {
-                          staticClass:
-                            "select2-selection select2-selection--single",
-                          attrs: {
-                            role: "combobox",
-                            "aria-haspopup": "true",
-                            "aria-expanded": "false",
-                            tabindex: "0",
-                            "aria-disabled": "false",
-                            "aria-labelledby": "select2-8vtv-container",
-                          },
-                        },
-                        [
-                          _c(
-                            "span",
-                            {
-                              staticClass: "select2-selection__rendered",
-                              attrs: {
-                                id: "select2-8vtv-container",
-                                role: "textbox",
-                                "aria-readonly": "true",
-                                title: "Alabama",
-                              },
-                            },
-                            [_vm._v("Alabama")]
-                          ),
-                          _c(
-                            "span",
-                            {
-                              staticClass: "select2-selection__arrow",
-                              attrs: { role: "presentation" },
-                            },
-                            [_c("b", { attrs: { role: "presentation" } })]
-                          ),
-                        ]
-                      ),
-                    ]),
-                    _c("span", {
-                      staticClass: "dropdown-wrapper",
-                      attrs: { "aria-hidden": "true" },
-                    }),
-                  ]
-                ),
-              ]),
-            ]),
-          ]),
-          _vm._v(" "),
-          _c("h5", [_vm._v("Custom Color Variants")]),
-          _vm._v(" "),
-          _c("div", { staticClass: "row" }, [
-            _c("div", { staticClass: "col-12 col-sm-6" }, [
-              _c("div", { staticClass: "form-group" }, [
-                _c("label", [_vm._v("Minimal (.select2-danger)")]),
+                _c("td", [
+                  _c("span", { staticClass: "badge badge-success" }, [
+                    _vm._v("Shipped"),
+                  ]),
+                ]),
                 _vm._v(" "),
-                _c(
-                  "select",
-                  {
-                    staticClass:
-                      "form-control select2 select2-danger select2-hidden-accessible",
-                    staticStyle: { width: "100%" },
-                    attrs: {
-                      "data-dropdown-css-class": "select2-danger",
-                      "data-select2-id": "12",
-                      tabindex: "-1",
-                      "aria-hidden": "true",
-                    },
-                  },
-                  [
-                    _c(
-                      "option",
-                      {
-                        attrs: {
-                          selected: "selected",
-                          "data-select2-id": "14",
-                        },
-                      },
-                      [_vm._v("Alabama")]
-                    ),
-                    _vm._v(" "),
-                    _c("option", [_vm._v("Alaska")]),
-                    _vm._v(" "),
-                    _c("option", [_vm._v("California")]),
-                    _vm._v(" "),
-                    _c("option", [_vm._v("Delaware")]),
-                    _vm._v(" "),
-                    _c("option", [_vm._v("Tennessee")]),
-                    _vm._v(" "),
-                    _c("option", [_vm._v("Texas")]),
-                    _vm._v(" "),
-                    _c("option", [_vm._v("Washington")]),
-                  ]
-                ),
-                _c(
-                  "span",
-                  {
-                    staticClass:
-                      "select2 select2-container select2-container--default",
-                    staticStyle: { width: "100%" },
-                    attrs: { dir: "ltr", "data-select2-id": "13" },
-                  },
-                  [
-                    _c("span", { staticClass: "selection" }, [
-                      _c(
-                        "span",
-                        {
-                          staticClass:
-                            "select2-selection select2-selection--single",
-                          attrs: {
-                            role: "combobox",
-                            "aria-haspopup": "true",
-                            "aria-expanded": "false",
-                            tabindex: "0",
-                            "aria-disabled": "false",
-                            "aria-labelledby": "select2-sfep-container",
-                          },
-                        },
-                        [
-                          _c(
-                            "span",
-                            {
-                              staticClass: "select2-selection__rendered",
-                              attrs: {
-                                id: "select2-sfep-container",
-                                role: "textbox",
-                                "aria-readonly": "true",
-                                title: "Alabama",
-                              },
-                            },
-                            [_vm._v("Alabama")]
-                          ),
-                          _c(
-                            "span",
-                            {
-                              staticClass: "select2-selection__arrow",
-                              attrs: { role: "presentation" },
-                            },
-                            [_c("b", { attrs: { role: "presentation" } })]
-                          ),
-                        ]
-                      ),
-                    ]),
-                    _c("span", {
-                      staticClass: "dropdown-wrapper",
-                      attrs: { "aria-hidden": "true" },
-                    }),
-                  ]
-                ),
-              ]),
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-12 col-sm-6" }, [
-              _c("div", { staticClass: "form-group" }, [
-                _c("label", [_vm._v("Multiple (.select2-purple)")]),
-                _vm._v(" "),
-                _c("div", { staticClass: "select2-purple" }, [
+                _c("td", [
                   _c(
-                    "select",
+                    "div",
                     {
-                      staticClass: "select2 select2-hidden-accessible",
-                      staticStyle: { width: "100%" },
-                      attrs: {
-                        multiple: "",
-                        "data-placeholder": "Select a State",
-                        "data-dropdown-css-class": "select2-purple",
-                        "data-select2-id": "15",
-                        tabindex: "-1",
-                        "aria-hidden": "true",
-                      },
+                      staticClass: "sparkbar",
+                      attrs: { "data-color": "#00a65a", "data-height": "20" },
                     },
-                    [
-                      _c("option", [_vm._v("Alabama")]),
-                      _vm._v(" "),
-                      _c("option", [_vm._v("Alaska")]),
-                      _vm._v(" "),
-                      _c("option", [_vm._v("California")]),
-                      _vm._v(" "),
-                      _c("option", [_vm._v("Delaware")]),
-                      _vm._v(" "),
-                      _c("option", [_vm._v("Tennessee")]),
-                      _vm._v(" "),
-                      _c("option", [_vm._v("Texas")]),
-                      _vm._v(" "),
-                      _c("option", [_vm._v("Washington")]),
-                    ]
+                    [_vm._v("90,80,90,-70,61,-83,63")]
                   ),
+                ]),
+              ]),
+              _vm._v(" "),
+              _c("tr", [
+                _c("td", [
+                  _c("a", { attrs: { href: "pages/examples/invoice.html" } }, [
+                    _vm._v("OR1848"),
+                  ]),
+                ]),
+                _vm._v(" "),
+                _c("td", [_vm._v("Samsung Smart TV")]),
+                _vm._v(" "),
+                _c("td", [
+                  _c("span", { staticClass: "badge badge-warning" }, [
+                    _vm._v("Pending"),
+                  ]),
+                ]),
+                _vm._v(" "),
+                _c("td", [
                   _c(
-                    "span",
+                    "div",
                     {
-                      staticClass:
-                        "select2 select2-container select2-container--default",
-                      staticStyle: { width: "100%" },
-                      attrs: { dir: "ltr", "data-select2-id": "16" },
+                      staticClass: "sparkbar",
+                      attrs: { "data-color": "#f39c12", "data-height": "20" },
                     },
-                    [
-                      _c("span", { staticClass: "selection" }, [
-                        _c(
-                          "span",
-                          {
-                            staticClass:
-                              "select2-selection select2-selection--multiple",
-                            attrs: {
-                              role: "combobox",
-                              "aria-haspopup": "true",
-                              "aria-expanded": "false",
-                              tabindex: "-1",
-                              "aria-disabled": "false",
-                            },
-                          },
-                          [
-                            _c(
-                              "ul",
-                              { staticClass: "select2-selection__rendered" },
-                              [
-                                _c(
-                                  "li",
-                                  {
-                                    staticClass:
-                                      "select2-search select2-search--inline",
-                                  },
-                                  [
-                                    _c("input", {
-                                      staticClass: "select2-search__field",
-                                      staticStyle: { width: "453px" },
-                                      attrs: {
-                                        type: "search",
-                                        tabindex: "0",
-                                        autocomplete: "off",
-                                        autocorrect: "off",
-                                        autocapitalize: "none",
-                                        spellcheck: "false",
-                                        role: "searchbox",
-                                        "aria-autocomplete": "list",
-                                        placeholder: "Select a State",
-                                      },
-                                    }),
-                                  ]
-                                ),
-                              ]
-                            ),
-                          ]
-                        ),
-                      ]),
-                      _c("span", {
-                        staticClass: "dropdown-wrapper",
-                        attrs: { "aria-hidden": "true" },
-                      }),
-                    ]
+                    [_vm._v("90,80,-90,70,61,-83,68")]
+                  ),
+                ]),
+              ]),
+              _vm._v(" "),
+              _c("tr", [
+                _c("td", [
+                  _c("a", { attrs: { href: "pages/examples/invoice.html" } }, [
+                    _vm._v("OR7429"),
+                  ]),
+                ]),
+                _vm._v(" "),
+                _c("td", [_vm._v("iPhone 6 Plus")]),
+                _vm._v(" "),
+                _c("td", [
+                  _c("span", { staticClass: "badge badge-danger" }, [
+                    _vm._v("Delivered"),
+                  ]),
+                ]),
+                _vm._v(" "),
+                _c("td", [
+                  _c(
+                    "div",
+                    {
+                      staticClass: "sparkbar",
+                      attrs: { "data-color": "#f56954", "data-height": "20" },
+                    },
+                    [_vm._v("90,-80,90,70,-61,83,63")]
+                  ),
+                ]),
+              ]),
+              _vm._v(" "),
+              _c("tr", [
+                _c("td", [
+                  _c("a", { attrs: { href: "pages/examples/invoice.html" } }, [
+                    _vm._v("OR7429"),
+                  ]),
+                ]),
+                _vm._v(" "),
+                _c("td", [_vm._v("Samsung Smart TV")]),
+                _vm._v(" "),
+                _c("td", [
+                  _c("span", { staticClass: "badge badge-info" }, [
+                    _vm._v("Processing"),
+                  ]),
+                ]),
+                _vm._v(" "),
+                _c("td", [
+                  _c(
+                    "div",
+                    {
+                      staticClass: "sparkbar",
+                      attrs: { "data-color": "#00c0ef", "data-height": "20" },
+                    },
+                    [_vm._v("90,80,-90,70,-61,83,63")]
+                  ),
+                ]),
+              ]),
+              _vm._v(" "),
+              _c("tr", [
+                _c("td", [
+                  _c("a", { attrs: { href: "pages/examples/invoice.html" } }, [
+                    _vm._v("OR1848"),
+                  ]),
+                ]),
+                _vm._v(" "),
+                _c("td", [_vm._v("Samsung Smart TV")]),
+                _vm._v(" "),
+                _c("td", [
+                  _c("span", { staticClass: "badge badge-warning" }, [
+                    _vm._v("Pending"),
+                  ]),
+                ]),
+                _vm._v(" "),
+                _c("td", [
+                  _c(
+                    "div",
+                    {
+                      staticClass: "sparkbar",
+                      attrs: { "data-color": "#f39c12", "data-height": "20" },
+                    },
+                    [_vm._v("90,80,-90,70,61,-83,68")]
+                  ),
+                ]),
+              ]),
+              _vm._v(" "),
+              _c("tr", [
+                _c("td", [
+                  _c("a", { attrs: { href: "pages/examples/invoice.html" } }, [
+                    _vm._v("OR7429"),
+                  ]),
+                ]),
+                _vm._v(" "),
+                _c("td", [_vm._v("iPhone 6 Plus")]),
+                _vm._v(" "),
+                _c("td", [
+                  _c("span", { staticClass: "badge badge-danger" }, [
+                    _vm._v("Delivered"),
+                  ]),
+                ]),
+                _vm._v(" "),
+                _c("td", [
+                  _c(
+                    "div",
+                    {
+                      staticClass: "sparkbar",
+                      attrs: { "data-color": "#f56954", "data-height": "20" },
+                    },
+                    [_vm._v("90,-80,90,70,-61,83,63")]
+                  ),
+                ]),
+              ]),
+              _vm._v(" "),
+              _c("tr", [
+                _c("td", [
+                  _c("a", { attrs: { href: "pages/examples/invoice.html" } }, [
+                    _vm._v("OR9842"),
+                  ]),
+                ]),
+                _vm._v(" "),
+                _c("td", [_vm._v("Call of Duty IV")]),
+                _vm._v(" "),
+                _c("td", [
+                  _c("span", { staticClass: "badge badge-success" }, [
+                    _vm._v("Shipped"),
+                  ]),
+                ]),
+                _vm._v(" "),
+                _c("td", [
+                  _c(
+                    "div",
+                    {
+                      staticClass: "sparkbar",
+                      attrs: { "data-color": "#00a65a", "data-height": "20" },
+                    },
+                    [_vm._v("90,80,90,-70,61,-83,63")]
                   ),
                 ]),
               ]),
             ]),
           ]),
         ]),
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "card-footer clearfix" }, [
+        _c(
+          "a",
+          {
+            staticClass: "btn btn-sm btn-info float-left",
+            attrs: { href: "javascript:void(0)" },
+          },
+          [_vm._v("Place New Order")]
+        ),
         _vm._v(" "),
-        _c("div", { staticClass: "card-footer" }, [
-          _vm._v("\n        Visit "),
-          _c("a", { attrs: { href: "https://select2.github.io/" } }, [
-            _vm._v("Select2 documentation"),
-          ]),
-          _vm._v(
-            " for more examples and information about\n        the plugin.\n      "
-          ),
-        ]),
+        _c(
+          "a",
+          {
+            staticClass: "btn btn-sm btn-secondary float-right",
+            attrs: { href: "javascript:void(0)" },
+          },
+          [_vm._v("View All Orders")]
+        ),
       ]),
     ])
   },
@@ -67190,368 +67169,405 @@ var render = function () {
                 ),
               ]),
               _vm._v(" "),
-              _c("form", [
-                _c("h3", [_vm._v("Student Leader")]),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  { staticClass: "radio" },
-                  _vm._l(_vm.pres_candidates.data, function (cand) {
-                    return _c("tr", { key: cand.id }, [
-                      _c("td", [
-                        _c("label", [
-                          _c("input", {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.form.president_candidate_id,
-                                expression: "form.president_candidate_id",
+              _c(
+                "form",
+                {
+                  on: {
+                    submit: function ($event) {
+                      $event.preventDefault()
+                      return _vm.vote()
+                    },
+                  },
+                },
+                [
+                  _c("h3", [_vm._v("Student Leader")]),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    { staticClass: "radio" },
+                    _vm._l(_vm.pres_candidates.data, function (cand) {
+                      return _c("tr", { key: cand.id }, [
+                        _c("td", [
+                          _c("label", [
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.form.pres_candidate_id,
+                                  expression: "form.pres_candidate_id",
+                                },
+                              ],
+                              attrs: {
+                                type: "radio",
+                                selected:
+                                  cand.student_id == _vm.form.pres_candidate_id,
+                                name: "president_candidate_id",
                               },
-                            ],
-                            attrs: {
-                              type: "radio",
-                              name: "president_candidate_id",
-                            },
-                            domProps: {
-                              checked: _vm._q(
-                                _vm.form.president_candidate_id,
-                                null
-                              ),
-                            },
-                            on: {
-                              change: function ($event) {
-                                return _vm.$set(
-                                  _vm.form,
-                                  "president_candidate_id",
-                                  null
-                                )
+                              domProps: {
+                                value: cand.student_id,
+                                checked: _vm._q(
+                                  _vm.form.pres_candidate_id,
+                                  cand.student_id
+                                ),
                               },
-                            },
-                          }),
-                          _vm._v(
-                            _vm._s(cand.student.first_name) +
-                              " " +
-                              _vm._s(cand.student.last_name) +
-                              "\n                            "
-                          ),
+                              on: {
+                                change: function ($event) {
+                                  return _vm.$set(
+                                    _vm.form,
+                                    "pres_candidate_id",
+                                    cand.student_id
+                                  )
+                                },
+                              },
+                            }),
+                            _vm._v(
+                              _vm._s(cand.student.first_name) +
+                                " " +
+                                _vm._s(cand.student.last_name) +
+                                "\n                            "
+                            ),
+                          ]),
                         ]),
-                      ]),
-                    ])
-                  }),
-                  0
-                ),
-                _vm._v(" "),
-                _c("h3", [_vm._v("Secretary General")]),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  { staticClass: "radio" },
-                  _vm._l(_vm.sec_gen_candidates.data, function (cand) {
-                    return _c("tr", { key: cand.id }, [
-                      _c("td", [
-                        _c("label", [
-                          _c("input", {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.form.sec_gen_candidate_id,
-                                expression: "form.sec_gen_candidate_id",
+                      ])
+                    }),
+                    0
+                  ),
+                  _vm._v(" "),
+                  _c("h3", [_vm._v("Secretary General")]),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    { staticClass: "radio" },
+                    _vm._l(_vm.sec_gen_candidates.data, function (cand) {
+                      return _c("tr", { key: cand.id }, [
+                        _c("td", [
+                          _c("label", [
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.form.sec_gen_candidate_id,
+                                  expression: "form.sec_gen_candidate_id",
+                                },
+                              ],
+                              attrs: {
+                                type: "radio",
+                                selected:
+                                  cand.id == _vm.form.sec_gen_candidate_id,
+                                name: "sec_gen_candidate_id",
                               },
-                            ],
-                            attrs: {
-                              type: "radio",
-                              name: "sec_gen_candidate_id",
-                            },
-                            domProps: {
-                              checked: _vm._q(
-                                _vm.form.sec_gen_candidate_id,
-                                null
-                              ),
-                            },
-                            on: {
-                              change: function ($event) {
-                                return _vm.$set(
-                                  _vm.form,
-                                  "sec_gen_candidate_id",
-                                  null
-                                )
+                              domProps: {
+                                value: cand.id,
+                                checked: _vm._q(
+                                  _vm.form.sec_gen_candidate_id,
+                                  cand.id
+                                ),
                               },
-                            },
-                          }),
-                          _vm._v(
-                            _vm._s(cand.student.first_name) +
-                              " " +
-                              _vm._s(cand.student.last_name) +
-                              "\n                            "
-                          ),
+                              on: {
+                                change: function ($event) {
+                                  return _vm.$set(
+                                    _vm.form,
+                                    "sec_gen_candidate_id",
+                                    cand.id
+                                  )
+                                },
+                              },
+                            }),
+                            _vm._v(
+                              _vm._s(cand.student.first_name) +
+                                " " +
+                                _vm._s(cand.student.last_name) +
+                                "\n                            "
+                            ),
+                          ]),
                         ]),
-                      ]),
-                    ])
-                  }),
-                  0
-                ),
-                _vm._v(" "),
-                _c("h3", [_vm._v("Finance")]),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  { staticClass: "radio" },
-                  _vm._l(_vm.fin_candidates.data, function (cand) {
-                    return _c("tr", { key: cand.id }, [
-                      _c("td", [
-                        _c("label", [
-                          _c("input", {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.form.fin_candidate_id,
-                                expression: "form.fin_candidate_id",
+                      ])
+                    }),
+                    0
+                  ),
+                  _vm._v(" "),
+                  _c("h3", [_vm._v("Finance")]),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    { staticClass: "radio" },
+                    _vm._l(_vm.fin_candidates.data, function (cand) {
+                      return _c("tr", { key: cand.id }, [
+                        _c("td", [
+                          _c("label", [
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.form.fin_candidate_id,
+                                  expression: "form.fin_candidate_id",
+                                },
+                              ],
+                              attrs: {
+                                type: "radio",
+                                selected: cand.id == _vm.form.fin_candidate_id,
+                                name: "fin_candidate_id",
                               },
-                            ],
-                            attrs: { type: "radio", name: "fin_candidate_id" },
-                            domProps: {
-                              checked: _vm._q(_vm.form.fin_candidate_id, null),
-                            },
-                            on: {
-                              change: function ($event) {
-                                return _vm.$set(
-                                  _vm.form,
-                                  "fin_candidate_id",
-                                  null
-                                )
+                              domProps: {
+                                value: cand.id,
+                                checked: _vm._q(
+                                  _vm.form.fin_candidate_id,
+                                  cand.id
+                                ),
                               },
-                            },
-                          }),
-                          _vm._v(
-                            _vm._s(cand.student.first_name) +
-                              " " +
-                              _vm._s(cand.student.last_name) +
-                              "\n                            "
-                          ),
+                              on: {
+                                change: function ($event) {
+                                  return _vm.$set(
+                                    _vm.form,
+                                    "fin_candidate_id",
+                                    cand.id
+                                  )
+                                },
+                              },
+                            }),
+                            _vm._v(
+                              _vm._s(cand.student.first_name) +
+                                " " +
+                                _vm._s(cand.student.last_name) +
+                                "\n                            "
+                            ),
+                          ]),
                         ]),
-                      ]),
-                    ])
-                  }),
-                  0
-                ),
-                _vm._v(" "),
-                _c("h3", [_vm._v("School Rep")]),
-                _vm._v(" "),
-                _c("h5", [_vm._v("Male")]),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  { staticClass: "radio" },
-                  _vm._l(_vm.male_sch_candidates.data, function (cand) {
-                    return _c("tr", { key: cand.id }, [
-                      _c("td", [
-                        _c("label", [
-                          _c("input", {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.form.male_sch_candidate_id,
-                                expression: "form.male_sch_candidate_id",
+                      ])
+                    }),
+                    0
+                  ),
+                  _vm._v(" "),
+                  _c("h3", [_vm._v("School Rep")]),
+                  _vm._v(" "),
+                  _c("h5", [_vm._v("Male")]),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    { staticClass: "radio" },
+                    _vm._l(_vm.male_sch_candidates.data, function (cand) {
+                      return _c("tr", { key: cand.id }, [
+                        _c("td", [
+                          _c("label", [
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.form.male_sch_candidate_id,
+                                  expression: "form.male_sch_candidate_id",
+                                },
+                              ],
+                              attrs: {
+                                type: "radio",
+                                selected:
+                                  cand.id == _vm.form.male_sch_candidate_id,
+                                name: "male_sch_candidate_id",
                               },
-                            ],
-                            attrs: {
-                              type: "radio",
-                              name: "male_sch_candidate_id",
-                            },
-                            domProps: {
-                              checked: _vm._q(
-                                _vm.form.male_sch_candidate_id,
-                                null
-                              ),
-                            },
-                            on: {
-                              change: function ($event) {
-                                return _vm.$set(
-                                  _vm.form,
-                                  "male_sch_candidate_id",
-                                  null
-                                )
+                              domProps: {
+                                value: cand.id,
+                                checked: _vm._q(
+                                  _vm.form.male_sch_candidate_id,
+                                  cand.id
+                                ),
                               },
-                            },
-                          }),
-                          _vm._v(
-                            _vm._s(cand.student.first_name) +
-                              " " +
-                              _vm._s(cand.student.last_name) +
-                              "\n                            "
-                          ),
+                              on: {
+                                change: function ($event) {
+                                  return _vm.$set(
+                                    _vm.form,
+                                    "male_sch_candidate_id",
+                                    cand.id
+                                  )
+                                },
+                              },
+                            }),
+                            _vm._v(
+                              _vm._s(cand.student.first_name) +
+                                " " +
+                                _vm._s(cand.student.last_name) +
+                                "\n                            "
+                            ),
+                          ]),
                         ]),
-                      ]),
-                    ])
-                  }),
-                  0
-                ),
-                _vm._v(" "),
-                _c("h5", [_vm._v("Female")]),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  { staticClass: "radio" },
-                  _vm._l(_vm.female_sch_candidates.data, function (cand) {
-                    return _c("tr", { key: cand.id }, [
-                      _c("td", [
-                        _c("label", [
-                          _c("input", {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.form.female_sch_candidate_id,
-                                expression: "form.female_sch_candidate_id",
+                      ])
+                    }),
+                    0
+                  ),
+                  _vm._v(" "),
+                  _c("h5", [_vm._v("Female")]),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    { staticClass: "radio" },
+                    _vm._l(_vm.female_sch_candidates.data, function (cand) {
+                      return _c("tr", { key: cand.id }, [
+                        _c("td", [
+                          _c("label", [
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.form.female_sch_candidate_id,
+                                  expression: "form.female_sch_candidate_id",
+                                },
+                              ],
+                              attrs: {
+                                type: "radio",
+                                selected:
+                                  cand.id == _vm.form.female_sch_candidate_id,
+                                name: "female_sch_candidate_id",
                               },
-                            ],
-                            attrs: {
-                              type: "radio",
-                              name: "female_sch_candidate_id",
-                            },
-                            domProps: {
-                              checked: _vm._q(
-                                _vm.form.female_sch_candidate_id,
-                                null
-                              ),
-                            },
-                            on: {
-                              change: function ($event) {
-                                return _vm.$set(
-                                  _vm.form,
-                                  "female_sch_candidate_id",
-                                  null
-                                )
+                              domProps: {
+                                value: cand.id,
+                                checked: _vm._q(
+                                  _vm.form.female_sch_candidate_id,
+                                  cand.id
+                                ),
                               },
-                            },
-                          }),
-                          _vm._v(
-                            _vm._s(cand.student.first_name) +
-                              " " +
-                              _vm._s(cand.student.last_name) +
-                              "\n                            "
-                          ),
+                              on: {
+                                change: function ($event) {
+                                  return _vm.$set(
+                                    _vm.form,
+                                    "female_sch_candidate_id",
+                                    cand.id
+                                  )
+                                },
+                              },
+                            }),
+                            _vm._v(
+                              _vm._s(cand.student.first_name) +
+                                " " +
+                                _vm._s(cand.student.last_name) +
+                                "\n                            "
+                            ),
+                          ]),
                         ]),
-                      ]),
-                    ])
-                  }),
-                  0
-                ),
-                _vm._v(" "),
-                _c("h3", [_vm._v("Co-curricular")]),
-                _vm._v(" "),
-                _c("h5", [_vm._v("Male")]),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  { staticClass: "radio" },
-                  _vm._l(_vm.male_sport_candidates.data, function (cand) {
-                    return _c("tr", { key: cand.id }, [
-                      _c("td", [
-                        _c("label", [
-                          _c("input", {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.form.male_sport_candidate_id,
-                                expression: "form.male_sport_candidate_id",
+                      ])
+                    }),
+                    0
+                  ),
+                  _vm._v(" "),
+                  _c("h3", [_vm._v("Co-curricular")]),
+                  _vm._v(" "),
+                  _c("h5", [_vm._v("Male")]),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    { staticClass: "radio" },
+                    _vm._l(_vm.male_sport_candidates.data, function (cand) {
+                      return _c("tr", { key: cand.id }, [
+                        _c("td", [
+                          _c("label", [
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.form.male_sport_candidate_id,
+                                  expression: "form.male_sport_candidate_id",
+                                },
+                              ],
+                              attrs: {
+                                type: "radio",
+                                selected:
+                                  cand.id == _vm.form.male_sport_candidate_id,
+                                name: "male_sport_candidate_id",
                               },
-                            ],
-                            attrs: {
-                              type: "radio",
-                              name: "male_sport_candidate_id",
-                            },
-                            domProps: {
-                              checked: _vm._q(
-                                _vm.form.male_sport_candidate_id,
-                                null
-                              ),
-                            },
-                            on: {
-                              change: function ($event) {
-                                return _vm.$set(
-                                  _vm.form,
-                                  "male_sport_candidate_id",
-                                  null
-                                )
+                              domProps: {
+                                value: cand.id,
+                                checked: _vm._q(
+                                  _vm.form.male_sport_candidate_id,
+                                  cand.id
+                                ),
                               },
-                            },
-                          }),
-                          _vm._v(
-                            _vm._s(cand.student.first_name) +
-                              " " +
-                              _vm._s(cand.student.last_name) +
-                              "\n                            "
-                          ),
+                              on: {
+                                change: function ($event) {
+                                  return _vm.$set(
+                                    _vm.form,
+                                    "male_sport_candidate_id",
+                                    cand.id
+                                  )
+                                },
+                              },
+                            }),
+                            _vm._v(
+                              _vm._s(cand.student.first_name) +
+                                " " +
+                                _vm._s(cand.student.last_name) +
+                                "\n                            "
+                            ),
+                          ]),
                         ]),
-                      ]),
-                    ])
-                  }),
-                  0
-                ),
-                _vm._v(" "),
-                _c("h5", [_vm._v("Female")]),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  { staticClass: "radio" },
-                  _vm._l(_vm.female_sport_candidates.data, function (cand) {
-                    return _c("tr", { key: cand.id }, [
-                      _c("td", [
-                        _c("label", [
-                          _c("input", {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.form.female_sport_candidate_id,
-                                expression: "form.female_sport_candidate_id",
+                      ])
+                    }),
+                    0
+                  ),
+                  _vm._v(" "),
+                  _c("h5", [_vm._v("Female")]),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    { staticClass: "radio" },
+                    _vm._l(_vm.female_sport_candidates.data, function (cand) {
+                      return _c("tr", { key: cand.id }, [
+                        _c("td", [
+                          _c("label", [
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.form.female_sport_candidate_id,
+                                  expression: "form.female_sport_candidate_id",
+                                },
+                              ],
+                              attrs: {
+                                type: "radio",
+                                selected:
+                                  cand.id == _vm.form.female_sport_candidate_id,
+                                name: "female_sport_candidate_id",
                               },
-                            ],
-                            attrs: {
-                              type: "radio",
-                              name: "female_sch_candidate_id",
-                            },
-                            domProps: {
-                              checked: _vm._q(
-                                _vm.form.female_sport_candidate_id,
-                                null
-                              ),
-                            },
-                            on: {
-                              change: function ($event) {
-                                return _vm.$set(
-                                  _vm.form,
-                                  "female_sport_candidate_id",
-                                  null
-                                )
+                              domProps: {
+                                value: cand.id,
+                                checked: _vm._q(
+                                  _vm.form.female_sport_candidate_id,
+                                  cand.id
+                                ),
                               },
-                            },
-                          }),
-                          _vm._v(
-                            _vm._s(cand.student.first_name) +
-                              " " +
-                              _vm._s(cand.student.last_name) +
-                              "\n                            "
-                          ),
+                              on: {
+                                change: function ($event) {
+                                  return _vm.$set(
+                                    _vm.form,
+                                    "female_sport_candidate_id",
+                                    cand.id
+                                  )
+                                },
+                              },
+                            }),
+                            _vm._v(
+                              _vm._s(cand.student.first_name) +
+                                " " +
+                                _vm._s(cand.student.last_name) +
+                                "\n                            "
+                            ),
+                          ]),
                         ]),
-                      ]),
-                    ])
-                  }),
-                  0
-                ),
-                _vm._v(" "),
-                _c(
-                  "button",
-                  { staticClass: "btn btn-solid", attrs: { type: "submit" } },
-                  [_vm._v("Vote")]
-                ),
-              ]),
+                      ])
+                    }),
+                    0
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    { staticClass: "btn btn-solid", attrs: { type: "submit" } },
+                    [_vm._v("Vote")]
+                  ),
+                ]
+              ),
             ]),
           ]
         ),

@@ -7,13 +7,16 @@
                 <div class="contact-info">
                     <!-- <h3>A simple and transparent voting process</h3> -->
                     <p>Please choose your preferred candidate in the following categories:</p>
-                    <form>
+                    <form @submit.prevent = "vote()">
                     <h3>Student Leader</h3>
                     <div class="radio">
                         <tr  v-for="cand in pres_candidates.data" :key="cand.id">
                             <td>
                                 <label>
-                                <input type="radio" v-model="form.president_candidate_id" name="president_candidate_id">{{cand.student.first_name}} {{cand.student.last_name}}
+                                <input type="radio" :value="cand.student_id"
+                                 v-model="form.pres_candidate_id"
+                                 :selected ="cand.student_id == form.pres_candidate_id"
+                                  name="president_candidate_id">{{cand.student.first_name}} {{cand.student.last_name}}
                                 </label>
                             </td>
                         </tr>
@@ -24,7 +27,10 @@
                         <tr  v-for="cand in sec_gen_candidates.data" :key="cand.id">
                             <td>
                                 <label>
-                                <input type="radio" v-model="form.sec_gen_candidate_id" name="sec_gen_candidate_id">{{cand.student.first_name}} {{cand.student.last_name}}
+                                <input type="radio" :value="cand.id"
+                                 v-model="form.sec_gen_candidate_id"
+                                 :selected ="cand.id == form.sec_gen_candidate_id"
+                                  name="sec_gen_candidate_id">{{cand.student.first_name}} {{cand.student.last_name}}
                                 </label>
                             </td>
                         </tr>
@@ -34,7 +40,10 @@
                         <tr  v-for="cand in fin_candidates.data" :key="cand.id">
                             <td>
                                 <label>
-                                <input type="radio" v-model="form.fin_candidate_id" name="fin_candidate_id">{{cand.student.first_name}} {{cand.student.last_name}}
+                                <input type="radio" :value="cand.id"
+                                 v-model="form.fin_candidate_id"
+                                 :selected ="cand.id == form.fin_candidate_id"
+                                  name="fin_candidate_id">{{cand.student.first_name}} {{cand.student.last_name}}
                                 </label>
                             </td>
                         </tr>
@@ -45,7 +54,10 @@
                         <tr  v-for="cand in male_sch_candidates.data" :key="cand.id">
                             <td>
                                 <label>
-                                <input type="radio" v-model="form.male_sch_candidate_id" name="male_sch_candidate_id">{{cand.student.first_name}} {{cand.student.last_name}}
+                                <input type="radio" :value="cand.id"
+                                 v-model="form.male_sch_candidate_id"
+                                 :selected ="cand.id == form.male_sch_candidate_id"
+                                  name="male_sch_candidate_id">{{cand.student.first_name}} {{cand.student.last_name}}
                                 </label>
                             </td>
                         </tr>
@@ -55,7 +67,10 @@
                         <tr  v-for="cand in female_sch_candidates.data" :key="cand.id">
                             <td>
                                 <label>
-                                <input type="radio" v-model="form.female_sch_candidate_id" name="female_sch_candidate_id">{{cand.student.first_name}} {{cand.student.last_name}}
+                                <input type="radio" :value="cand.id"
+                                 v-model="form.female_sch_candidate_id"
+                                 :selected ="cand.id == form.female_sch_candidate_id"
+                                  name="female_sch_candidate_id">{{cand.student.first_name}} {{cand.student.last_name}}
                                 </label>
                             </td>
                         </tr>
@@ -66,7 +81,10 @@
                         <tr  v-for="cand in male_sport_candidates.data" :key="cand.id">
                             <td>
                                 <label>
-                                <input type="radio" v-model="form.male_sport_candidate_id" name="male_sport_candidate_id">{{cand.student.first_name}} {{cand.student.last_name}}
+                                <input type="radio" :value="cand.id"
+                                 v-model="form.male_sport_candidate_id"
+                                 :selected ="cand.id == form.male_sport_candidate_id"
+                                  name="male_sport_candidate_id">{{cand.student.first_name}} {{cand.student.last_name}}
                                 </label>
                             </td>
                         </tr>
@@ -76,7 +94,10 @@
                         <tr  v-for="cand in female_sport_candidates.data" :key="cand.id">
                             <td>
                                 <label>
-                                <input type="radio" v-model="form.female_sport_candidate_id" name="female_sch_candidate_id">{{cand.student.first_name}} {{cand.student.last_name}}
+                                <input type="radio" :value="cand.id"
+                                 v-model="form.female_sport_candidate_id"
+                                 :selected ="cand.id == form.female_sport_candidate_id"
+                                  name="female_sport_candidate_id">{{cand.student.first_name}} {{cand.student.last_name}}
                                 </label>
                             </td>
                         </tr>
@@ -121,9 +142,23 @@
             }
         },
         methods: {
-            //check if reg no exists or if voted
-            confirmRegNo(){
-                axios.get('api/confirmreg').then(({data}) => (this.confirmregno = data));
+            vote(){
+                this.$Progress.start();
+                this.form.post('api/vote').then(() => {
+                this.$Progress.finish();                                      
+                  Swal.fire({
+                      icon: 'success',
+                      title: 'Thank you for voting!'
+                      })
+                  window.location.href= "/";      
+                  })
+                  .catch(() => {
+                  this.$Progress.fail(); 
+                  toast.fire({
+                      icon: 'fail',
+                      title: 'Please ensure to fill all required categories!'
+                      })                   
+                  })
             },
             loadPresCandidates(){
                 axios.get('api/pres_candidate').then(({data}) => (this.pres_candidates = data));

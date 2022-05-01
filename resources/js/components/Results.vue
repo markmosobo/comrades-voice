@@ -1,15 +1,12 @@
 <template>
-    <div class="container">
+    <div class="container mt-3">
         <div class="card card-default">
           <div class="card-header">
-            <h3 class="card-title">Select2 (Default Theme)</h3>
+            <h3 class="card-title">Election Results (Real-time)</h3>
 
             <div class="card-tools">
               <button type="button" class="btn btn-tool" data-card-widget="collapse">
                 <i class="fas fa-minus"></i>
-              </button>
-              <button type="button" class="btn btn-tool" data-card-widget="remove">
-                <i class="fas fa-times"></i>
               </button>
             </div>
           </div>
@@ -18,116 +15,194 @@
             <div class="row">
               <div class="col-md-6">
                 <div class="form-group">
-                  <label>Minimal</label>
-                  <select class="form-control select2 select2-hidden-accessible" style="width: 100%;" data-select2-id="1" tabindex="-1" aria-hidden="true">
-                    <option selected="selected" data-select2-id="3">Alabama</option>
-                    <option>Alaska</option>
-                    <option>California</option>
-                    <option>Delaware</option>
-                    <option>Tennessee</option>
-                    <option>Texas</option>
-                    <option>Washington</option>
-                  </select><span class="select2 select2-container select2-container--default" dir="ltr" data-select2-id="2" style="width: 100%;"><span class="selection"><span class="select2-selection select2-selection--single" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-disabled="false" aria-labelledby="select2-k4jg-container"><span class="select2-selection__rendered" id="select2-k4jg-container" role="textbox" aria-readonly="true" title="Alabama">Alabama</span><span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span>
+                  <label>Position</label>
+                  <select class="form-control"
+                   style="width: 100%;" data-select2-id="1" tabindex="-1"
+                    aria-hidden="true" v-model="form.candidate_position_id" id="candidate_position_id">
+                    <option value="">Select Position</option>
+                    <option 
+                        v-for="item in positions" :key="item.id"
+                        :value="item.id"
+                        :selected="item.id == form.candidate_position_id">{{ item.name }}</option> 
+                  </select>
                 </div>
                 <!-- /.form-group -->
                 <div class="form-group">
-                  <label>Disabled</label>
-                  <select class="form-control select2 select2-hidden-accessible" disabled="" style="width: 100%;" data-select2-id="4" tabindex="-1" aria-hidden="true">
-                    <option selected="selected" data-select2-id="6">Alabama</option>
-                    <option>Alaska</option>
-                    <option>California</option>
-                    <option>Delaware</option>
-                    <option>Tennessee</option>
-                    <option>Texas</option>
-                    <option>Washington</option>
-                  </select><span class="select2 select2-container select2-container--default select2-container--disabled" dir="ltr" data-select2-id="5" style="width: 100%;"><span class="selection"><span class="select2-selection select2-selection--single" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="-1" aria-disabled="true" aria-labelledby="select2-m3dq-container"><span class="select2-selection__rendered" id="select2-m3dq-container" role="textbox" aria-readonly="true" title="Alabama">Alabama</span><span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span>
+                  <label>School</label>
+                  <select class="form-control"
+                   style="width: 100%;" data-select2-id="1" tabindex="-1"
+                    aria-hidden="true" v-model="form.candidate_school_id" id="candidate_school_id">
+                    <option value="">Select School</option>
+                    <option 
+                        v-for="item in schools" :key="item.id"
+                        :value="item.id"
+                        :selected="item.id == form.candidate_school_id">{{ item.name }}</option> 
+                  </select>
                 </div>
                 <!-- /.form-group -->
               </div>
               <!-- /.col -->
               <div class="col-md-6">
                 <div class="form-group">
-                  <label>Multiple</label>
-                  <select class="select2 select2-hidden-accessible" multiple="" data-placeholder="Select a State" style="width: 100%;" data-select2-id="7" tabindex="-1" aria-hidden="true">
-                    <option>Alabama</option>
-                    <option>Alaska</option>
-                    <option>California</option>
-                    <option>Delaware</option>
-                    <option>Tennessee</option>
-                    <option>Texas</option>
-                    <option>Washington</option>
-                  </select><span class="select2 select2-container select2-container--default" dir="ltr" data-select2-id="8" style="width: 100%;"><span class="selection"><span class="select2-selection select2-selection--multiple" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="-1" aria-disabled="false"><ul class="select2-selection__rendered"><li class="select2-search select2-search--inline"><input class="select2-search__field" type="search" tabindex="0" autocomplete="off" autocorrect="off" autocapitalize="none" spellcheck="false" role="searchbox" aria-autocomplete="list" placeholder="Select a State" style="width: 453px;"></li></ul></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span>
+                  <label>Gender</label>
+                    <select v-model="form.gender" id="gender"
+                    name="gender" class="form-control">
+                    <option value="">Select Gender</option>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                      </select>
+                    <div v-if="form.errors.has('gender')" v-html="form.errors.get('gender')" />
                 </div>
                 <!-- /.form-group -->
-                <div class="form-group">
-                  <label>Disabled Result</label>
-                  <select class="form-control select2 select2-hidden-accessible" style="width: 100%;" data-select2-id="9" tabindex="-1" aria-hidden="true">
-                    <option selected="selected" data-select2-id="11">Alabama</option>
-                    <option>Alaska</option>
-                    <option disabled="disabled">California (disabled)</option>
-                    <option>Delaware</option>
-                    <option>Tennessee</option>
-                    <option>Texas</option>
-                    <option>Washington</option>
-                  </select><span class="select2 select2-container select2-container--default" dir="ltr" data-select2-id="10" style="width: 100%;"><span class="selection"><span class="select2-selection select2-selection--single" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-disabled="false" aria-labelledby="select2-8vtv-container"><span class="select2-selection__rendered" id="select2-8vtv-container" role="textbox" aria-readonly="true" title="Alabama">Alabama</span><span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span>
-                </div>
+                <!-- <div class="form-group">
+                    <select class="form-control" v-model="form.acad_year_id">
+                      <option 
+                          v-for="item in acadyears" :key="item.id"
+                          :value="item.id"
+                          :selected="item.id == form.acad_year_id">{{ item.name }}</option>
+                    </select>
+                    <div v-if="form.errors.has('acad_year_id')" v-html="form.errors.get('acad_year_id')" />
+                  <span class="select2 select2-container select2-container--default" dir="ltr" data-select2-id="10" style="width: 100%;"><span class="selection"><span class="select2-selection select2-selection--single" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-disabled="false" aria-labelledby="select2-8vtv-container"><span class="select2-selection__rendered" id="select2-8vtv-container" role="textbox" aria-readonly="true" title="Alabama">Alabama</span><span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span>
+                </div> -->
                 <!-- /.form-group -->
               </div>
               <!-- /.col -->
             </div>
             <!-- /.row -->
+            <button type="button" class="btn btn-primary">Find <i class="fas fa-search"></i></button>   
 
-            <h5>Custom Color Variants</h5>
-            <div class="row">
-              <div class="col-12 col-sm-6">
-                <div class="form-group">
-                  <label>Minimal (.select2-danger)</label>
-                  <select class="form-control select2 select2-danger select2-hidden-accessible" data-dropdown-css-class="select2-danger" style="width: 100%;" data-select2-id="12" tabindex="-1" aria-hidden="true">
-                    <option selected="selected" data-select2-id="14">Alabama</option>
-                    <option>Alaska</option>
-                    <option>California</option>
-                    <option>Delaware</option>
-                    <option>Tennessee</option>
-                    <option>Texas</option>
-                    <option>Washington</option>
-                  </select><span class="select2 select2-container select2-container--default" dir="ltr" data-select2-id="13" style="width: 100%;"><span class="selection"><span class="select2-selection select2-selection--single" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-disabled="false" aria-labelledby="select2-sfep-container"><span class="select2-selection__rendered" id="select2-sfep-container" role="textbox" aria-readonly="true" title="Alabama">Alabama</span><span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span>
-                </div>
-                <!-- /.form-group -->
-              </div>
-              <!-- /.col -->
-              <div class="col-12 col-sm-6">
-                <div class="form-group">
-                  <label>Multiple (.select2-purple)</label>
-                  <div class="select2-purple">
-                    <select class="select2 select2-hidden-accessible" multiple="" data-placeholder="Select a State" data-dropdown-css-class="select2-purple" style="width: 100%;" data-select2-id="15" tabindex="-1" aria-hidden="true">
-                      <option>Alabama</option>
-                      <option>Alaska</option>
-                      <option>California</option>
-                      <option>Delaware</option>
-                      <option>Tennessee</option>
-                      <option>Texas</option>
-                      <option>Washington</option>
-                    </select><span class="select2 select2-container select2-container--default" dir="ltr" data-select2-id="16" style="width: 100%;"><span class="selection"><span class="select2-selection select2-selection--multiple" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="-1" aria-disabled="false"><ul class="select2-selection__rendered"><li class="select2-search select2-search--inline"><input class="select2-search__field" type="search" tabindex="0" autocomplete="off" autocorrect="off" autocapitalize="none" spellcheck="false" role="searchbox" aria-autocomplete="list" placeholder="Select a State" style="width: 453px;"></li></ul></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span>
-                  </div>
-                </div>
-                <!-- /.form-group -->
-              </div>
-              <!-- /.col -->
-            </div>
-            <!-- /.row -->
+          <!-- <div class="overlay"><i class="fas fa-2x fa-sync-alt fa-spin"></i></div> -->
           </div>
           <!-- /.card-body -->
           <div class="card-footer">
-            Visit <a href="https://select2.github.io/">Select2 documentation</a> for more examples and information about
-            the plugin.
+            Visit <a href="https://select2.github.io/">Results documentation</a> for more insight and information about
+            the completed elections.
           </div>
         </div>
+        <div class="card">
+              <div class="card-header border-transparent">
+                <h3 class="card-title">Latest Orders</h3>
+
+                <div class="card-tools">
+                  <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                    <i class="fas fa-minus"></i>
+                  </button>
+                  <button type="button" class="btn btn-tool" data-card-widget="remove">
+                    <i class="fas fa-times"></i>
+                  </button>
+                </div>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body p-0">
+                <div class="table-responsive">
+                  <table class="table m-0">
+                    <thead>
+                    <tr>
+                      <th>Order ID</th>
+                      <th>Item</th>
+                      <th>Status</th>
+                      <th>Popularity</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                      <td><a href="pages/examples/invoice.html">OR9842</a></td>
+                      <td>Call of Duty IV</td>
+                      <td><span class="badge badge-success">Shipped</span></td>
+                      <td>
+                        <div class="sparkbar" data-color="#00a65a" data-height="20">90,80,90,-70,61,-83,63</div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><a href="pages/examples/invoice.html">OR1848</a></td>
+                      <td>Samsung Smart TV</td>
+                      <td><span class="badge badge-warning">Pending</span></td>
+                      <td>
+                        <div class="sparkbar" data-color="#f39c12" data-height="20">90,80,-90,70,61,-83,68</div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><a href="pages/examples/invoice.html">OR7429</a></td>
+                      <td>iPhone 6 Plus</td>
+                      <td><span class="badge badge-danger">Delivered</span></td>
+                      <td>
+                        <div class="sparkbar" data-color="#f56954" data-height="20">90,-80,90,70,-61,83,63</div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><a href="pages/examples/invoice.html">OR7429</a></td>
+                      <td>Samsung Smart TV</td>
+                      <td><span class="badge badge-info">Processing</span></td>
+                      <td>
+                        <div class="sparkbar" data-color="#00c0ef" data-height="20">90,80,-90,70,-61,83,63</div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><a href="pages/examples/invoice.html">OR1848</a></td>
+                      <td>Samsung Smart TV</td>
+                      <td><span class="badge badge-warning">Pending</span></td>
+                      <td>
+                        <div class="sparkbar" data-color="#f39c12" data-height="20">90,80,-90,70,61,-83,68</div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><a href="pages/examples/invoice.html">OR7429</a></td>
+                      <td>iPhone 6 Plus</td>
+                      <td><span class="badge badge-danger">Delivered</span></td>
+                      <td>
+                        <div class="sparkbar" data-color="#f56954" data-height="20">90,-80,90,70,-61,83,63</div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><a href="pages/examples/invoice.html">OR9842</a></td>
+                      <td>Call of Duty IV</td>
+                      <td><span class="badge badge-success">Shipped</span></td>
+                      <td>
+                        <div class="sparkbar" data-color="#00a65a" data-height="20">90,80,90,-70,61,-83,63</div>
+                      </td>
+                    </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <!-- /.table-responsive -->
+              </div>
+              <!-- /.card-body -->
+              <div class="card-footer clearfix">
+                <a href="javascript:void(0)" class="btn btn-sm btn-info float-left">Place New Order</a>
+                <a href="javascript:void(0)" class="btn btn-sm btn-secondary float-right">View All Orders</a>
+              </div>
+              <!-- /.card-footer -->
+            </div>
     </div>
 </template>
 
 <script>
     export default {
+      data(){
+        return {
+          positions: {},
+          schools: {},
+          form: new Form({
+            gender: '',
+            acad_year: ''
+          })
+        }
+      },
+      methods: {
+        listPositions(){
+            axios.get('api/listpositions').then((response) => {
+              this.positions = response.data.data;
+              });
+        },
+        listSchools(){
+            axios.get('api/listschools').then((response) => {
+              this.schools = response.data.data;
+              });
+        },
+      },
         mounted() {
+            this.listPositions();
+            this.listSchools();
             console.log('Component mounted.')
         }
     }

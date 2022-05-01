@@ -15,24 +15,27 @@ class CreateCastedVotesTable extends Migration
     {
         Schema::create('casted_votes', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('school_male_rep_id')->unsigned();
-            $table->foreign('school_male_rep_id')
+            $table->integer('male_sch_candidate_id')->unsigned();
+            $table->foreign('male_sch_candidate_id')
             ->references('id')->on('candidates');
-            $table->integer('school_female_rep_id')->unsigned();
-            $table->foreign('school_female_rep_id')
+            $table->integer('female_sch_candidate_id')->unsigned();
+            $table->foreign('female_sch_candidate_id')
             ->references('id')->on('candidates');
-            $table->integer('president_candidate_id')->unsigned();
-            $table->foreign('president_candidate_id')
+            $table->integer('pres_candidate_id')->unsigned();
+            $table->foreign('pres_candidate_id')
             ->references('id')->on('candidates');
             $table->integer('sec_gen_candidate_id')->unsigned();
             $table->foreign('sec_gen_candidate_id')
             ->references('id')->on('candidates');
-            $table->integer('finance_candidate_id')->unsigned();
-            $table->foreign('finance_candidate_id')
+            $table->integer('fin_candidate_id')->unsigned();
+            $table->foreign('fin_candidate_id')
             ->references('id')->on('candidates');
-            $table->integer('sports_candidate_id')->unsigned();
-            $table->foreign('sports_candidate_id')
+            $table->integer('male_sport_candidate_id')->unsigned();
+            $table->foreign('male_sport_candidate_id')
             ->references('id')->on('candidates');
+            $table->integer('female_sport_candidate_id')->unsigned();
+            $table->foreign('female_sport_candidate_id')
+            ->references('id')->on('candidates');            
             $table->timestamps();
         });
     }
