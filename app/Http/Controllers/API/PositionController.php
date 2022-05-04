@@ -9,7 +9,7 @@ use App\Models\Position;
 class PositionController extends Controller
 {
     public function index(){
-        return Position::latest()->paginate(5);
+        return Position::latest()->paginate(10);
     }
 
     public function list(){
@@ -42,5 +42,11 @@ class PositionController extends Controller
     public function destroy(Request $request,$id){
         $position = Position::findOrFail($id);
         $position->delete();
+    }
+
+    public function countPos()
+    {
+        $positions = Position::all()->count();
+        return response()->json($positions);
     }
 }

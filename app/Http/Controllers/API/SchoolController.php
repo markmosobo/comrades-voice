@@ -9,7 +9,7 @@ use App\Models\School;
 class SchoolController extends Controller
 {
     public function index(){
-        return School::latest()->paginate(5);
+        return School::latest()->paginate(10);
     }
 
     public function list(){

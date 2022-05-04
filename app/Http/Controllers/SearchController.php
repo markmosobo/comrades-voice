@@ -30,8 +30,9 @@ class SearchController extends Controller
         ->orderBy('id','desc')
         ->paginate(10);  
         if(count($searchedreg) == 0){
-            return redirect('/')->with('status','Invalid Reg');
-        } else{    
+            return redirect('/')->with('status','This registration number is not in our records');
+        }
+         else{    
         return view('vote',compact('searchedreg'))
         ->with('i',(request()->input('page',1)- 1)* 5);
         }

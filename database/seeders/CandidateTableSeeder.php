@@ -20,7 +20,7 @@ class CandidateTableSeeder extends Seeder
             'position_id' => '1',
             'school_id' => '1',
             'gender' => 'M',
-            'acad_year' => '2021/2022'
+            'acad_year_id' => '1'
         ]);
 
         Candidate::create([
@@ -28,7 +28,7 @@ class CandidateTableSeeder extends Seeder
             'position_id' => '1',
             'school_id' => '8',
             'gender' => 'F',
-            'acad_year' => '2021/2022'
+            'acad_year_id' => '1'
         ]);
 
         Candidate::create([
@@ -36,7 +36,7 @@ class CandidateTableSeeder extends Seeder
             'position_id' => '1',
             'school_id' => '3',
             'gender' => 'M',
-            'acad_year' => '2021/2022'
+            'acad_year_id' => '1'
         ]);
 
         //School Reps
@@ -45,7 +45,7 @@ class CandidateTableSeeder extends Seeder
             'position_id' => '2',
             'school_id' => '3',
             'gender' => 'F',
-            'acad_year' => '2021/2022'
+            'acad_year_id' => '1'
         ]);
 
         Candidate::create([
@@ -53,7 +53,7 @@ class CandidateTableSeeder extends Seeder
             'position_id' => '2',
             'school_id' => '7',
             'gender' => 'F',
-            'acad_year' => '2021/2022'
+            'acad_year_id' => '1'
         ]);
         
         Candidate::create([
@@ -61,7 +61,7 @@ class CandidateTableSeeder extends Seeder
             'position_id' => '2',
             'school_id' => '3',
             'gender' => 'M',
-            'acad_year' => '2021/2022'
+            'acad_year_id' => '1'
         ]);
         
         Candidate::create([
@@ -69,7 +69,7 @@ class CandidateTableSeeder extends Seeder
             'position_id' => '2',
             'school_id' => '10',
             'gender' => 'M',
-            'acad_year' => '2021/2022'
+            'acad_year_id' => '1'
         ]);  
         
         //sec-gens
@@ -78,7 +78,7 @@ class CandidateTableSeeder extends Seeder
             'position_id' => '3',
             'school_id' => '5',
             'gender' => 'M',
-            'acad_year' => '2021/2022'
+            'acad_year_id' => '1'
         ]);
 
         Candidate::create([
@@ -86,7 +86,7 @@ class CandidateTableSeeder extends Seeder
             'position_id' => '3',
             'school_id' => '2',
             'gender' => 'F',
-            'acad_year' => '2021/2022'
+            'acad_year_id' => '1'
         ]);
         
         Candidate::create([
@@ -94,7 +94,7 @@ class CandidateTableSeeder extends Seeder
             'position_id' => '3',
             'school_id' => '6',
             'gender' => 'M',
-            'acad_year' => '2021/2022'
+            'acad_year_id' => '1'
         ]); 
 
         //finance
@@ -103,7 +103,7 @@ class CandidateTableSeeder extends Seeder
             'position_id' => '4',
             'school_id' => '5',
             'gender' => 'F',
-            'acad_year' => '2021/2022'
+            'acad_year_id' => '1'
         ]);
 
         Candidate::create([
@@ -111,7 +111,7 @@ class CandidateTableSeeder extends Seeder
             'position_id' => '4',
             'school_id' => '1',
             'gender' => 'F',
-            'acad_year' => '2021/2022'
+            'acad_year_id' => '1'
         ]);
         
         Candidate::create([
@@ -119,7 +119,7 @@ class CandidateTableSeeder extends Seeder
             'position_id' => '4',
             'school_id' => '3',
             'gender' => 'M',
-            'acad_year' => '2021/2022'
+            'acad_year_id' => '1'
         ]); 
 
         //sports and co-curriculra reps
@@ -128,7 +128,7 @@ class CandidateTableSeeder extends Seeder
             'position_id' => '5',
             'school_id' => '4',
             'gender' => 'M',
-            'acad_year' => '2021/2022'
+            'acad_year_id' => '1'
         ]);
 
         Candidate::create([
@@ -136,7 +136,7 @@ class CandidateTableSeeder extends Seeder
             'position_id' => '5',
             'school_id' => '1',
             'gender' => 'M',
-            'acad_year' => '2021/2022'
+            'acad_year_id' => '1'
         ]);
 
         Candidate::create([
@@ -144,7 +144,7 @@ class CandidateTableSeeder extends Seeder
             'position_id' => '5',
             'school_id' => '4',
             'gender' => 'F',
-            'acad_year' => '2021/2022'
+            'acad_year_id' => '1'
         ]);
 
         Candidate::create([
@@ -152,7 +152,7 @@ class CandidateTableSeeder extends Seeder
             'position_id' => '5',
             'school_id' => '1',
             'gender' => 'F',
-            'acad_year' => '2021/2022'
+            'acad_year_id' => '1'
         ]);        
     }
 }

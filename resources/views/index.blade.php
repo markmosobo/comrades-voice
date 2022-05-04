@@ -79,15 +79,15 @@
         <div class="row no-gutters align-items-center">
             <div class="col-md-6 col-lg-7">
                 <div class="contact-info">
-                    <h3>Democracy in practice</h3>
-                    <p>The most convenient way to make your voice as a comrade count, just from 
-                        the comfort of anywhere you are at the touch of a button.
+                    <h3>Democracy in the digital age</h3>
+                    <p>The most convenient way to make your voice as a comrade count, from 
+                        the comfort of anywhere just at the touch of a button.
                     </p>
                     <ul class="contact-list">
-                        <li><i class="fas fa-envelope"></i> <a href="mailto:abc@example.com.com">mmosobo@gmail.com</a> </li>
+                        <li><i class="fas fa-envelope"></i> <a href="mailto:abc@example.com.com">comradesvoice@gmail.com</a> </li>
                         <li><i class="fas fa-phone fa-flip-horizontal"></i><a href="tel:1234567890">0791514737</a>
                         </li>
-                        <li><i class="fas fa-map-marker-alt"></i>MMSUT</li>
+                        <li><i class="fas fa-map-marker-alt"></i>Kenya</li>
                     </ul>
                     <div class="circular-icons social-links">
                         <ul>

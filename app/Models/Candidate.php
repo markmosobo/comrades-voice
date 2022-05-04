@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\Position;
 use App\Models\Student;
 use App\Models\School;
+use App\Models\AcadYear;
 
 class Candidate extends Model
 {
@@ -15,7 +16,8 @@ class Candidate extends Model
         'position_id',
         'student_id',
         'gender',
-        'school_id'
+        'school_id',
+        'acad_year_id'
     ];
     //candidate belongs to a position
     public function position()
@@ -33,4 +35,9 @@ class Candidate extends Model
     {
         return $this->belongsTo(School::class,'school_id');
     }
+    //candidacy belongs to an academic period
+    public function year()
+    {
+        return $this->belongsTo(AcadYear::class,'acad_year_id');
+    }    
 }

@@ -10,7 +10,7 @@ class StudentController extends Controller
 {
     public function list()
     {
-        return Student::latest()->paginate(5);
+        return Student::latest()->paginate(10);
     }
 
     public function confirm(Request $request)
@@ -28,5 +28,11 @@ class StudentController extends Controller
         return view('welcome',compact('validregno'))
         ->with('i',(request()->input('page',1)- 1)* 5);
 
+    }
+
+    public function countStud()
+    {
+        $students = Student::all()->count();
+        return response()->json($students);
     }
 }

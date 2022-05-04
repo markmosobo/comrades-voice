@@ -27,7 +27,11 @@ class CreateCandidatesTable extends Migration
             $table->foreign('school_id')
             ->references('id')->on('schools');
             $table->string('gender')->nullable();
-            $table->string('acad_year')->nullable();
+            $table->integer('acad_year_id')->unsigned();
+            $table->foreign('acad_year_id')
+            ->references('id')
+            ->on('acad_years');
+            $table->bigInteger('votes')->default(0);
             $table->timestamps();
         });
     }

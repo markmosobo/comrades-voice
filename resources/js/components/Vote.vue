@@ -16,7 +16,7 @@
                                 <input type="radio" :value="cand.student_id"
                                  v-model="form.pres_candidate_id"
                                  :selected ="cand.student_id == form.pres_candidate_id"
-                                  name="president_candidate_id">{{cand.student.first_name}} {{cand.student.last_name}}
+                                  name="pres_candidate_id">{{cand.student.first_name}} {{cand.student.last_name}}
                                 </label>
                             </td>
                         </tr>

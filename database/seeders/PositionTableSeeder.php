@@ -34,13 +34,13 @@ class PositionTableSeeder extends Seeder
 
         Position::create([
             'name' => 'Finance',
-            'position_code' => 'FIN',
+            'position_code' => 'FINANCE',
             'slot' => '1'
         ]);
 
         Position::create([
             'name' => 'Sports Representative',
-            'position_code' => 'SPORT-REP',
+            'position_code' => 'SPORTS-REP',
             'slot' => '2'
         ]);
 

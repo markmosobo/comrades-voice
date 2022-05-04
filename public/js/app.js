@@ -2070,6 +2070,471 @@ module.exports = {
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/AcadYear.vue?vue&type=script&lang=js&":
+/*!***************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/AcadYear.vue?vue&type=script&lang=js& ***!
+  \***************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  data: function data() {
+    return {
+      editmode: false,
+      acad_years: {},
+      electiondates: {},
+      form: new Form({
+        id: '',
+        year_code: '',
+        acad_year_id: '',
+        start_date: '',
+        start_time: '',
+        end_date: '',
+        end_time: ''
+      })
+    };
+  },
+  methods: {
+    getResults: function getResults() {
+      var _this = this;
+
+      var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
+      this.$Progress.start();
+      axios.get('api/acad_year?page=' + page).then(function (_ref) {
+        var data = _ref.data;
+        return _this.acad_years = data;
+      });
+      this.$Progress.finish();
+    },
+    newModal: function newModal() {
+      this.editmode = false, this.form.reset();
+      $('#addNew').modal('show');
+    },
+    editModal: function editModal(position) {
+      this.editmode = true, this.form.reset();
+      $('#addNew').modal('show');
+      this.form.fill(position);
+    },
+    updateYear: function updateYear() {
+      var _this2 = this;
+
+      this.$Progress.start();
+      this.form.put('api/acad_year/' + this.form.id).then(function () {
+        $('#addNew').modal('hide');
+
+        _this2.$Progress.finish();
+
+        toast.fire({
+          icon: 'success',
+          title: 'Updated'
+        });
+        Fire.$emit('Refresh');
+      })["catch"](function () {
+        _this2.$Progress.fail();
+      });
+    },
+    createYear: function createYear() {
+      var _this3 = this;
+
+      this.$Progress.start();
+      this.form.post('api/acad_year').then(function () {
+        $('#addNew').modal('hide');
+
+        _this3.$Progress.finish();
+
+        toast.fire({
+          icon: 'success',
+          title: 'Year created successfully'
+        });
+        Fire.$emit('Refresh');
+      })["catch"](function () {
+        _this3.$Progress.fail();
+      });
+    },
+    deleteYear: function deleteYear(id) {
+      var _this4 = this;
+
+      this.$Progress.start();
+      Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+      }).then(function (result) {
+        if (result.isConfirmed) {
+          //send request to the server
+          _this4.form["delete"]('api/acad_year/' + id).then(function () {
+            _this4.$Progress.finish();
+
+            Swal.fire('Deleted!', 'Year has been deleted.', 'success');
+            Fire.$emit('Refresh');
+          })["catch"](function () {
+            _this4.$Progress.fail();
+
+            Swal.fire('Failed!', 'There was something wrong.', 'warning');
+          });
+        }
+      });
+    },
+    //methods for dates
+    getDates: function getDates() {
+      var _this5 = this;
+
+      var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
+      this.$Progress.start();
+      axios.get('api/electiondate?page=' + page).then(function (_ref2) {
+        var data = _ref2.data;
+        return _this5.electiondates = data;
+      });
+      this.$Progress.finish();
+    },
+    newdateModal: function newdateModal() {
+      this.editmode = false, this.form.reset();
+      $('#addDate').modal('show');
+    },
+    editdateModal: function editdateModal(position) {
+      this.editmode = true, this.form.reset();
+      $('#addDate').modal('show');
+      this.form.fill(position);
+    },
+    updateDate: function updateDate() {
+      var _this6 = this;
+
+      this.$Progress.start();
+      this.form.put('api/electiondate/' + this.form.id).then(function () {
+        $('#addDate').modal('hide');
+
+        _this6.$Progress.finish();
+
+        toast.fire({
+          icon: 'success',
+          title: 'Updated'
+        });
+        Fire.$emit('Refresh');
+      })["catch"](function () {
+        _this6.$Progress.fail();
+      });
+    },
+    createDate: function createDate() {
+      var _this7 = this;
+
+      this.$Progress.start();
+      this.form.post('api/electiondate').then(function () {
+        $('#addDate').modal('hide');
+
+        _this7.$Progress.finish();
+
+        toast.fire({
+          icon: 'success',
+          title: 'Date created successfully'
+        });
+        Fire.$emit('Refresh');
+      })["catch"](function () {
+        _this7.$Progress.fail();
+      });
+    },
+    deleteDate: function deleteDate(id) {
+      var _this8 = this;
+
+      this.$Progress.start();
+      Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+      }).then(function (result) {
+        if (result.isConfirmed) {
+          //send request to the server
+          _this8.form["delete"]('api/electiondate/' + id).then(function () {
+            _this8.$Progress.finish();
+
+            Swal.fire('Deleted!', 'Date has been deleted.', 'success');
+            Fire.$emit('Refresh');
+          })["catch"](function () {
+            _this8.$Progress.fail();
+
+            Swal.fire('Failed!', 'There was something wrong.', 'warning');
+          });
+        }
+      });
+    },
+    loadYears: function loadYears() {
+      var _this9 = this;
+
+      axios.get('api/acad_year').then(function (_ref3) {
+        var data = _ref3.data;
+        return _this9.acad_years = data;
+      });
+    },
+    loadDates: function loadDates() {
+      var _this10 = this;
+
+      axios.get('api/electiondate').then(function (_ref4) {
+        var data = _ref4.data;
+        return _this10.electiondates = data;
+      });
+    }
+  },
+  mounted: function mounted() {
+    var _this11 = this;
+
+    this.loadYears();
+    Fire.$on('Refresh', function () {
+      _this11.loadYears();
+    });
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Candidates.vue?vue&type=script&lang=js&":
 /*!*****************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Candidates.vue?vue&type=script&lang=js& ***!
@@ -2429,8 +2894,192 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  data: function data() {
+    return {
+      leadcandidates: {},
+      students_no: {},
+      votes_no: {}
+    };
+  },
+  methods: {
+    loadLeadCandidates: function loadLeadCandidates() {
+      var _this = this;
+
+      axios.get('api/leadcandidates').then(function (_ref) {
+        var data = _ref.data;
+        return _this.leadcandidates = data;
+      });
+    },
+    loadAnalytics: function loadAnalytics() {
+      var _this2 = this;
+
+      axios.get('api/count_students').then(function (_ref2) {
+        var data = _ref2.data;
+        return _this2.students_no = data;
+      });
+      axios.get('api/count_votes').then(function (_ref3) {
+        var data = _ref3.data;
+        return _this2.votes_no = data;
+      });
+    },
+    getResults: function getResults() {
+      var _this3 = this;
+
+      var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
+      this.$Progress.start();
+      axios.get('api/leadcandidates?page=' + page).then(function (_ref4) {
+        var data = _ref4.data;
+        return _this3.leadcandidates = data;
+      });
+      this.$Progress.finish();
+    }
+  },
   mounted: function mounted() {
+    this.loadLeadCandidates();
+    this.loadAnalytics();
     console.log('Component mounted.');
   }
 });
@@ -2894,36 +3543,611 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
-      positions: {},
-      schools: {},
-      form: new Form({
-        gender: '',
-        acad_year: ''
-      })
+      pres_candidates: {},
+      sec_gen_candidates: {},
+      fin_candidates: {},
+      male_sch_candidates: {},
+      female_sch_candidates: {},
+      male_sport_candidates: {},
+      female_sport_candidates: {},
+      results: {},
+      electiondates: {},
+      pres_candidates_no: {},
+      sec_gen_candidates_no: {},
+      fin_candidates_no: {},
+      male_sch_candidates_no: {},
+      female_sch_candidates_no: {},
+      male_sport_candidates_no: {},
+      female_sport_candidates_no: {},
+      positions_no: {},
+      candidates_no: {},
+      votes_no: {},
+      students_no: {}
     };
   },
   methods: {
-    listPositions: function listPositions() {
+    loadGeneral: function loadGeneral() {
       var _this = this;
 
-      axios.get('api/listpositions').then(function (response) {
-        _this.positions = response.data.data;
+      axios.get('api/electiondate').then(function (_ref) {
+        var data = _ref.data;
+        return _this.electiondates = data;
+      });
+      axios.get('api/count_pres_candidate').then(function (_ref2) {
+        var data = _ref2.data;
+        return _this.pres_candidates_no = data;
+      });
+      axios.get('api/count_sec_gen_candidate').then(function (_ref3) {
+        var data = _ref3.data;
+        return _this.sec_gen_candidates_no = data;
+      });
+      axios.get('api/count_fin_candidate').then(function (_ref4) {
+        var data = _ref4.data;
+        return _this.fin_candidates_no = data;
+      });
+      axios.get('api/count_male_sch_candidate').then(function (_ref5) {
+        var data = _ref5.data;
+        return _this.male_sch_candidates_no = data;
+      });
+      axios.get('api/count_female_sch_candidate').then(function (_ref6) {
+        var data = _ref6.data;
+        return _this.female_sch_candidates_no = data;
+      });
+      axios.get('api/count_male_sport_candidate').then(function (_ref7) {
+        var data = _ref7.data;
+        return _this.male_sport_candidates_no = data;
+      });
+      axios.get('api/count_female_sport_candidate').then(function (_ref8) {
+        var data = _ref8.data;
+        return _this.female_sport_candidates_no = data;
+      });
+      axios.get('api/count_positions').then(function (_ref9) {
+        var data = _ref9.data;
+        return _this.positions_no = data;
+      });
+      axios.get('api/count_candidates').then(function (_ref10) {
+        var data = _ref10.data;
+        return _this.candidates_no = data;
+      });
+      axios.get('api/count_votes').then(function (_ref11) {
+        var data = _ref11.data;
+        return _this.votes_no = data;
+      });
+      axios.get('api/count_students').then(function (_ref12) {
+        var data = _ref12.data;
+        return _this.students_no = data;
       });
     },
-    listSchools: function listSchools() {
+    loadPresidential: function loadPresidential() {
       var _this2 = this;
 
-      axios.get('api/listschools').then(function (response) {
-        _this2.schools = response.data.data;
+      //load candidates
+      axios.get('api/pres_candidate').then(function (_ref13) {
+        var data = _ref13.data;
+        return _this2.pres_candidates = data;
+      });
+    },
+    loadSecGens: function loadSecGens() {
+      var _this3 = this;
+
+      axios.get('api/sec_gen_candidate').then(function (_ref14) {
+        var data = _ref14.data;
+        return _this3.sec_gen_candidates = data;
+      });
+    },
+    loadFins: function loadFins() {
+      var _this4 = this;
+
+      axios.get('api/fin_candidate').then(function (_ref15) {
+        var data = _ref15.data;
+        return _this4.fin_candidates = data;
+      });
+    },
+    loadSchoolReps: function loadSchoolReps() {
+      var _this5 = this;
+
+      axios.get('api/female_sch_candidate').then(function (_ref16) {
+        var data = _ref16.data;
+        return _this5.female_sch_candidates = data;
+      });
+      axios.get('api/male_sch_candidate').then(function (_ref17) {
+        var data = _ref17.data;
+        return _this5.male_sch_candidates = data;
+      });
+    },
+    loadSportReps: function loadSportReps() {
+      var _this6 = this;
+
+      axios.get('api/female_sport_candidate').then(function (_ref18) {
+        var data = _ref18.data;
+        return _this6.female_sport_candidates = data;
+      });
+      axios.get('api/male_sport_candidate').then(function (_ref19) {
+        var data = _ref19.data;
+        return _this6.male_sport_candidates = data;
+      });
+    },
+    getPresResults: function getPresResults() {
+      var _this7 = this;
+
+      var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
+      this.$Progress.start();
+      axios.get('api/pres_candidate?page=' + page).then(function (_ref20) {
+        var data = _ref20.data;
+        return _this7.pres_candidates = data;
+      });
+      this.$Progress.finish();
+    },
+    getSecGenResults: function getSecGenResults() {
+      var _this8 = this;
+
+      var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
+      this.$Progress.start();
+      axios.get('api/sec_gen_candidate?page=' + page).then(function (_ref21) {
+        var data = _ref21.data;
+        return _this8.sec_gen_candidates = data;
+      });
+      this.$Progress.finish();
+    },
+    getFinResults: function getFinResults() {
+      var _this9 = this;
+
+      var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
+      this.$Progress.start();
+      axios.get('api/sec_gen_candidate?page=' + page).then(function (_ref22) {
+        var data = _ref22.data;
+        return _this9.fin_candidates = data;
+      });
+      this.$Progress.finish();
+    },
+    getMaleSchResults: function getMaleSchResults() {
+      var _this10 = this;
+
+      var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
+      this.$Progress.start();
+      axios.get('api/male_sch_candidate?page=' + page).then(function (_ref23) {
+        var data = _ref23.data;
+        return _this10.male_sch_candidates = data;
+      });
+      this.$Progress.finish();
+    },
+    getFemaleSchResults: function getFemaleSchResults() {
+      var _this11 = this;
+
+      var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
+      this.$Progress.start();
+      axios.get('api/female_sch_candidate?page=' + page).then(function (_ref24) {
+        var data = _ref24.data;
+        return _this11.female_sch_candidates = data;
+      });
+      this.$Progress.finish();
+    },
+    getMaleSportResults: function getMaleSportResults() {
+      var _this12 = this;
+
+      var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
+      this.$Progress.start();
+      axios.get('api/male_sport_candidate?page=' + page).then(function (_ref25) {
+        var data = _ref25.data;
+        return _this12.male_sport_candidates = data;
+      });
+      this.$Progress.finish();
+    },
+    getFemaleSportResults: function getFemaleSportResults() {
+      var _this13 = this;
+
+      var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
+      this.$Progress.start();
+      axios.get('api/female_sport_candidate?page=' + page).then(function (_ref26) {
+        var data = _ref26.data;
+        return _this13.female_sport_candidates = data;
+      });
+      this.$Progress.finish();
+    },
+    find: function find() {
+      var _this14 = this;
+
+      axios.get('api/find').then(function (_ref27) {
+        var data = _ref27.data;
+        return _this14.candidates = data;
       });
     }
   },
   mounted: function mounted() {
-    this.listPositions();
-    this.listSchools();
+    this.loadGeneral();
     console.log('Component mounted.');
   }
 });
@@ -3567,6 +4791,9 @@ __webpack_require__.r(__webpack_exports__);
 }, {
   path: '/positions',
   component: (__webpack_require__(/*! ./components/Positions.vue */ "./resources/js/components/Positions.vue")["default"])
+}, {
+  path: '/acad_years',
+  component: (__webpack_require__(/*! ./components/AcadYear.vue */ "./resources/js/components/AcadYear.vue")["default"])
 }, {
   path: '/results',
   component: (__webpack_require__(/*! ./components/Results.vue */ "./resources/js/components/Results.vue")["default"])
@@ -64579,6 +65806,45 @@ var e=Object.defineProperty,t=Object.prototype.hasOwnProperty,s=Object.getOwnPro
 
 /***/ }),
 
+/***/ "./resources/js/components/AcadYear.vue":
+/*!**********************************************!*\
+  !*** ./resources/js/components/AcadYear.vue ***!
+  \**********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _AcadYear_vue_vue_type_template_id_88dcc3e6___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./AcadYear.vue?vue&type=template&id=88dcc3e6& */ "./resources/js/components/AcadYear.vue?vue&type=template&id=88dcc3e6&");
+/* harmony import */ var _AcadYear_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./AcadYear.vue?vue&type=script&lang=js& */ "./resources/js/components/AcadYear.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+;
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _AcadYear_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _AcadYear_vue_vue_type_template_id_88dcc3e6___WEBPACK_IMPORTED_MODULE_0__.render,
+  _AcadYear_vue_vue_type_template_id_88dcc3e6___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/AcadYear.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
 /***/ "./resources/js/components/Candidates.vue":
 /*!************************************************!*\
   !*** ./resources/js/components/Candidates.vue ***!
@@ -64891,6 +66157,22 @@ component.options.__file = "resources/js/components/Vote.vue"
 
 /***/ }),
 
+/***/ "./resources/js/components/AcadYear.vue?vue&type=script&lang=js&":
+/*!***********************************************************************!*\
+  !*** ./resources/js/components/AcadYear.vue?vue&type=script&lang=js& ***!
+  \***********************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AcadYear_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./AcadYear.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/AcadYear.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AcadYear_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
 /***/ "./resources/js/components/Candidates.vue?vue&type=script&lang=js&":
 /*!*************************************************************************!*\
   !*** ./resources/js/components/Candidates.vue?vue&type=script&lang=js& ***!
@@ -65016,6 +66298,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Vote_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./Vote.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Vote.vue?vue&type=script&lang=js&");
  /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Vote_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/AcadYear.vue?vue&type=template&id=88dcc3e6&":
+/*!*****************************************************************************!*\
+  !*** ./resources/js/components/AcadYear.vue?vue&type=template&id=88dcc3e6& ***!
+  \*****************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AcadYear_vue_vue_type_template_id_88dcc3e6___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AcadYear_vue_vue_type_template_id_88dcc3e6___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AcadYear_vue_vue_type_template_id_88dcc3e6___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./AcadYear.vue?vue&type=template&id=88dcc3e6& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/AcadYear.vue?vue&type=template&id=88dcc3e6&");
+
 
 /***/ }),
 
@@ -65151,6 +66450,944 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Vote_vue_vue_type_template_id_40e744d5___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
 /* harmony export */ });
 /* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Vote_vue_vue_type_template_id_40e744d5___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./Vote.vue?vue&type=template&id=40e744d5& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Vote.vue?vue&type=template&id=40e744d5&");
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/AcadYear.vue?vue&type=template&id=88dcc3e6&":
+/*!********************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/AcadYear.vue?vue&type=template&id=88dcc3e6& ***!
+  \********************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render),
+/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function () {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "container" }, [
+    _c("div", { staticClass: "row mt-3" }, [
+      _c("div", { staticClass: "col-12" }, [
+        _c(
+          "div",
+          { staticClass: "card card-primary card-outline card-outline-tabs" },
+          [
+            _c("div", { staticClass: "card-header p-0 border-bottom-0" }, [
+              _c(
+                "ul",
+                {
+                  staticClass: "nav nav-tabs",
+                  attrs: { id: "custom-tabs-four-tab", role: "tablist" },
+                },
+                [
+                  _vm._m(0),
+                  _vm._v(" "),
+                  _c("li", { staticClass: "nav-item" }, [
+                    _c(
+                      "a",
+                      {
+                        staticClass: "nav-link",
+                        attrs: {
+                          id: "custom-tabs-four-profile-tab",
+                          "data-toggle": "pill",
+                          href: "#custom-tabs-four-profile",
+                          role: "tab",
+                          "aria-controls": "custom-tabs-four-profile",
+                          "aria-selected": "false",
+                        },
+                        on: {
+                          click: function ($event) {
+                            return _vm.loadDates()
+                          },
+                        },
+                      },
+                      [_vm._v("Election Dates")]
+                    ),
+                  ]),
+                ]
+              ),
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "card-body" }, [
+              _c(
+                "div",
+                {
+                  staticClass: "tab-content",
+                  attrs: { id: "custom-tabs-four-tabContent" },
+                },
+                [
+                  _c(
+                    "div",
+                    {
+                      staticClass: "tab-pane fade show active",
+                      attrs: {
+                        id: "custom-tabs-four-home",
+                        role: "tabpanel",
+                        "aria-labelledby": "custom-tabs-four-home-tab",
+                      },
+                    },
+                    [
+                      _c("div", { staticClass: "card" }, [
+                        _c("div", { staticClass: "card-header" }, [
+                          _c("h3", { staticClass: "card-title" }, [
+                            _vm._v("Academic Years"),
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "card-tools" }, [
+                            _c(
+                              "button",
+                              {
+                                staticClass: "btn btn-primary",
+                                attrs: { type: "button" },
+                                on: { click: _vm.newModal },
+                              },
+                              [
+                                _vm._v("Add New "),
+                                _c("i", { staticClass: "fas fa-user" }),
+                              ]
+                            ),
+                          ]),
+                        ]),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          { staticClass: "card-body table-responsive p-0" },
+                          [
+                            _c(
+                              "table",
+                              { staticClass: "table table-hover text-nowrap" },
+                              [
+                                _vm._m(1),
+                                _vm._v(" "),
+                                _c(
+                                  "tbody",
+                                  _vm._l(_vm.acad_years.data, function (year) {
+                                    return _c("tr", { key: year.id }, [
+                                      _c("td", [_vm._v(_vm._s(year.id))]),
+                                      _vm._v(" "),
+                                      _c("td", [
+                                        _vm._v(_vm._s(year.year_code)),
+                                      ]),
+                                      _vm._v(" "),
+                                      _c("td", [
+                                        _c(
+                                          "a",
+                                          {
+                                            attrs: { href: "#" },
+                                            on: {
+                                              click: function ($event) {
+                                                return _vm.editModal(year)
+                                              },
+                                            },
+                                          },
+                                          [
+                                            _c("i", {
+                                              staticClass: "fa fa-edit blue",
+                                            }),
+                                          ]
+                                        ),
+                                        _vm._v(" "),
+                                        _c("span", [_vm._v("/")]),
+                                        _vm._v(" "),
+                                        _c(
+                                          "a",
+                                          {
+                                            attrs: { href: "#" },
+                                            on: {
+                                              click: function ($event) {
+                                                return _vm.deleteYear(year.id)
+                                              },
+                                            },
+                                          },
+                                          [
+                                            _c("i", {
+                                              staticClass: "fa fa-trash red",
+                                            }),
+                                          ]
+                                        ),
+                                      ]),
+                                    ])
+                                  }),
+                                  0
+                                ),
+                              ]
+                            ),
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          {
+                            staticClass: "card-footer clearfix",
+                            staticStyle: { display: "block" },
+                          },
+                          [
+                            _c("pagination", {
+                              attrs: { data: _vm.acad_years },
+                              on: { "pagination-change-page": _vm.getResults },
+                            }),
+                          ],
+                          1
+                        ),
+                      ]),
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass: "tab-pane fade",
+                      attrs: {
+                        id: "custom-tabs-four-profile",
+                        role: "tabpanel",
+                        "aria-labelledby": "custom-tabs-four-profile-tab",
+                      },
+                    },
+                    [
+                      _c("div", { staticClass: "card" }, [
+                        _c("div", { staticClass: "card-header" }, [
+                          _c("h3", { staticClass: "card-title" }, [
+                            _vm._v("Election Dates"),
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "card-tools" }, [
+                            _c(
+                              "button",
+                              {
+                                staticClass: "btn btn-primary",
+                                attrs: { type: "button" },
+                                on: { click: _vm.newdateModal },
+                              },
+                              [
+                                _vm._v("Add New "),
+                                _c("i", { staticClass: "fas fa-user" }),
+                              ]
+                            ),
+                          ]),
+                        ]),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          { staticClass: "card-body table-responsive p-0" },
+                          [
+                            _c(
+                              "table",
+                              { staticClass: "table table-hover text-nowrap" },
+                              [
+                                _vm._m(2),
+                                _vm._v(" "),
+                                _c(
+                                  "tbody",
+                                  _vm._l(
+                                    _vm.electiondates.data,
+                                    function (date) {
+                                      return _c("tr", { key: date.id }, [
+                                        _c("td", [
+                                          _vm._v(_vm._s(date.year.year_code)),
+                                        ]),
+                                        _vm._v(" "),
+                                        _c("td", [
+                                          _vm._v(_vm._s(date.start_date)),
+                                        ]),
+                                        _vm._v(" "),
+                                        _c("td", [
+                                          _vm._v(_vm._s(date.start_time)),
+                                        ]),
+                                        _vm._v(" "),
+                                        _c("td", [
+                                          _vm._v(_vm._s(date.end_date)),
+                                        ]),
+                                        _vm._v(" "),
+                                        _c("td", [
+                                          _vm._v(_vm._s(date.end_time)),
+                                        ]),
+                                        _vm._v(" "),
+                                        _c("td", [
+                                          _c(
+                                            "a",
+                                            {
+                                              attrs: { href: "#" },
+                                              on: {
+                                                click: function ($event) {
+                                                  return _vm.editdateModal(date)
+                                                },
+                                              },
+                                            },
+                                            [
+                                              _c("i", {
+                                                staticClass: "fa fa-edit blue",
+                                              }),
+                                            ]
+                                          ),
+                                          _vm._v(" "),
+                                          _c("span", [_vm._v("/")]),
+                                          _vm._v(" "),
+                                          _c(
+                                            "a",
+                                            {
+                                              attrs: { href: "#" },
+                                              on: {
+                                                click: function ($event) {
+                                                  return _vm.deleteDate(date.id)
+                                                },
+                                              },
+                                            },
+                                            [
+                                              _c("i", {
+                                                staticClass: "fa fa-trash red",
+                                              }),
+                                            ]
+                                          ),
+                                        ]),
+                                      ])
+                                    }
+                                  ),
+                                  0
+                                ),
+                              ]
+                            ),
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          {
+                            staticClass: "card-footer clearfix",
+                            staticStyle: { display: "block" },
+                          },
+                          [
+                            _c("pagination", {
+                              attrs: { data: _vm.electiondates },
+                              on: { "pagination-change-page": _vm.getDates },
+                            }),
+                          ],
+                          1
+                        ),
+                      ]),
+                    ]
+                  ),
+                ]
+              ),
+            ]),
+          ]
+        ),
+      ]),
+    ]),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        staticClass: "modal fade",
+        attrs: {
+          id: "addNew",
+          tabindex: "-1",
+          role: "dialog",
+          "aria-labelledby": "addNewModal",
+          "aria-hidden": "true",
+        },
+      },
+      [
+        _c(
+          "div",
+          {
+            staticClass: "modal-dialog model-dialog-centered",
+            attrs: { role: "document" },
+          },
+          [
+            _c("div", { staticClass: "modal-content" }, [
+              _c(
+                "form",
+                {
+                  on: {
+                    submit: function ($event) {
+                      $event.preventDefault()
+                      _vm.editmode ? _vm.updateYear() : _vm.createYear()
+                    },
+                  },
+                },
+                [
+                  _c("div", { staticClass: "modal-header" }, [
+                    _c(
+                      "h5",
+                      {
+                        directives: [
+                          {
+                            name: "show",
+                            rawName: "v-show",
+                            value: _vm.editmode,
+                            expression: "editmode",
+                          },
+                        ],
+                        staticClass: "modal-title",
+                        attrs: { id: "addNewModalTitle" },
+                      },
+                      [
+                        _vm._v(
+                          "\n                        Update Academic Year \n                        "
+                        ),
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "h5",
+                      {
+                        directives: [
+                          {
+                            name: "show",
+                            rawName: "v-show",
+                            value: !_vm.editmode,
+                            expression: "!editmode",
+                          },
+                        ],
+                        staticClass: "modal-title",
+                        attrs: { id: "addNewModalTitle" },
+                      },
+                      [
+                        _vm._v(
+                          "\n                        Add New Academic Year\n                        "
+                        ),
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _vm._m(3),
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "modal-body" }, [
+                    _c("div", { staticClass: "form-group" }, [
+                      _c("label", [_vm._v("Year Code")]),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.form.year_code,
+                            expression: "form.year_code",
+                          },
+                        ],
+                        staticClass: "form-control",
+                        attrs: { type: "text", name: "year_code" },
+                        domProps: { value: _vm.form.year_code },
+                        on: {
+                          input: function ($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(_vm.form, "year_code", $event.target.value)
+                          },
+                        },
+                      }),
+                      _vm._v(" "),
+                      _vm.form.errors.has("year_code")
+                        ? _c("div", {
+                            domProps: {
+                              innerHTML: _vm._s(
+                                _vm.form.errors.get("year_code")
+                              ),
+                            },
+                          })
+                        : _vm._e(),
+                    ]),
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "modal-footer" }, [
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-danger",
+                        attrs: { type: "button", "data-dismiss": "modal" },
+                      },
+                      [_vm._v("Close")]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "button",
+                      {
+                        directives: [
+                          {
+                            name: "show",
+                            rawName: "v-show",
+                            value: _vm.editmode,
+                            expression: "editmode",
+                          },
+                        ],
+                        staticClass: "btn btn-success",
+                        attrs: { type: "submit" },
+                      },
+                      [_vm._v("\n                    Update")]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "button",
+                      {
+                        directives: [
+                          {
+                            name: "show",
+                            rawName: "v-show",
+                            value: !_vm.editmode,
+                            expression: "!editmode",
+                          },
+                        ],
+                        staticClass: "btn btn-primary",
+                        attrs: { type: "submit" },
+                      },
+                      [_vm._v("\n                    Create")]
+                    ),
+                  ]),
+                ]
+              ),
+            ]),
+          ]
+        ),
+      ]
+    ),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        staticClass: "modal fade",
+        attrs: {
+          id: "addDate",
+          tabindex: "-1",
+          role: "dialog",
+          "aria-labelledby": "addNewModal",
+          "aria-hidden": "true",
+        },
+      },
+      [
+        _c(
+          "div",
+          {
+            staticClass: "modal-dialog model-dialog-centered",
+            attrs: { role: "document" },
+          },
+          [
+            _c("div", { staticClass: "modal-content" }, [
+              _c(
+                "form",
+                {
+                  on: {
+                    submit: function ($event) {
+                      $event.preventDefault()
+                      _vm.editmode ? _vm.updateDate() : _vm.createDate()
+                    },
+                  },
+                },
+                [
+                  _c("div", { staticClass: "modal-header" }, [
+                    _c(
+                      "h5",
+                      {
+                        directives: [
+                          {
+                            name: "show",
+                            rawName: "v-show",
+                            value: _vm.editmode,
+                            expression: "editmode",
+                          },
+                        ],
+                        staticClass: "modal-title",
+                        attrs: { id: "addNewModalTitle" },
+                      },
+                      [
+                        _vm._v(
+                          "\n                        Update Election Date \n                        "
+                        ),
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "h5",
+                      {
+                        directives: [
+                          {
+                            name: "show",
+                            rawName: "v-show",
+                            value: !_vm.editmode,
+                            expression: "!editmode",
+                          },
+                        ],
+                        staticClass: "modal-title",
+                        attrs: { id: "addNewModalTitle" },
+                      },
+                      [
+                        _vm._v(
+                          "\n                        Add New Academic Year\n                        "
+                        ),
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _vm._m(4),
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "modal-body" }, [
+                    _c("div", { staticClass: "form-group" }, [
+                      _c("label", [_vm._v("Academic Year:")]),
+                      _vm._v(" "),
+                      _c(
+                        "select",
+                        {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.form.acad_year_id,
+                              expression: "form.acad_year_id",
+                            },
+                          ],
+                          staticClass: "form-control",
+                          on: {
+                            change: function ($event) {
+                              var $$selectedVal = Array.prototype.filter
+                                .call($event.target.options, function (o) {
+                                  return o.selected
+                                })
+                                .map(function (o) {
+                                  var val = "_value" in o ? o._value : o.value
+                                  return val
+                                })
+                              _vm.$set(
+                                _vm.form,
+                                "acad_year_id",
+                                $event.target.multiple
+                                  ? $$selectedVal
+                                  : $$selectedVal[0]
+                              )
+                            },
+                          },
+                        },
+                        _vm._l(_vm.acad_years.data, function (item) {
+                          return _c(
+                            "option",
+                            {
+                              key: item.id,
+                              domProps: {
+                                value: item.id,
+                                selected: item.id == _vm.form.acad_year_id,
+                              },
+                            },
+                            [_vm._v(_vm._s(item.year_code))]
+                          )
+                        }),
+                        0
+                      ),
+                      _vm._v(" "),
+                      _vm.form.errors.has("acad_year_id")
+                        ? _c("div", {
+                            domProps: {
+                              innerHTML: _vm._s(
+                                _vm.form.errors.get("acad_year_id")
+                              ),
+                            },
+                          })
+                        : _vm._e(),
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "form-group" }, [
+                      _c("label", [_vm._v("Start Date")]),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.form.start_date,
+                            expression: "form.start_date",
+                          },
+                        ],
+                        staticClass: "form-control",
+                        attrs: { type: "date", name: "start_date" },
+                        domProps: { value: _vm.form.start_date },
+                        on: {
+                          input: function ($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.form,
+                              "start_date",
+                              $event.target.value
+                            )
+                          },
+                        },
+                      }),
+                      _vm._v(" "),
+                      _vm.form.errors.has("start_date")
+                        ? _c("div", {
+                            domProps: {
+                              innerHTML: _vm._s(
+                                _vm.form.errors.get("start_date")
+                              ),
+                            },
+                          })
+                        : _vm._e(),
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "form-group" }, [
+                      _c("label", [_vm._v("Start Time")]),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.form.start_time,
+                            expression: "form.start_time",
+                          },
+                        ],
+                        staticClass: "form-control",
+                        attrs: { type: "time", name: "start_time" },
+                        domProps: { value: _vm.form.start_time },
+                        on: {
+                          input: function ($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.form,
+                              "start_time",
+                              $event.target.value
+                            )
+                          },
+                        },
+                      }),
+                      _vm._v(" "),
+                      _vm.form.errors.has("start_time")
+                        ? _c("div", {
+                            domProps: {
+                              innerHTML: _vm._s(
+                                _vm.form.errors.get("start_time")
+                              ),
+                            },
+                          })
+                        : _vm._e(),
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "form-group" }, [
+                      _c("label", [_vm._v("End Date")]),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.form.end_date,
+                            expression: "form.end_date",
+                          },
+                        ],
+                        staticClass: "form-control",
+                        attrs: { type: "date", name: "end_date" },
+                        domProps: { value: _vm.form.end_date },
+                        on: {
+                          input: function ($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(_vm.form, "end_date", $event.target.value)
+                          },
+                        },
+                      }),
+                      _vm._v(" "),
+                      _vm.form.errors.has("end_date")
+                        ? _c("div", {
+                            domProps: {
+                              innerHTML: _vm._s(
+                                _vm.form.errors.get("end_date")
+                              ),
+                            },
+                          })
+                        : _vm._e(),
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "form-group" }, [
+                      _c("label", [_vm._v("End Time")]),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.form.end_time,
+                            expression: "form.end_time",
+                          },
+                        ],
+                        staticClass: "form-control",
+                        attrs: { type: "time", name: "end_time" },
+                        domProps: { value: _vm.form.end_time },
+                        on: {
+                          input: function ($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(_vm.form, "end_time", $event.target.value)
+                          },
+                        },
+                      }),
+                      _vm._v(" "),
+                      _vm.form.errors.has("end_time")
+                        ? _c("div", {
+                            domProps: {
+                              innerHTML: _vm._s(
+                                _vm.form.errors.get("end_time")
+                              ),
+                            },
+                          })
+                        : _vm._e(),
+                    ]),
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "modal-footer" }, [
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-danger",
+                        attrs: { type: "button", "data-dismiss": "modal" },
+                      },
+                      [_vm._v("Close")]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "button",
+                      {
+                        directives: [
+                          {
+                            name: "show",
+                            rawName: "v-show",
+                            value: _vm.editmode,
+                            expression: "editmode",
+                          },
+                        ],
+                        staticClass: "btn btn-success",
+                        attrs: { type: "submit" },
+                      },
+                      [_vm._v("\n                    Update")]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "button",
+                      {
+                        directives: [
+                          {
+                            name: "show",
+                            rawName: "v-show",
+                            value: !_vm.editmode,
+                            expression: "!editmode",
+                          },
+                        ],
+                        staticClass: "btn btn-primary",
+                        attrs: { type: "submit" },
+                      },
+                      [_vm._v("\n                    Create")]
+                    ),
+                  ]),
+                ]
+              ),
+            ]),
+          ]
+        ),
+      ]
+    ),
+  ])
+}
+var staticRenderFns = [
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", { staticClass: "nav-item" }, [
+      _c(
+        "a",
+        {
+          staticClass: "nav-link active",
+          attrs: {
+            id: "custom-tabs-four-home-tab",
+            "data-toggle": "pill",
+            href: "#custom-tabs-four-home",
+            role: "tab",
+            "aria-controls": "custom-tabs-four-home",
+            "aria-selected": "true",
+          },
+        },
+        [_vm._v("Academic Years")]
+      ),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", [_vm._v("ID")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Code")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Modify")]),
+      ]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", [_vm._v("Academic Year")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Start Date")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Start Time")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("End Date")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("End Time")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Modify")]),
+      ]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "button",
+      {
+        staticClass: "close",
+        attrs: {
+          type: "button",
+          "data-dismiss": "modal",
+          "aria-label": "Close",
+        },
+      },
+      [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+    )
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "button",
+      {
+        staticClass: "close",
+        attrs: {
+          type: "button",
+          "data-dismiss": "modal",
+          "aria-label": "Close",
+        },
+      },
+      [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+    )
+  },
+]
+render._withStripped = true
+
 
 
 /***/ }),
@@ -65800,28 +68037,342 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", { staticClass: "container" }, [
+    _c("div", { staticClass: "row mt-3" }, [
+      _c("div", { staticClass: "col-lg-6" }, [
+        _c("div", { staticClass: "card" }, [
+          _c("div", { staticClass: "card-header border-0" }, [
+            _c(
+              "div",
+              { staticClass: "d-flex justify-content-between" },
+              [
+                _c("h3", { staticClass: "card-title" }, [
+                  _vm._v("Election Analytics"),
+                ]),
+                _vm._v(" "),
+                _c(
+                  "router-link",
+                  { attrs: { to: "/results", href: "javascript:void(0);" } },
+                  [_vm._v("View Results")]
+                ),
+              ],
+              1
+            ),
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "card-body" }, [
+            _c("div", { staticClass: "d-flex" }, [
+              _c("p", { staticClass: "d-flex flex-column" }, [
+                _c("span", { staticClass: "text-bold text-lg" }, [
+                  _vm._v(_vm._s(_vm.students_no)),
+                ]),
+                _vm._v(" "),
+                _c("span", [_vm._v("Student Population")]),
+              ]),
+              _vm._v(" "),
+              _c(
+                "p",
+                { staticClass: "ml-auto d-flex flex-column text-right" },
+                [
+                  (_vm.votes_no / _vm.students_no) * 100 > 50
+                    ? _c("span", { staticClass: "text-success" }, [
+                        _c("i", { staticClass: "fas fa-arrow-up" }),
+                        _vm._v(
+                          "\n                   " +
+                            _vm._s((_vm.votes_no / _vm.students_no) * 100) +
+                            "%\n                "
+                        ),
+                      ])
+                    : (_vm.votes_no / _vm.students_no) * 100 < 50
+                    ? _c("span", { staticClass: "text-danger" }, [
+                        _c("i", { staticClass: "fas fa-arrow-down" }),
+                        _vm._v(
+                          "\n                   " +
+                            _vm._s((_vm.votes_no / _vm.students_no) * 100) +
+                            "%\n                "
+                        ),
+                      ])
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _c("span", { staticClass: "text-muted" }, [
+                    _vm._v("Voter turnout"),
+                  ]),
+                ]
+              ),
+            ]),
+            _vm._v(" "),
+            _vm._m(0),
+            _vm._v(" "),
+            _vm._m(1),
+          ]),
+          _vm._v(" "),
+          _vm._m(2),
+        ]),
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-lg-6" }, [
+        _c("div", { staticClass: "card" }, [
+          _vm._m(3),
+          _vm._v(" "),
+          _c("div", { staticClass: "card-body p-0" }, [
+            _c("div", { staticClass: "table-responsive" }, [
+              _c("table", { staticClass: "table m-0" }, [
+                _vm._m(4),
+                _vm._v(" "),
+                _c(
+                  "tbody",
+                  _vm._l(_vm.leadcandidates.data, function (cand) {
+                    return _c("tr", { key: cand.id }, [
+                      _c("td", [
+                        _c("a", { attrs: { href: "#" } }, [
+                          _vm._v(_vm._s(cand.year.year_code)),
+                        ]),
+                      ]),
+                      _vm._v(" "),
+                      _c("td", [
+                        _vm._v(
+                          _vm._s(cand.student.first_name) +
+                            " " +
+                            _vm._s(cand.student.last_name)
+                        ),
+                      ]),
+                      _vm._v(" "),
+                      _c("td", [
+                        cand.position.name == "President"
+                          ? _c("span", { staticClass: "badge badge-success" }, [
+                              _vm._v(_vm._s(cand.position.position_code)),
+                            ])
+                          : _vm._e(),
+                        _vm._v(" "),
+                        cand.position.name == "Secretary General"
+                          ? _c("span", { staticClass: "badge badge-success" }, [
+                              _vm._v(_vm._s(cand.position.position_code)),
+                            ])
+                          : _vm._e(),
+                        _vm._v(" "),
+                        cand.position.name == "Finance"
+                          ? _c("span", { staticClass: "badge badge-success" }, [
+                              _vm._v(_vm._s(cand.position.position_code)),
+                            ])
+                          : _vm._e(),
+                        _vm._v(" "),
+                        cand.position.name == "School Representative"
+                          ? _c("span", { staticClass: "badge badge-info" }, [
+                              _vm._v(
+                                _vm._s(cand.position.position_code) +
+                                  " (" +
+                                  _vm._s(cand.school.school_code) +
+                                  ")"
+                              ),
+                            ])
+                          : _vm._e(),
+                        _vm._v(" "),
+                        cand.position.name == "Sports Representative" &&
+                        cand.gender == "M"
+                          ? _c("span", { staticClass: "badge badge-primary" }, [
+                              _vm._v(
+                                _vm._s(cand.position.position_code) + " (M)"
+                              ),
+                            ])
+                          : _vm._e(),
+                        _vm._v(" "),
+                        cand.position.name == "Sports Representative" &&
+                        cand.gender == "F"
+                          ? _c("span", { staticClass: "badge badge-danger" }, [
+                              _vm._v(
+                                _vm._s(cand.position.position_code) + " (F)"
+                              ),
+                            ])
+                          : _vm._e(),
+                      ]),
+                      _vm._v(" "),
+                      _c("td", [
+                        _c(
+                          "div",
+                          {
+                            staticClass: "sparkbar",
+                            attrs: {
+                              "data-color": "#00a65a",
+                              "data-height": "20",
+                            },
+                          },
+                          [_vm._v(_vm._s(cand.votes))]
+                        ),
+                      ]),
+                    ])
+                  }),
+                  0
+                ),
+              ]),
+            ]),
+          ]),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "card-footer clearfix" },
+            [
+              _c(
+                "router-link",
+                {
+                  staticClass: "btn btn-sm btn-info float-left",
+                  attrs: { to: "/candidates", href: "javascript:void(0)" },
+                },
+                [_vm._v("View All Candidates")]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "float-right",
+                  staticStyle: { display: "block" },
+                },
+                [
+                  _c("pagination", {
+                    attrs: { data: _vm.leadcandidates },
+                    on: { "pagination-change-page": _vm.getResults },
+                  }),
+                ],
+                1
+              ),
+            ],
+            1
+          ),
+        ]),
+      ]),
+    ]),
+  ])
 }
 var staticRenderFns = [
   function () {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "container" }, [
-      _c("div", { staticClass: "row justify-content-center" }, [
-        _c("div", { staticClass: "col-md-8" }, [
-          _c("div", { staticClass: "card" }, [
-            _c("div", { staticClass: "card-header" }, [
-              _vm._v("Example Component"),
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "card-body" }, [
-              _vm._v(
-                "\n                    I'm an example component.\n                "
-              ),
+    return _c("div", { staticClass: "position-relative mb-4" }, [
+      _c("div", { staticClass: "chartjs-size-monitor" }, [
+        _c("div", { staticClass: "chartjs-size-monitor-expand" }, [
+          _c("div", {}),
+        ]),
+        _c("div", { staticClass: "chartjs-size-monitor-shrink" }, [
+          _c("div", {}),
+        ]),
+      ]),
+      _vm._v(" "),
+      _c("canvas", {
+        staticClass: "chartjs-render-monitor",
+        staticStyle: { display: "block", width: "447px", height: "200px" },
+        attrs: { id: "visitors-chart", height: "200", width: "447" },
+      }),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "d-flex flex-row justify-content-end" }, [
+      _c("span", { staticClass: "mr-2" }, [
+        _c("i", { staticClass: "fas fa-square text-primary" }),
+        _vm._v(" Cast Votes\n              "),
+      ]),
+      _vm._v(" "),
+      _c("span", [
+        _c("i", { staticClass: "fas fa-square text-gray" }),
+        _vm._v(" Expected Votes\n              "),
+      ]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "card-footer bg-light p-0" }, [
+      _c("br"),
+      _vm._v(" "),
+      _c("p", { staticClass: "text-center" }, [
+        _c("strong", [_vm._v("Voter Turnout per School")]),
+      ]),
+      _vm._v(" "),
+      _c("ul", { staticClass: "nav nav-pills flex-column" }, [
+        _c("li", { staticClass: "nav-item" }, [
+          _c("a", { staticClass: "nav-link", attrs: { href: "#" } }, [
+            _vm._v("\n                  Student Leader\n                  "),
+            _c("span", { staticClass: "float-right text-danger" }, [
+              _c("i", { staticClass: "fas fa-arrow-down text-sm" }),
+              _vm._v("\n                    3"),
             ]),
           ]),
         ]),
+        _vm._v(" "),
+        _c("li", { staticClass: "nav-item" }, [
+          _c("a", { staticClass: "nav-link", attrs: { href: "#" } }, [
+            _vm._v("\n                  Secretary General\n                  "),
+            _c("span", { staticClass: "float-right text-success" }, [
+              _c("i", { staticClass: "fas fa-arrow-up text-sm" }),
+              _vm._v(" 4\n                  "),
+            ]),
+          ]),
+        ]),
+        _vm._v(" "),
+        _c("li", { staticClass: "nav-item" }, [
+          _c("a", { staticClass: "nav-link", attrs: { href: "#" } }, [
+            _vm._v("\n                  Finance\n                  "),
+            _c("span", { staticClass: "float-right text-warning" }, [
+              _c("i", { staticClass: "fas fa-arrow-left text-sm" }),
+              _vm._v(" 2\n                  "),
+            ]),
+          ]),
+        ]),
+        _vm._v(" "),
+        _c("li", { staticClass: "nav-item" }, [
+          _c("a", { staticClass: "nav-link", attrs: { href: "#" } }, [
+            _vm._v("\n                  School Reps\n                  "),
+            _c("span", { staticClass: "float-right text-danger" }, [
+              _c("i", { staticClass: "fas fa-arrow-down text-sm" }),
+              _vm._v("\n                    20"),
+            ]),
+          ]),
+        ]),
+        _vm._v(" "),
+        _c("li", { staticClass: "nav-item" }, [
+          _c("a", { staticClass: "nav-link", attrs: { href: "#" } }, [
+            _vm._v(
+              "\n                  Co-curricular Reps\n                  "
+            ),
+            _c("span", { staticClass: "float-right text-success" }, [
+              _c("i", { staticClass: "fas fa-arrow-up text-sm" }),
+              _vm._v(" 5\n                  "),
+            ]),
+          ]),
+        ]),
+      ]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "card-header border-0" }, [
+      _c("div", { staticClass: "d-flex justify-content-between" }, [
+        _c("h3", { staticClass: "card-title" }, [_vm._v("Leaderboard")]),
+        _vm._v(" "),
+        _c("div", { staticClass: "overlay" }, [
+          _c("i", { staticClass: "fas fa-2x fa-sync-alt fa-spin" }),
+        ]),
+      ]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", [_vm._v("Academic Year")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Candidate")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Position")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Votes")]),
       ]),
     ])
   },
@@ -66266,212 +68817,887 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "container mt-3" }, [
-    _c("div", { staticClass: "card card-default" }, [
-      _vm._m(0),
-      _vm._v(" "),
-      _c("div", { staticClass: "card-body" }, [
-        _c("div", { staticClass: "row" }, [
-          _c("div", { staticClass: "col-md-6" }, [
-            _c("div", { staticClass: "form-group" }, [
-              _c("label", [_vm._v("Position")]),
-              _vm._v(" "),
-              _c(
-                "select",
-                {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.form.candidate_position_id,
-                      expression: "form.candidate_position_id",
-                    },
-                  ],
-                  staticClass: "form-control",
-                  staticStyle: { width: "100%" },
-                  attrs: {
-                    "data-select2-id": "1",
-                    tabindex: "-1",
-                    "aria-hidden": "true",
-                    id: "candidate_position_id",
-                  },
-                  on: {
-                    change: function ($event) {
-                      var $$selectedVal = Array.prototype.filter
-                        .call($event.target.options, function (o) {
-                          return o.selected
-                        })
-                        .map(function (o) {
-                          var val = "_value" in o ? o._value : o.value
-                          return val
-                        })
-                      _vm.$set(
-                        _vm.form,
-                        "candidate_position_id",
-                        $event.target.multiple
-                          ? $$selectedVal
-                          : $$selectedVal[0]
-                      )
-                    },
-                  },
-                },
-                [
-                  _c("option", { attrs: { value: "" } }, [
-                    _vm._v("Select Position"),
-                  ]),
-                  _vm._v(" "),
-                  _vm._l(_vm.positions, function (item) {
-                    return _c(
-                      "option",
-                      {
-                        key: item.id,
-                        domProps: {
-                          value: item.id,
-                          selected: item.id == _vm.form.candidate_position_id,
-                        },
-                      },
-                      [_vm._v(_vm._s(item.name))]
-                    )
-                  }),
-                ],
-                2
-              ),
+  return _c("div", { staticClass: "container" }, [
+    _c("div", { staticClass: "row mt-3" }, [
+      _c("div", { staticClass: "col-md-12" }, [
+        _c("div", { staticClass: "card" }, [
+          _c("div", { staticClass: "card-header" }, [
+            _c("h5", { staticClass: "card-title" }, [
+              _vm._v("Election Results (real-time)"),
             ]),
             _vm._v(" "),
-            _c("div", { staticClass: "form-group" }, [
-              _c("label", [_vm._v("School")]),
-              _vm._v(" "),
-              _c(
-                "select",
-                {
-                  directives: [
+            _c("div", { staticClass: "card-tools" }, [
+              _c("ul", { staticClass: "nav nav-pills ml-auto p-2" }, [
+                _vm._m(0),
+                _vm._v(" "),
+                _c("li", { staticClass: "nav-item" }, [
+                  _c(
+                    "a",
                     {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.form.candidate_school_id,
-                      expression: "form.candidate_school_id",
-                    },
-                  ],
-                  staticClass: "form-control",
-                  staticStyle: { width: "100%" },
-                  attrs: {
-                    "data-select2-id": "1",
-                    tabindex: "-1",
-                    "aria-hidden": "true",
-                    id: "candidate_school_id",
-                  },
-                  on: {
-                    change: function ($event) {
-                      var $$selectedVal = Array.prototype.filter
-                        .call($event.target.options, function (o) {
-                          return o.selected
-                        })
-                        .map(function (o) {
-                          var val = "_value" in o ? o._value : o.value
-                          return val
-                        })
-                      _vm.$set(
-                        _vm.form,
-                        "candidate_school_id",
-                        $event.target.multiple
-                          ? $$selectedVal
-                          : $$selectedVal[0]
-                      )
-                    },
-                  },
-                },
-                [
-                  _c("option", { attrs: { value: "" } }, [
-                    _vm._v("Select School"),
-                  ]),
-                  _vm._v(" "),
-                  _vm._l(_vm.schools, function (item) {
-                    return _c(
-                      "option",
-                      {
-                        key: item.id,
-                        domProps: {
-                          value: item.id,
-                          selected: item.id == _vm.form.candidate_school_id,
+                      staticClass: "nav-link",
+                      attrs: { href: "#tab_2", "data-toggle": "tab" },
+                      on: {
+                        click: function ($event) {
+                          return _vm.loadPresidential()
                         },
                       },
-                      [_vm._v(_vm._s(item.name))]
-                    )
-                  }),
-                ],
-                2
-              ),
+                    },
+                    [_vm._v("Student Leader")]
+                  ),
+                ]),
+                _vm._v(" "),
+                _c("li", { staticClass: "nav-item" }, [
+                  _c(
+                    "a",
+                    {
+                      staticClass: "nav-link",
+                      attrs: { href: "#tab_3", "data-toggle": "tab" },
+                      on: {
+                        click: function ($event) {
+                          return _vm.loadSecGens()
+                        },
+                      },
+                    },
+                    [_vm._v("Secretary General")]
+                  ),
+                ]),
+                _vm._v(" "),
+                _c("li", { staticClass: "nav-item" }, [
+                  _c(
+                    "a",
+                    {
+                      staticClass: "nav-link",
+                      attrs: { href: "#tab_4", "data-toggle": "tab" },
+                      on: {
+                        click: function ($event) {
+                          return _vm.loadFins()
+                        },
+                      },
+                    },
+                    [_vm._v("Finance")]
+                  ),
+                ]),
+                _vm._v(" "),
+                _c("li", { staticClass: "nav-item" }, [
+                  _c(
+                    "a",
+                    {
+                      staticClass: "nav-link",
+                      attrs: { href: "#tab_5", "data-toggle": "tab" },
+                      on: {
+                        click: function ($event) {
+                          return _vm.loadSchoolReps()
+                        },
+                      },
+                    },
+                    [_vm._v("School Reps")]
+                  ),
+                ]),
+                _vm._v(" "),
+                _c("li", { staticClass: "nav-item" }, [
+                  _c(
+                    "a",
+                    {
+                      staticClass: "nav-link",
+                      attrs: { href: "#tab_6", "data-toggle": "tab" },
+                      on: {
+                        click: function ($event) {
+                          return _vm.loadSportReps()
+                        },
+                      },
+                    },
+                    [_vm._v("Co-curricular Reps")]
+                  ),
+                ]),
+              ]),
             ]),
           ]),
           _vm._v(" "),
-          _c("div", { staticClass: "col-md-6" }, [
-            _c("div", { staticClass: "form-group" }, [
-              _c("label", [_vm._v("Gender")]),
-              _vm._v(" "),
+          _c("div", { staticClass: "card-body" }, [
+            _c("div", { staticClass: "tab-content" }, [
               _c(
-                "select",
-                {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.form.gender,
-                      expression: "form.gender",
-                    },
-                  ],
-                  staticClass: "form-control",
-                  attrs: { id: "gender", name: "gender" },
-                  on: {
-                    change: function ($event) {
-                      var $$selectedVal = Array.prototype.filter
-                        .call($event.target.options, function (o) {
-                          return o.selected
-                        })
-                        .map(function (o) {
-                          var val = "_value" in o ? o._value : o.value
-                          return val
-                        })
-                      _vm.$set(
-                        _vm.form,
-                        "gender",
-                        $event.target.multiple
-                          ? $$selectedVal
-                          : $$selectedVal[0]
-                      )
-                    },
-                  },
-                },
+                "div",
+                { staticClass: "tab-pane active", attrs: { id: "tab_1" } },
                 [
-                  _c("option", { attrs: { value: "" } }, [
-                    _vm._v("Select Gender"),
+                  _c("div", { staticClass: "row" }, [
+                    _vm._m(1),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-md-4" }, [
+                      _vm._m(2),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "card-footer bg-light p-0" }, [
+                        _c("ul", { staticClass: "nav nav-pills flex-column" }, [
+                          _c("li", { staticClass: "nav-item" }, [
+                            _c(
+                              "a",
+                              { staticClass: "nav-link", attrs: { href: "#" } },
+                              [
+                                _vm._v(
+                                  "\n                            Student Leader\n                            "
+                                ),
+                                _c(
+                                  "span",
+                                  { staticClass: "float-right text-danger" },
+                                  [
+                                    _vm._v(
+                                      "\n                              " +
+                                        _vm._s(_vm.pres_candidates_no)
+                                    ),
+                                  ]
+                                ),
+                              ]
+                            ),
+                          ]),
+                          _vm._v(" "),
+                          _c("li", { staticClass: "nav-item" }, [
+                            _c(
+                              "a",
+                              { staticClass: "nav-link", attrs: { href: "#" } },
+                              [
+                                _vm._v(
+                                  "\n                            Secretary General\n                            "
+                                ),
+                                _c(
+                                  "span",
+                                  { staticClass: "float-right text-success" },
+                                  [
+                                    _vm._v(
+                                      "\n                              " +
+                                        _vm._s(_vm.sec_gen_candidates_no) +
+                                        "\n                            "
+                                    ),
+                                  ]
+                                ),
+                              ]
+                            ),
+                          ]),
+                          _vm._v(" "),
+                          _c("li", { staticClass: "nav-item" }, [
+                            _c(
+                              "a",
+                              { staticClass: "nav-link", attrs: { href: "#" } },
+                              [
+                                _vm._v(
+                                  "\n                            Finance\n                            "
+                                ),
+                                _c(
+                                  "span",
+                                  { staticClass: "float-right text-warning" },
+                                  [
+                                    _vm._v(
+                                      "\n                               " +
+                                        _vm._s(_vm.fin_candidates_no) +
+                                        "\n                            "
+                                    ),
+                                  ]
+                                ),
+                              ]
+                            ),
+                          ]),
+                          _vm._v(" "),
+                          _c("li", { staticClass: "nav-item" }, [
+                            _c(
+                              "a",
+                              { staticClass: "nav-link", attrs: { href: "#" } },
+                              [
+                                _vm._v(
+                                  "\n                            School Reps\n                            "
+                                ),
+                                _c(
+                                  "span",
+                                  { staticClass: "float-right text-danger" },
+                                  [
+                                    _vm._v(
+                                      "\n                              " +
+                                        _vm._s(
+                                          _vm.female_sch_candidates_no +
+                                            _vm.male_sch_candidates_no
+                                        ) +
+                                        "\n                            "
+                                    ),
+                                  ]
+                                ),
+                              ]
+                            ),
+                          ]),
+                          _vm._v(" "),
+                          _c("li", { staticClass: "nav-item" }, [
+                            _c(
+                              "a",
+                              { staticClass: "nav-link", attrs: { href: "#" } },
+                              [
+                                _vm._v(
+                                  "\n                            Co-curricular Reps \n                            "
+                                ),
+                                _c(
+                                  "span",
+                                  { staticClass: "float-right text-success" },
+                                  [
+                                    _vm._v(
+                                      "\n                              " +
+                                        _vm._s(
+                                          _vm.male_sport_candidates_no +
+                                            _vm.female_sport_candidates_no
+                                        ) +
+                                        "\n                            "
+                                    ),
+                                  ]
+                                ),
+                              ]
+                            ),
+                          ]),
+                        ]),
+                      ]),
+                    ]),
                   ]),
                   _vm._v(" "),
-                  _c("option", { attrs: { value: "male" } }, [_vm._v("Male")]),
-                  _vm._v(" "),
-                  _c("option", { attrs: { value: "female" } }, [
-                    _vm._v("Female"),
+                  _c("div", { staticClass: "card-footer" }, [
+                    _c("div", { staticClass: "row" }, [
+                      _c("div", { staticClass: "col-sm-3 col-6" }, [
+                        _c(
+                          "div",
+                          { staticClass: "description-block border-right" },
+                          [
+                            _vm._m(3),
+                            _vm._v(" "),
+                            _c("h5", { staticClass: "description-header" }, [
+                              _vm._v(_vm._s(_vm.students_no)),
+                            ]),
+                            _vm._v(" "),
+                            _c("span", { staticClass: "description-text" }, [
+                              _vm._v("TOTAL STUDENTS"),
+                            ]),
+                          ]
+                        ),
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-sm-3 col-6" }, [
+                        _c(
+                          "div",
+                          { staticClass: "description-block border-right" },
+                          [
+                            _vm._m(4),
+                            _vm._v(" "),
+                            _c("h5", { staticClass: "description-header" }, [
+                              _vm._v(_vm._s(_vm.votes_no)),
+                            ]),
+                            _vm._v(" "),
+                            _c("span", { staticClass: "description-text" }, [
+                              _vm._v("TOTAL CAST VOTES"),
+                            ]),
+                          ]
+                        ),
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-sm-3 col-6" }, [
+                        _c(
+                          "div",
+                          { staticClass: "description-block border-right" },
+                          [
+                            _vm._m(5),
+                            _vm._v(" "),
+                            _c("h5", { staticClass: "description-header" }, [
+                              _vm._v(_vm._s(_vm.positions_no)),
+                            ]),
+                            _vm._v(" "),
+                            _c("span", { staticClass: "description-text" }, [
+                              _vm._v("CONTESTED POSITIONS"),
+                            ]),
+                          ]
+                        ),
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-sm-3 col-6" }, [
+                        _c("div", { staticClass: "description-block" }, [
+                          _vm._m(6),
+                          _vm._v(" "),
+                          _c("h5", { staticClass: "description-header" }, [
+                            _vm._v(_vm._s(_vm.candidates_no)),
+                          ]),
+                          _vm._v(" "),
+                          _c("span", { staticClass: "description-text" }, [
+                            _vm._v("TOTAL CANDIDATES"),
+                          ]),
+                        ]),
+                      ]),
+                    ]),
                   ]),
                 ]
               ),
               _vm._v(" "),
-              _vm.form.errors.has("gender")
-                ? _c("div", {
-                    domProps: {
-                      innerHTML: _vm._s(_vm.form.errors.get("gender")),
-                    },
-                  })
-                : _vm._e(),
+              _c("div", { staticClass: "tab-pane", attrs: { id: "tab_2" } }, [
+                _c("div", { staticClass: "card" }, [
+                  _vm._m(7),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "card-body p-0" }, [
+                    _c("div", { staticClass: "table-responsive" }, [
+                      _c("table", { staticClass: "table m-0" }, [
+                        _vm._m(8),
+                        _vm._v(" "),
+                        _c(
+                          "tbody",
+                          _vm._l(_vm.pres_candidates.data, function (cand) {
+                            return _c("tr", { key: cand.id }, [
+                              _c("td", [
+                                _c("a", { attrs: { href: "#" } }, [
+                                  _vm._v(_vm._s(cand.year.year_code)),
+                                ]),
+                              ]),
+                              _vm._v(" "),
+                              _c("td", [
+                                _vm._v(
+                                  _vm._s(cand.student.first_name) +
+                                    " " +
+                                    _vm._s(cand.student.last_name)
+                                ),
+                              ]),
+                              _vm._v(" "),
+                              _c("td", [_vm._v(_vm._s(cand.gender))]),
+                              _vm._v(" "),
+                              _c("td", [
+                                _c(
+                                  "div",
+                                  {
+                                    staticClass: "sparkbar",
+                                    attrs: {
+                                      "data-color": "#00a65a",
+                                      "data-height": "20",
+                                    },
+                                  },
+                                  [_vm._v(_vm._s(cand.votes))]
+                                ),
+                              ]),
+                            ])
+                          }),
+                          0
+                        ),
+                      ]),
+                    ]),
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "card-footer clearfix" }, [
+                    _c(
+                      "div",
+                      {
+                        staticClass: "float-right",
+                        staticStyle: { display: "block" },
+                      },
+                      [
+                        _c("pagination", {
+                          attrs: { data: _vm.pres_candidates },
+                          on: { "pagination-change-page": _vm.getPresResults },
+                        }),
+                      ],
+                      1
+                    ),
+                  ]),
+                ]),
+                _vm._v(" "),
+                _c(
+                  "a",
+                  {
+                    staticClass: "btn btn-sm btn-info float-left",
+                    attrs: { href: "javascript:void(0)" },
+                  },
+                  [_vm._v("Voting for this category has been closed")]
+                ),
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "tab-pane", attrs: { id: "tab_3" } }, [
+                _c("div", { staticClass: "card" }, [
+                  _vm._m(9),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "card-body p-0" }, [
+                    _c("div", { staticClass: "table-responsive" }, [
+                      _c("table", { staticClass: "table m-0" }, [
+                        _vm._m(10),
+                        _vm._v(" "),
+                        _c(
+                          "tbody",
+                          _vm._l(_vm.sec_gen_candidates.data, function (cand) {
+                            return _c("tr", { key: cand.id }, [
+                              _c("td", [
+                                _c("a", { attrs: { href: "#" } }, [
+                                  _vm._v(_vm._s(cand.year.year_code)),
+                                ]),
+                              ]),
+                              _vm._v(" "),
+                              _c("td", [
+                                _vm._v(
+                                  _vm._s(cand.student.first_name) +
+                                    " " +
+                                    _vm._s(cand.student.last_name)
+                                ),
+                              ]),
+                              _vm._v(" "),
+                              _c("td", [_vm._v(_vm._s(cand.gender))]),
+                              _vm._v(" "),
+                              _c("td", [
+                                _c(
+                                  "div",
+                                  {
+                                    staticClass: "sparkbar",
+                                    attrs: {
+                                      "data-color": "#00a65a",
+                                      "data-height": "20",
+                                    },
+                                  },
+                                  [_vm._v(_vm._s(cand.votes))]
+                                ),
+                              ]),
+                            ])
+                          }),
+                          0
+                        ),
+                      ]),
+                    ]),
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "card-footer clearfix" }, [
+                    _c(
+                      "div",
+                      {
+                        staticClass: "float-right",
+                        staticStyle: { display: "block" },
+                      },
+                      [
+                        _c("pagination", {
+                          attrs: { data: _vm.sec_gen_candidates },
+                          on: {
+                            "pagination-change-page": _vm.getSecGenResults,
+                          },
+                        }),
+                      ],
+                      1
+                    ),
+                  ]),
+                ]),
+                _vm._v(" "),
+                _c(
+                  "a",
+                  {
+                    staticClass: "btn btn-sm btn-info float-left",
+                    attrs: { href: "javascript:void(0)" },
+                  },
+                  [_vm._v("Voting for this category has been closed")]
+                ),
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "tab-pane", attrs: { id: "tab_4" } }, [
+                _c("div", { staticClass: "card" }, [
+                  _vm._m(11),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "card-body p-0" }, [
+                    _c("div", { staticClass: "table-responsive" }, [
+                      _c("table", { staticClass: "table m-0" }, [
+                        _vm._m(12),
+                        _vm._v(" "),
+                        _c(
+                          "tbody",
+                          _vm._l(_vm.fin_candidates.data, function (cand) {
+                            return _c("tr", { key: cand.id }, [
+                              _c("td", [
+                                _c("a", { attrs: { href: "#" } }, [
+                                  _vm._v(_vm._s(cand.year.year_code)),
+                                ]),
+                              ]),
+                              _vm._v(" "),
+                              _c("td", [
+                                _vm._v(
+                                  _vm._s(cand.student.first_name) +
+                                    " " +
+                                    _vm._s(cand.student.last_name)
+                                ),
+                              ]),
+                              _vm._v(" "),
+                              _c("td", [_vm._v(_vm._s(cand.gender))]),
+                              _vm._v(" "),
+                              _c("td", [
+                                _c(
+                                  "div",
+                                  {
+                                    staticClass: "sparkbar",
+                                    attrs: {
+                                      "data-color": "#00a65a",
+                                      "data-height": "20",
+                                    },
+                                  },
+                                  [_vm._v(_vm._s(cand.votes))]
+                                ),
+                              ]),
+                            ])
+                          }),
+                          0
+                        ),
+                      ]),
+                    ]),
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "card-footer clearfix" }, [
+                    _c(
+                      "div",
+                      {
+                        staticClass: "float-right",
+                        staticStyle: { display: "block" },
+                      },
+                      [
+                        _c("pagination", {
+                          attrs: { data: _vm.fin_candidates },
+                          on: { "pagination-change-page": _vm.getFinResults },
+                        }),
+                      ],
+                      1
+                    ),
+                  ]),
+                ]),
+                _vm._v(" "),
+                _c(
+                  "a",
+                  {
+                    staticClass: "btn btn-sm btn-info float-left",
+                    attrs: { href: "javascript:void(0)" },
+                  },
+                  [_vm._v("Voting for this category has been closed")]
+                ),
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "tab-pane", attrs: { id: "tab_5" } }, [
+                _c("div", { staticClass: "row mt-3" }, [
+                  _c("div", { staticClass: "col-lg-6" }, [
+                    _c("div", { staticClass: "card" }, [
+                      _vm._m(13),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "card-body p-0" }, [
+                        _c("div", { staticClass: "table-responsive" }, [
+                          _c("table", { staticClass: "table m-0" }, [
+                            _vm._m(14),
+                            _vm._v(" "),
+                            _c(
+                              "tbody",
+                              _vm._l(
+                                _vm.male_sch_candidates.data,
+                                function (cand) {
+                                  return _c("tr", { key: cand.id }, [
+                                    _c("td", [
+                                      _c("a", { attrs: { href: "#" } }, [
+                                        _vm._v(_vm._s(cand.year.year_code)),
+                                      ]),
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("td", [
+                                      _vm._v(
+                                        _vm._s(cand.student.first_name) +
+                                          " " +
+                                          _vm._s(cand.student.last_name)
+                                      ),
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("td", [
+                                      _vm._v(_vm._s(cand.school.school_code)),
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("td", [
+                                      _c(
+                                        "div",
+                                        {
+                                          staticClass: "sparkbar",
+                                          attrs: {
+                                            "data-color": "#00a65a",
+                                            "data-height": "20",
+                                          },
+                                        },
+                                        [_vm._v(_vm._s(cand.votes))]
+                                      ),
+                                    ]),
+                                  ])
+                                }
+                              ),
+                              0
+                            ),
+                          ]),
+                        ]),
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "card-footer clearfix" }, [
+                        _c(
+                          "div",
+                          {
+                            staticClass: "float-right",
+                            staticStyle: { display: "block" },
+                          },
+                          [
+                            _c("pagination", {
+                              attrs: { data: _vm.male_sch_candidates },
+                              on: {
+                                "pagination-change-page": _vm.getMaleSchResults,
+                              },
+                            }),
+                          ],
+                          1
+                        ),
+                      ]),
+                    ]),
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-lg-6" }, [
+                    _c("div", { staticClass: "card" }, [
+                      _vm._m(15),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "card-body p-0" }, [
+                        _c("div", { staticClass: "table-responsive" }, [
+                          _c("table", { staticClass: "table m-0" }, [
+                            _vm._m(16),
+                            _vm._v(" "),
+                            _c(
+                              "tbody",
+                              _vm._l(
+                                _vm.female_sch_candidates.data,
+                                function (cand) {
+                                  return _c("tr", { key: cand.id }, [
+                                    _c("td", [
+                                      _c("a", { attrs: { href: "#" } }, [
+                                        _vm._v(_vm._s(cand.year.year_code)),
+                                      ]),
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("td", [
+                                      _vm._v(
+                                        _vm._s(cand.student.first_name) +
+                                          " " +
+                                          _vm._s(cand.student.last_name)
+                                      ),
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("td", [
+                                      _vm._v(_vm._s(cand.school.school_code)),
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("td", [
+                                      _c(
+                                        "div",
+                                        {
+                                          staticClass: "sparkbar",
+                                          attrs: {
+                                            "data-color": "#00a65a",
+                                            "data-height": "20",
+                                          },
+                                        },
+                                        [_vm._v(_vm._s(cand.votes))]
+                                      ),
+                                    ]),
+                                  ])
+                                }
+                              ),
+                              0
+                            ),
+                          ]),
+                        ]),
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "card-footer clearfix" }, [
+                        _c(
+                          "div",
+                          {
+                            staticClass: "float-right",
+                            staticStyle: { display: "block" },
+                          },
+                          [
+                            _c("pagination", {
+                              attrs: { data: _vm.female_sch_candidates },
+                              on: {
+                                "pagination-change-page":
+                                  _vm.getFemaleSchResults,
+                              },
+                            }),
+                          ],
+                          1
+                        ),
+                      ]),
+                    ]),
+                  ]),
+                ]),
+                _vm._v(" "),
+                _c(
+                  "a",
+                  {
+                    staticClass: "btn btn-sm btn-info float-left",
+                    attrs: { href: "javascript:void(0)" },
+                  },
+                  [_vm._v("Voting for this category has been closed")]
+                ),
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "tab-pane", attrs: { id: "tab_6" } }, [
+                _c("div", { staticClass: "row mt-3" }, [
+                  _c("div", { staticClass: "col-lg-6" }, [
+                    _c("div", { staticClass: "card" }, [
+                      _vm._m(17),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "card-body p-0" }, [
+                        _c("div", { staticClass: "table-responsive" }, [
+                          _c("table", { staticClass: "table m-0" }, [
+                            _vm._m(18),
+                            _vm._v(" "),
+                            _c(
+                              "tbody",
+                              _vm._l(
+                                _vm.male_sport_candidates.data,
+                                function (cand) {
+                                  return _c("tr", { key: cand.id }, [
+                                    _c("td", [
+                                      _c("a", { attrs: { href: "#" } }, [
+                                        _vm._v(_vm._s(cand.year.year_code)),
+                                      ]),
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("td", [
+                                      _vm._v(
+                                        _vm._s(cand.student.first_name) +
+                                          " " +
+                                          _vm._s(cand.student.last_name)
+                                      ),
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("td", [
+                                      _vm._v(_vm._s(cand.school.school_code)),
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("td", [
+                                      _c(
+                                        "div",
+                                        {
+                                          staticClass: "sparkbar",
+                                          attrs: {
+                                            "data-color": "#00a65a",
+                                            "data-height": "20",
+                                          },
+                                        },
+                                        [_vm._v(_vm._s(cand.votes))]
+                                      ),
+                                    ]),
+                                  ])
+                                }
+                              ),
+                              0
+                            ),
+                          ]),
+                        ]),
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "card-footer clearfix" }, [
+                        _c(
+                          "div",
+                          {
+                            staticClass: "float-right",
+                            staticStyle: { display: "block" },
+                          },
+                          [
+                            _c("pagination", {
+                              attrs: { data: _vm.male_sport_candidates },
+                              on: {
+                                "pagination-change-page":
+                                  _vm.getMaleSportResults,
+                              },
+                            }),
+                          ],
+                          1
+                        ),
+                      ]),
+                    ]),
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-lg-6" }, [
+                    _c("div", { staticClass: "card" }, [
+                      _vm._m(19),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "card-body p-0" }, [
+                        _c("div", { staticClass: "table-responsive" }, [
+                          _c("table", { staticClass: "table m-0" }, [
+                            _vm._m(20),
+                            _vm._v(" "),
+                            _c(
+                              "tbody",
+                              _vm._l(
+                                _vm.female_sport_candidates.data,
+                                function (cand) {
+                                  return _c("tr", { key: cand.id }, [
+                                    _c("td", [
+                                      _c("a", { attrs: { href: "#" } }, [
+                                        _vm._v(_vm._s(cand.year.year_code)),
+                                      ]),
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("td", [
+                                      _vm._v(
+                                        _vm._s(cand.student.first_name) +
+                                          " " +
+                                          _vm._s(cand.student.last_name)
+                                      ),
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("td", [
+                                      _vm._v(_vm._s(cand.school.school_code)),
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("td", [
+                                      _c(
+                                        "div",
+                                        {
+                                          staticClass: "sparkbar",
+                                          attrs: {
+                                            "data-color": "#00a65a",
+                                            "data-height": "20",
+                                          },
+                                        },
+                                        [_vm._v(_vm._s(cand.votes))]
+                                      ),
+                                    ]),
+                                  ])
+                                }
+                              ),
+                              0
+                            ),
+                          ]),
+                        ]),
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "card-footer clearfix" }, [
+                        _c(
+                          "div",
+                          {
+                            staticClass: "float-right",
+                            staticStyle: { display: "block" },
+                          },
+                          [
+                            _c("pagination", {
+                              attrs: { data: _vm.female_sport_candidates },
+                              on: {
+                                "pagination-change-page":
+                                  _vm.getFemaleSportResults,
+                              },
+                            }),
+                          ],
+                          1
+                        ),
+                      ]),
+                    ]),
+                  ]),
+                ]),
+                _vm._v(" "),
+                _c(
+                  "a",
+                  {
+                    staticClass: "btn btn-sm btn-info float-left",
+                    attrs: { href: "javascript:void(0)" },
+                  },
+                  [_vm._v("Voting for this category has been closed")]
+                ),
+              ]),
             ]),
           ]),
         ]),
-        _vm._v(" "),
-        _vm._m(1),
       ]),
-      _vm._v(" "),
-      _vm._m(2),
     ]),
-    _vm._v(" "),
-    _vm._m(3),
   ])
 }
 var staticRenderFns = [
@@ -66479,44 +69705,14 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "card-header" }, [
-      _c("h3", { staticClass: "card-title" }, [
-        _vm._v("Election Results (Real-time)"),
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "card-tools" }, [
-        _c(
-          "button",
-          {
-            staticClass: "btn btn-tool",
-            attrs: { type: "button", "data-card-widget": "collapse" },
-          },
-          [_c("i", { staticClass: "fas fa-minus" })]
-        ),
-      ]),
-    ])
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "button",
-      { staticClass: "btn btn-primary", attrs: { type: "button" } },
-      [_vm._v("Find "), _c("i", { staticClass: "fas fa-search" })]
-    )
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "card-footer" }, [
-      _vm._v("\n        Visit "),
-      _c("a", { attrs: { href: "https://select2.github.io/" } }, [
-        _vm._v("Results documentation"),
-      ]),
-      _vm._v(
-        " for more insight and information about\n        the completed elections.\n      "
+    return _c("li", { staticClass: "nav-item" }, [
+      _c(
+        "a",
+        {
+          staticClass: "nav-link active",
+          attrs: { href: "#tab_1", "data-toggle": "tab" },
+        },
+        [_vm._v("General")]
       ),
     ])
   },
@@ -66524,258 +69720,446 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "card" }, [
-      _c("div", { staticClass: "card-header border-transparent" }, [
-        _c("h3", { staticClass: "card-title" }, [_vm._v("Latest Orders")]),
-        _vm._v(" "),
-        _c("div", { staticClass: "card-tools" }, [
-          _c(
-            "button",
-            {
-              staticClass: "btn btn-tool",
-              attrs: { type: "button", "data-card-widget": "collapse" },
-            },
-            [_c("i", { staticClass: "fas fa-minus" })]
-          ),
-          _vm._v(" "),
-          _c(
-            "button",
-            {
-              staticClass: "btn btn-tool",
-              attrs: { type: "button", "data-card-widget": "remove" },
-            },
-            [_c("i", { staticClass: "fas fa-times" })]
-          ),
-        ]),
+    return _c("div", { staticClass: "col-md-8" }, [
+      _c("p", { staticClass: "text-center" }, [
+        _c("strong", [_vm._v("Voting: 1 Jan, 2018 - 30 Jul, 2018")]),
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "card-body p-0" }, [
-        _c("div", { staticClass: "table-responsive" }, [
-          _c("table", { staticClass: "table m-0" }, [
-            _c("thead", [
-              _c("tr", [
-                _c("th", [_vm._v("Order ID")]),
-                _vm._v(" "),
-                _c("th", [_vm._v("Item")]),
-                _vm._v(" "),
-                _c("th", [_vm._v("Status")]),
-                _vm._v(" "),
-                _c("th", [_vm._v("Popularity")]),
-              ]),
-            ]),
-            _vm._v(" "),
-            _c("tbody", [
-              _c("tr", [
-                _c("td", [
-                  _c("a", { attrs: { href: "pages/examples/invoice.html" } }, [
-                    _vm._v("OR9842"),
-                  ]),
-                ]),
-                _vm._v(" "),
-                _c("td", [_vm._v("Call of Duty IV")]),
-                _vm._v(" "),
-                _c("td", [
-                  _c("span", { staticClass: "badge badge-success" }, [
-                    _vm._v("Shipped"),
-                  ]),
-                ]),
-                _vm._v(" "),
-                _c("td", [
-                  _c(
-                    "div",
-                    {
-                      staticClass: "sparkbar",
-                      attrs: { "data-color": "#00a65a", "data-height": "20" },
-                    },
-                    [_vm._v("90,80,90,-70,61,-83,63")]
-                  ),
-                ]),
-              ]),
-              _vm._v(" "),
-              _c("tr", [
-                _c("td", [
-                  _c("a", { attrs: { href: "pages/examples/invoice.html" } }, [
-                    _vm._v("OR1848"),
-                  ]),
-                ]),
-                _vm._v(" "),
-                _c("td", [_vm._v("Samsung Smart TV")]),
-                _vm._v(" "),
-                _c("td", [
-                  _c("span", { staticClass: "badge badge-warning" }, [
-                    _vm._v("Pending"),
-                  ]),
-                ]),
-                _vm._v(" "),
-                _c("td", [
-                  _c(
-                    "div",
-                    {
-                      staticClass: "sparkbar",
-                      attrs: { "data-color": "#f39c12", "data-height": "20" },
-                    },
-                    [_vm._v("90,80,-90,70,61,-83,68")]
-                  ),
-                ]),
-              ]),
-              _vm._v(" "),
-              _c("tr", [
-                _c("td", [
-                  _c("a", { attrs: { href: "pages/examples/invoice.html" } }, [
-                    _vm._v("OR7429"),
-                  ]),
-                ]),
-                _vm._v(" "),
-                _c("td", [_vm._v("iPhone 6 Plus")]),
-                _vm._v(" "),
-                _c("td", [
-                  _c("span", { staticClass: "badge badge-danger" }, [
-                    _vm._v("Delivered"),
-                  ]),
-                ]),
-                _vm._v(" "),
-                _c("td", [
-                  _c(
-                    "div",
-                    {
-                      staticClass: "sparkbar",
-                      attrs: { "data-color": "#f56954", "data-height": "20" },
-                    },
-                    [_vm._v("90,-80,90,70,-61,83,63")]
-                  ),
-                ]),
-              ]),
-              _vm._v(" "),
-              _c("tr", [
-                _c("td", [
-                  _c("a", { attrs: { href: "pages/examples/invoice.html" } }, [
-                    _vm._v("OR7429"),
-                  ]),
-                ]),
-                _vm._v(" "),
-                _c("td", [_vm._v("Samsung Smart TV")]),
-                _vm._v(" "),
-                _c("td", [
-                  _c("span", { staticClass: "badge badge-info" }, [
-                    _vm._v("Processing"),
-                  ]),
-                ]),
-                _vm._v(" "),
-                _c("td", [
-                  _c(
-                    "div",
-                    {
-                      staticClass: "sparkbar",
-                      attrs: { "data-color": "#00c0ef", "data-height": "20" },
-                    },
-                    [_vm._v("90,80,-90,70,-61,83,63")]
-                  ),
-                ]),
-              ]),
-              _vm._v(" "),
-              _c("tr", [
-                _c("td", [
-                  _c("a", { attrs: { href: "pages/examples/invoice.html" } }, [
-                    _vm._v("OR1848"),
-                  ]),
-                ]),
-                _vm._v(" "),
-                _c("td", [_vm._v("Samsung Smart TV")]),
-                _vm._v(" "),
-                _c("td", [
-                  _c("span", { staticClass: "badge badge-warning" }, [
-                    _vm._v("Pending"),
-                  ]),
-                ]),
-                _vm._v(" "),
-                _c("td", [
-                  _c(
-                    "div",
-                    {
-                      staticClass: "sparkbar",
-                      attrs: { "data-color": "#f39c12", "data-height": "20" },
-                    },
-                    [_vm._v("90,80,-90,70,61,-83,68")]
-                  ),
-                ]),
-              ]),
-              _vm._v(" "),
-              _c("tr", [
-                _c("td", [
-                  _c("a", { attrs: { href: "pages/examples/invoice.html" } }, [
-                    _vm._v("OR7429"),
-                  ]),
-                ]),
-                _vm._v(" "),
-                _c("td", [_vm._v("iPhone 6 Plus")]),
-                _vm._v(" "),
-                _c("td", [
-                  _c("span", { staticClass: "badge badge-danger" }, [
-                    _vm._v("Delivered"),
-                  ]),
-                ]),
-                _vm._v(" "),
-                _c("td", [
-                  _c(
-                    "div",
-                    {
-                      staticClass: "sparkbar",
-                      attrs: { "data-color": "#f56954", "data-height": "20" },
-                    },
-                    [_vm._v("90,-80,90,70,-61,83,63")]
-                  ),
-                ]),
-              ]),
-              _vm._v(" "),
-              _c("tr", [
-                _c("td", [
-                  _c("a", { attrs: { href: "pages/examples/invoice.html" } }, [
-                    _vm._v("OR9842"),
-                  ]),
-                ]),
-                _vm._v(" "),
-                _c("td", [_vm._v("Call of Duty IV")]),
-                _vm._v(" "),
-                _c("td", [
-                  _c("span", { staticClass: "badge badge-success" }, [
-                    _vm._v("Shipped"),
-                  ]),
-                ]),
-                _vm._v(" "),
-                _c("td", [
-                  _c(
-                    "div",
-                    {
-                      staticClass: "sparkbar",
-                      attrs: { "data-color": "#00a65a", "data-height": "20" },
-                    },
-                    [_vm._v("90,80,90,-70,61,-83,63")]
-                  ),
-                ]),
-              ]),
-            ]),
+      _c("div", { staticClass: "chart" }, [
+        _c("div", { staticClass: "chartjs-size-monitor" }, [
+          _c("div", { staticClass: "chartjs-size-monitor-expand" }, [
+            _c("div", {}),
+          ]),
+          _c("div", { staticClass: "chartjs-size-monitor-shrink" }, [
+            _c("div", {}),
           ]),
         ]),
+        _vm._v(" "),
+        _c("canvas", {
+          staticClass: "chartjs-render-monitor",
+          staticStyle: { height: "180px", display: "block", width: "618px" },
+          attrs: { id: "salesChart", height: "180", width: "618" },
+        }),
+      ]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("p", { staticClass: "text-center" }, [
+      _c("strong", [_vm._v("Candidates Summary")]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", { staticClass: "description-percentage text-success" }, [
+      _c("i", { staticClass: "fas fa-caret-up" }),
+      _vm._v(" 17%"),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", { staticClass: "description-percentage text-warning" }, [
+      _c("i", { staticClass: "fas fa-caret-left" }),
+      _vm._v(" 0%"),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", { staticClass: "description-percentage text-success" }, [
+      _c("i", { staticClass: "fas fa-caret-up" }),
+      _vm._v(" 20%"),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", { staticClass: "description-percentage text-danger" }, [
+      _c("i", { staticClass: "fas fa-caret-down" }),
+      _vm._v(" 18%"),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "card-header border-transparent" }, [
+      _c("h3", { staticClass: "card-title" }, [
+        _vm._v("Student Leader Contestants"),
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "card-footer clearfix" }, [
+      _c("div", { staticClass: "card-tools" }, [
         _c(
-          "a",
+          "div",
           {
-            staticClass: "btn btn-sm btn-info float-left",
-            attrs: { href: "javascript:void(0)" },
+            staticClass: "input-group input-group-sm",
+            staticStyle: { width: "150px" },
           },
-          [_vm._v("Place New Order")]
+          [
+            _c("input", {
+              staticClass: "form-control float-right",
+              attrs: {
+                type: "text",
+                name: "table_search",
+                placeholder: "Search",
+              },
+            }),
+            _vm._v(" "),
+            _c("div", { staticClass: "input-group-append" }, [
+              _c(
+                "button",
+                { staticClass: "btn btn-default", attrs: { type: "submit" } },
+                [_c("i", { staticClass: "fas fa-search" })]
+              ),
+            ]),
+          ]
         ),
+      ]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", [_vm._v("Academic Year")]),
         _vm._v(" "),
+        _c("th", [_vm._v("Candidate")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Gender")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Votes")]),
+      ]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "card-header border-transparent" }, [
+      _c("h3", { staticClass: "card-title" }, [
+        _vm._v("Secretary General Contestants"),
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "card-tools" }, [
         _c(
-          "a",
+          "div",
           {
-            staticClass: "btn btn-sm btn-secondary float-right",
-            attrs: { href: "javascript:void(0)" },
+            staticClass: "input-group input-group-sm",
+            staticStyle: { width: "150px" },
           },
-          [_vm._v("View All Orders")]
+          [
+            _c("input", {
+              staticClass: "form-control float-right",
+              attrs: {
+                type: "text",
+                name: "table_search",
+                placeholder: "Search",
+              },
+            }),
+            _vm._v(" "),
+            _c("div", { staticClass: "input-group-append" }, [
+              _c(
+                "button",
+                { staticClass: "btn btn-default", attrs: { type: "submit" } },
+                [_c("i", { staticClass: "fas fa-search" })]
+              ),
+            ]),
+          ]
         ),
+      ]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", [_vm._v("Academic Year")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Candidate")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Gender")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Votes")]),
+      ]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "card-header border-transparent" }, [
+      _c("h3", { staticClass: "card-title" }, [_vm._v("Finance Contestants")]),
+      _vm._v(" "),
+      _c("div", { staticClass: "card-tools" }, [
+        _c(
+          "div",
+          {
+            staticClass: "input-group input-group-sm",
+            staticStyle: { width: "150px" },
+          },
+          [
+            _c("input", {
+              staticClass: "form-control float-right",
+              attrs: {
+                type: "text",
+                name: "table_search",
+                placeholder: "Search",
+              },
+            }),
+            _vm._v(" "),
+            _c("div", { staticClass: "input-group-append" }, [
+              _c(
+                "button",
+                { staticClass: "btn btn-default", attrs: { type: "submit" } },
+                [_c("i", { staticClass: "fas fa-search" })]
+              ),
+            ]),
+          ]
+        ),
+      ]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", [_vm._v("Academic Year")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Candidate")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Gender")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Votes")]),
+      ]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "card-header border-transparent" }, [
+      _c("h3", { staticClass: "card-title" }, [
+        _vm._v("Male School Rep Contestants"),
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "card-tools" }, [
+        _c(
+          "div",
+          {
+            staticClass: "input-group input-group-sm",
+            staticStyle: { width: "150px" },
+          },
+          [
+            _c("input", {
+              staticClass: "form-control float-right",
+              attrs: {
+                type: "text",
+                name: "table_search",
+                placeholder: "Search",
+              },
+            }),
+            _vm._v(" "),
+            _c("div", { staticClass: "input-group-append" }, [
+              _c(
+                "button",
+                { staticClass: "btn btn-default", attrs: { type: "submit" } },
+                [_c("i", { staticClass: "fas fa-search" })]
+              ),
+            ]),
+          ]
+        ),
+      ]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", [_vm._v("Academic Year")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Candidate")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("School")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Votes")]),
+      ]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "card-header border-transparent" }, [
+      _c("h3", { staticClass: "card-title" }, [
+        _vm._v("Female School Rep Contestants"),
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "card-tools" }, [
+        _c(
+          "div",
+          {
+            staticClass: "input-group input-group-sm",
+            staticStyle: { width: "150px" },
+          },
+          [
+            _c("input", {
+              staticClass: "form-control float-right",
+              attrs: {
+                type: "text",
+                name: "table_search",
+                placeholder: "Search",
+              },
+            }),
+            _vm._v(" "),
+            _c("div", { staticClass: "input-group-append" }, [
+              _c(
+                "button",
+                { staticClass: "btn btn-default", attrs: { type: "submit" } },
+                [_c("i", { staticClass: "fas fa-search" })]
+              ),
+            ]),
+          ]
+        ),
+      ]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", [_vm._v("Academic Year")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Candidate")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("School")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Votes")]),
+      ]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "card-header border-transparent" }, [
+      _c("h3", { staticClass: "card-title" }, [
+        _vm._v("Male Co-curricular Rep Contestants"),
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "card-tools" }, [
+        _c(
+          "div",
+          {
+            staticClass: "input-group input-group-sm",
+            staticStyle: { width: "150px" },
+          },
+          [
+            _c("input", {
+              staticClass: "form-control float-right",
+              attrs: {
+                type: "text",
+                name: "table_search",
+                placeholder: "Search",
+              },
+            }),
+            _vm._v(" "),
+            _c("div", { staticClass: "input-group-append" }, [
+              _c(
+                "button",
+                { staticClass: "btn btn-default", attrs: { type: "submit" } },
+                [_c("i", { staticClass: "fas fa-search" })]
+              ),
+            ]),
+          ]
+        ),
+      ]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", [_vm._v("Academic Year")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Candidate")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("School")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Votes")]),
+      ]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "card-header border-transparent" }, [
+      _c("h3", { staticClass: "card-title" }, [
+        _vm._v("Female Co-curricular Rep Contestants"),
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "card-tools" }, [
+        _c(
+          "div",
+          {
+            staticClass: "input-group input-group-sm",
+            staticStyle: { width: "150px" },
+          },
+          [
+            _c("input", {
+              staticClass: "form-control float-right",
+              attrs: {
+                type: "text",
+                name: "table_search",
+                placeholder: "Search",
+              },
+            }),
+            _vm._v(" "),
+            _c("div", { staticClass: "input-group-append" }, [
+              _c(
+                "button",
+                { staticClass: "btn btn-default", attrs: { type: "submit" } },
+                [_c("i", { staticClass: "fas fa-search" })]
+              ),
+            ]),
+          ]
+        ),
+      ]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", [_vm._v("Academic Year")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Candidate")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("School")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Votes")]),
       ]),
     ])
   },
@@ -67202,7 +70586,7 @@ var render = function () {
                                 type: "radio",
                                 selected:
                                   cand.student_id == _vm.form.pres_candidate_id,
-                                name: "president_candidate_id",
+                                name: "pres_candidate_id",
                               },
                               domProps: {
                                 value: cand.student_id,

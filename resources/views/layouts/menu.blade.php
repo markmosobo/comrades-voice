@@ -34,6 +34,12 @@
                 </router-link>
               </li>
               <li class="nav-item">
+                <router-link to="/acad_years"class="nav-link">
+                  <i class="fas fa-list-ul nav-icon red"></i>
+                  <p>Academic & Election Yrs</p>
+                </router-link>
+              </li>              
+              <li class="nav-item">
                 <router-link to="/positions" class="nav-link">
                   <i class="fas fa-tags nav-icon cyan"></i>
                   <p>Electable Positions</p>
