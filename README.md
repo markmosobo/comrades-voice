@@ -1,64 +1,124 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+<!-- PROJECT SHIELDS -->
+<!--
+*** I'm using markdown "reference style" links for readability.
+*** Reference links are enclosed in brackets [ ] instead of parentheses ( ).
+*** See the bottom of this document for the declaration of the reference variables
+*** for contributors-url, forks-url, etc. This is an optional, concise syntax you may use.
+*** https://www.markdownguide.org/basic-syntax/#reference-style-links
+-->
+[![Contributors][contributors-shield]][contributors-url]
+[![Forks][forks-shield]][forks-url]
+[![Stargazers][stars-shield]][stars-url]
+[![Issues][issues-shield]][issues-url]
+[![MIT License][license-shield]][license-url]
+[![LinkedIn][linkedin-shield]][linkedin-url]
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+<!-- PROJECT LOGO -->
+<br />
+<div align="center">
+  <a href="https://github.com/markmosobo/comrades-voice">
+<!--     <img src="images/logo.png" alt="Logo" width="80" height="80"> -->
+  </a>
 
-## About Laravel
+  <h3 align="center"> Comrades Voice</h3>
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+  <p align="center">
+    a web app and system to allow university students to vote remotely and results relayed digitally
+    <br />
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+  </p>
+</div>
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+<!-- ABOUT THE PROJECT -->
+## About The Project
+Here’s what your completed application will look like:
+## Welcome Page
+![WhatsApp Image 2022-06-04 at 1 40 38 AM](https://user-images.githubusercontent.com/34887895/171963922-1b1a9f6c-d3e5-4e63-91e9-83937726f4db.jpeg)
 
-## Learning Laravel
+## Vote Page
+![WhatsApp Image 2022-06-04 at 1 40 38 AM (1)](https://user-images.githubusercontent.com/34887895/171963963-500bdec9-6db5-4078-ba99-910c6165034e.jpeg)
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## Admin Dashboard
+![WhatsApp Image 2022-06-04 at 1 41 54 AM](https://user-images.githubusercontent.com/34887895/171963994-8354efdb-cbe2-43ce-b094-4dbeb829eb5c.jpeg)
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
 
-## Laravel Sponsors
+<p align="right">(<a href="#top">back to top</a>)</p>
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+<!-- GETTING STARTED -->
+## Getting Started
 
-### Premium Partners
+To get a local copy up and running follow these simple example steps.
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+## Requirements
 
-## Contributing
+The current package requirements are:
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+- Laravel >= 6.x
+- PHP >= 7.2
+- Node JS >=10.0
 
-## Code of Conduct
+### Installation
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+_Below is an example of how you can instruct your audience on installing and setting up your app. This template doesn't rely on any external dependencies or services._
 
-## Security Vulnerabilities
+1. Get a free API Key at [https://github.com](https://github.com)
+2. Clone the repo
+   ```sh
+   git clone https://github.com/markmosobo/comrades-voice.git
+   ```
+2. Install composer dependencies
+   ```sh
+   composer install
+   ```
+4. Install NPM packages
+   ```sh
+   npm install
+   ```
+5. Run this command
+   ```sh
+   cp .env.example .env
+   ```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+6. Run each of these commands 
+   ```sh
+   php artisan key:generate
+   ```
+   ```sh
+   php artisan migrate
+   ```
+   ```sh
+   php artisan db:seed
+   ```   
+7. Finally
+   ```sh
+   php artisan serve
+   ```  
+8. Login credentials (admin)
+    admin@admin.com
+    123456   
+<p align="right">(<a href="#top">back to top</a>)</p>
 
-## License
+<!-- CONTACT -->
+## Contact
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+<!-- Your Name - [@your_twitter](https://twitter.com/markmosobo) - email@example.com
+ -->
+Project Link: [https://github.com/markmosobo/comrades-voice](https://github.com/markmosobo/comrades-voice)
+
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+<!-- MARKDOWN LINKS & IMAGES -->
+<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
+[contributors-shield]: https://img.shields.io/github/contributors/markmosobo/comrades-voice.svg?style=for-the-badge
+[contributors-url]: https://github.com/markmosobo/comrades-voice/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/markmosobo/comrades-voice.svg?style=for-the-badge
+[forks-url]: https://github.com/markmosobo/comrades-voice/network/members
+[stars-shield]: https://img.shields.io/github/stars/markmosobo/comrades-voice.svg?style=for-the-badge
+[stars-url]: https://github.com/markmosobo/comrades-voice/stargazers
+[issues-shield]: https://img.shields.io/github/issues/markmosobo/comrades-voice.svg?style=for-the-badge
+[issues-url]: https://github.com/markmosobo/comrades-voice/issues
+[license-shield]: https://img.shields.io/github/license/markmosobo/comrades-voice.svg?style=for-the-badge
+[license-url]: https://github.com/markmosobo/comrades-voice/LICENSE.txt
+[linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
+[linkedin-url]: https://linkedin.com/in/mark-mosobo
+[product-screenshot]: images/screenshot.png
