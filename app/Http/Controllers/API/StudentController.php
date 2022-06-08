@@ -35,4 +35,13 @@ class StudentController extends Controller
         $students = Student::all()->count();
         return response()->json($students);
     }
+
+    public function update(Request $request,$id)
+    {
+        $student = Student::findOrFail($id);
+        if($student){
+            $student->update(array('vote_status' => '1'));
+            $student->save();
+        }
+    }
 }

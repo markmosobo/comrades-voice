@@ -18,23 +18,13 @@ class SearchController extends Controller
            return redirect('/')
                ->withInput()
                ->withErrors($validator);
-       }
-        $searchedreg = Student::where([
-            [function ($query) use ($request){
-                if (($search = $request->search)){
-                    $query->orWhere('reg_no','LIKE','%'.$search.'%')->get();
-                }
-
-            }]
-        ])
-        ->orderBy('id','desc')
-        ->paginate(10);  
-        if(count($searchedreg) == 0){
-            return redirect('/')->with('status','This registration number is not in our records');
+       } 
+        if(Student::where('reg_no', $request->search)->exists()){
+            return view('vote')
+            ->with('i',(request()->input('page',1)- 1)* 5);
         }
          else{    
-        return view('vote',compact('searchedreg'))
-        ->with('i',(request()->input('page',1)- 1)* 5);
+            return redirect('/')->with('status','This registration number is not in our records');
         }
     }    
 }

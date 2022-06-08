@@ -22,7 +22,8 @@ Route::apiResources([
     'candidate' => API\CandidateController::class,
     'vote' => API\CastedVoteController::class,
     'acad_year' => API\AcadYearController::class,
-    'electiondate' => API\ElectionDateController::class
+    'electiondate' => API\ElectionDateController::class,
+    'student' => API\StudentController::class
 ]);
 
 Route::get('listschools',[API\SchoolController::class,'list']);

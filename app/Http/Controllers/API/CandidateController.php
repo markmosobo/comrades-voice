@@ -102,7 +102,7 @@ class CandidateController extends Controller
 
     public function lead()
     {
-        return Candidate::orderBy('votes','desc')
+        return Candidate::orderBy('votes','desc')->where('votes','>',0)
         ->with('year','student','position','school')->paginate(10);
     }
 

@@ -20,7 +20,7 @@
                       <div class="card-header">
                         <h3 class="card-title">Academic Years</h3>
                         <div class="card-tools">
-                        <button type="button" class="btn btn-primary" @click = "newModal">Add New <i class="fas fa-user"></i></button>   
+                        <button type="button" class="btn btn-primary" @click = "newModal()">Add New <i class="fas fa-user"></i></button>   
                         </div>
                       </div>
                       <!-- /.card-header -->
@@ -64,7 +64,7 @@
                       <div class="card-header">
                         <h3 class="card-title">Election Dates</h3>
                         <div class="card-tools">
-                        <button type="button" class="btn btn-primary" @click = "newdateModal">Add New <i class="fas fa-user"></i></button>   
+                        <button type="button" class="btn btn-primary" @click = "newdateModal()">Add New <i class="fas fa-user"></i></button>   
                         </div>
                       </div>
                       <!-- /.card-header -->

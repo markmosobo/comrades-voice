@@ -145,6 +145,7 @@
             vote(){
                 this.$Progress.start();
                 this.form.post('api/vote').then(() => {
+                this.form.put('api/student')    
                 this.$Progress.finish();                                      
                   Swal.fire({
                       icon: 'success',
