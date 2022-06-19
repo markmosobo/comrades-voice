@@ -19,12 +19,19 @@ class SearchController extends Controller
                ->withInput()
                ->withErrors($validator);
        } 
-        if(Student::where('reg_no', $request->search)->exists()){
-            return view('vote')
-            ->with('i',(request()->input('page',1)- 1)* 5);
-        }
-         else{    
+       $student = Student::where('reg_no', $request->search);
+        if($student->doesntExist())
+        {
             return redirect('/')->with('status','This registration number is not in our records');
+        }
+        else
+        {   
+            if($student->exists() && $student->where('vote_status',0)) 
+            {
+                return view('vote')
+                ->with('i',(request()->input('page',1)- 1)* 5);
+            }
+            return redirect('/')->with('status','This registration number voted');
         }
     }    
 }
